@@ -28,7 +28,7 @@ const light = {
             dark: common.black,
         },
     },
-    components: {
+    components: {   // containerga rang berilgan section.
         MuiContainer: {
             styleOverrides: {
                 root: {
@@ -48,14 +48,14 @@ const light = {
     typography,
 };
 
-// A custom theme for this app
+// A custom theme for this app => mijozlarning applicationing razmeriga qarab uzgarsin
 let theme = createTheme(light);
 theme = createTheme(theme, {
     components: {
         MuiContainer: {
             styleOverrides: {
                 maxWidthLg: {
-                    [theme.breakpoints.up("lg")]: {
+                    [theme.breakpoints.up("lg")]: {  // lg=> large format degani
                         maxWidth: "1320px",
                     },
                 },
