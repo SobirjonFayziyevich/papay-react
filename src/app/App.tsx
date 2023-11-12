@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
 import '../css/App.css';
 import '../css/navbar.css';
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route,} from "react-router-dom";
+
 import {RestaurantPage} from "./screens/RestaurantPage";
 import {CommunityPage} from "./screens/CommunityPage";
 import {OrdersPage} from "./screens/OrdersPage";
@@ -12,53 +13,25 @@ import {Homepage} from "./screens/Homepage";
 import {NavbarHome} from "./components/header";
 import {NavbarRestaurant} from "./components/header/restaurant";
 import {NavbarOthers} from "./components/header/others";
-function App() {                                                       // useStateni REACT dan import qilib olamz.
-     const [path, setPath] = useState();  // bizning path imiz uzgarganda viewimizni qayta qurub beradi.
+
+
+// useStateni REACT dan import qilib olamz.
+// bizning path imiz uzgarganda viewimizni qayta qurub beradi.
+function App () {
+    const [path, setPath] = useState();
     const main_path = window.location.pathname;
-    // console.log("main_path:", main_path);
 
-  return (
-      <Router>
-              {main_path == "/" ? (
-                  <NavbarHome setPath={setPath}/>
-              ) : main_path.includes("/restaurant") ? (
-                  <NavbarRestaurant setPath={setPath}/>
-                  ) : (
-                      <NavbarOthers setPath={setPath}/>
-                  )}
+    return (
+        <Router>
+            {main_path == "/" ? (
+                <NavbarHome setPath={setPath} />
+            ) : main_path.includes("/restaurant") ? (
+                <NavbarRestaurant setPath={setPath} />
+            ) : (
+                <NavbarOthers setPath={setPath} />
+            )}
 
-                  {/*/!*buyerdagilar barchasi nav link hisoblanadi.*!/*/}
-                  {/*<nav>*/}
-                  {/*    <ul>*/}
-                  {/*        <li>*/}
-                  {/*            <Link to="restaurant">RestaurantPage</Link>*/}
-                  {/*        </li>*/}
-                  {/*        <li>*/}
-                  {/*            <Link to="/community">CommunityPage</Link>*/}
-                  {/*        </li>*/}
-                  {/*        <li>*/}
-                  {/*            <Link to="/orders">OrdersPage</Link>*/}
-                  {/*        </li>*/}
-                  {/*        <li>*/}
-                  {/*            <Link to="/member-page">MemberPage</Link>*/}
-                  {/*        </li>*/}
-
-                  {/*        <li>*/}
-                  {/*        <Link to="/help">HelpPage</Link>*/}
-                  {/*        </li>*/}
-
-                  {/*        <li>*/}
-                  {/*        <Link to="/login">LoginPage</Link>*/}
-                  {/*        </li>*/}
-
-                  {/*        <li>*/}
-                  {/*        <Link to="/">HomePage</Link>*/}
-                  {/*        </li>*/}
-
-                  {/*    </ul>*/}
-                  {/*</nav>*/}
-
-                  {/*buyerdan swich routerlar boshlandi*/}
+            {/*buyerdan swich routerlar boshlandi*/}
                   <Switch>
                       <Route path="/restaurant">
                           < RestaurantPage/>

@@ -1,13 +1,11 @@
 import React from 'react';
-import {Box, Button, Container, IconButton, Stack} from "@mui/material";
+import { Box, Button, Container, IconButton, Stack} from "@mui/material";
 import {NavLink} from "react-router-dom";
 import Badge from "@mui/material/Badge";
 export function NavbarHome(props: any) {
-  return(
-      <div className="home_navbar">
+  return (
+      <div className="format home_navbar">
       <Container>
-
-
           <Stack
               flexDirection={"row"}
               className="navbar_config"
@@ -27,21 +25,25 @@ export function NavbarHome(props: any) {
                          Bosh Sahifa
                      </NavLink>
                   </Box>
+
                   <Box className="hover-line" onClick={props.setPath}>
                       <NavLink to="/restaurant" activeClassName="underline">
                           Oshxona
                       </NavLink>
                   </Box>
+
                   <Box className="hover-line" onClick={props.setPath}>
                       <NavLink to="/orders" activeClassName="underline">
                           Buyurtma
                       </NavLink>
                   </Box>
+
                   <Box className="hover-line" onClick={props.setPath}>
                       <NavLink to="/community" activeClassName="underline">
                           Jamiyat
                       </NavLink>
                   </Box>
+
                   <Box className="hover-line" onClick={props.setPath}>
                       <NavLink to="/help" activeClassName="underline">
                           Yordam
@@ -70,10 +72,6 @@ export function NavbarHome(props: any) {
                           KIRISH
                       </Button>
                   </Box>
-
-
-
-
               </Stack>
           </Stack>
 
