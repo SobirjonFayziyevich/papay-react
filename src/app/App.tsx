@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
-import '../css/App.css';
-import '../css/navbar.css';
+import "../css/App.css";
+import "../css/navbar.css";
+import "../css/footer.css";
 import { BrowserRouter as Router, Switch, Route,} from "react-router-dom";
 
 import {RestaurantPage} from "./screens/RestaurantPage";
@@ -13,6 +14,7 @@ import {Homepage} from "./screens/Homepage";
 import {NavbarHome} from "./components/header";
 import {NavbarRestaurant} from "./components/header/restaurant";
 import {NavbarOthers} from "./components/header/others";
+import {Footer} from "./components/footer";
 
 
 // useStateni REACT dan import qilib olamz.
@@ -21,6 +23,8 @@ function App () {
     const [path, setPath] = useState();
     const main_path = window.location.pathname;
 
+    // @ts-ignore
+    // @ts-ignore
     return (
         <Router>
             {main_path == "/" ? (
@@ -55,10 +59,12 @@ function App () {
                           < Homepage />
                       </Route>
                   </Switch>
-      </Router>
 
+            {/*FOOTER SECTION*/}
+            <Footer />
 
-  );
+        </Router>
+    );
 }
 export default App;
 
