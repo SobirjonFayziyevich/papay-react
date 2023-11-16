@@ -383,7 +383,7 @@ export function TopRestaurants() {
                             </Card>
                         </CssVarsProvider>
                     </Stack>
-                </Stack>s
+                </Stack>
             </Container>
         </div>
     );
