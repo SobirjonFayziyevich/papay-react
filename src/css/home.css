@@ -327,14 +327,13 @@
     display: flex;
     justify-content: space-between;
     flex-direction: row;
-    width: auto;
     font-family: "GT Walsheim Pro";
     font-style: normal;
     font-size: 14px;
     line-height: 16px;
     color: #4f547b;
 }
-/* 
+
 .homepage .swiper-wrapper {
     display: flex;
     flex-direction: row;
@@ -353,9 +352,9 @@
 .homepage .swiper-pagination-bullet-active {
     background: #007aff;
     border-radius: 50%;
-} */
+} 
 
-/* .homepage .bott_left .event_title_speaker {
+.homepage .bott_left .event_title_speaker {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -384,13 +383,11 @@
 .homepage .bott_info .bott_info_main {
     margin-left: 10px;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     flex-direction: row;
     width: auto;
-    height: 100%;
     font-family: "GT Walsheim Pro";
     font-style: normal;
-    font-weight: 400;
     font-size: 14px;
     line-height: 16px;
     color: #4f547b;
@@ -414,4 +411,146 @@
 .homepage .swiper-pagination-bullet-active {
     background: #007aff;
     border-radius: 50%;
-}  */
+} 
+
+ /* Recomendation section */
+
+ .homepage .top_article_frame {
+     width: 100%;
+     height: auto;
+     display: flex;
+ }
+
+ .homepage .article_main {
+     margin-top: 32px;
+     width: 100%;
+     height: auto;
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+ }
+
+ .homepage .article_main .article_container {
+     width: 568px;
+     height: auto;
+     display: flex;
+     flex-direction: column;
+ }
+
+ .homepage .article_main .article_category {
+     display: flex;
+     justify-content: center;
+     font-family: "Poppins";
+     font-style: normal;
+     font-weight: 600;
+     font-size: 30px;
+     line-height: 44px;
+     color: #FFFFFF;
+ }
+
+ .homepage .article_container .article_box {
+     margin-top: 18px;
+     width: 100%;
+     height: auto;
+     display: flex;
+     border-radius: 20px;
+     flex-direction: row;
+     background: #FFF;
+     box-shadow: 0px 4px 40px rgba(0, 0, 0, 0.25);
+ }
+
+.homepage .article_container .article_news {
+    width: 100%;
+    border-radius: 20px;
+    height: 380px;
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+    justify-content: center;
+    box-shadow: 0px 4px 40px rgba(83, 38, 208, 0.25);
+}
+
+.homepage .article_box .article_img {
+    width: 150px;
+    height: 153px;
+    border-radius: 0px;
+    background-size: cover;
+    object-fit: contain;
+    background-repeat: no-repeat;
+}
+
+.homepage .article_box .article_info {
+    padding: 10px 0px;
+    width: 318px;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #FFFFFF;
+}
+
+.homepage .article_info .article_main_info {
+    width: 92%;
+    height: 95%;
+}
+
+.homepage .article_main_info .article_author {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.homepage .article_author .author_username {
+    margin-left: 10px;
+    font-family: "Poppins";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 26px;
+    color: black;
+}
+
+.homepage  .article_main_info .article_title {
+    margin-top: 18px;
+    display: flex;
+    font-family: "Poppins";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 33px;
+    color: #e3c08D;
+}
+
+.homepage .article_main_info .article_desc {
+    margin-left: 10px;
+    font-family: "Poppins";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 26px;
+    color: #808080;
+}
+
+.homepage .personage_img.right{
+    margin-right: -40px;
+    width: 216px;
+    height: 200px;
+    transform: matrix(1, 0, 0, 1, 0, 0);
+    background: url("/public/home/papays.png");
+    background-size: cover;
+}
+
+.homepage .personage_img.left{
+    margin-right: -40px;
+    width: 216px;
+    height: 200px;
+    transform: matrix(-1, 0, 0, 1, 0, 0);
+    background: url("/public/home/papays.png");
+    background-size: cover;
+}
+ /* .homepage .article_news .mashhur_img {
+    width: 350px;
+    height: 300px;
+    flex-shrink: 0;
+ } */
