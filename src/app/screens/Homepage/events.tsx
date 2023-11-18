@@ -1,8 +1,9 @@
 import React from "react";
 import { Box, Container, Stack } from "@mui/material";
 import { Swiper, SwiperSlide } from "swiper/react";
-// import SwiperCore, { Autoplay, Navigation, Pagination} from 'swiper/react';
-// SwiperCore.use([Autoplay, Navigation, Pagination]);
+
+import SwiperCore, { Autoplay, Navigation, Pagination } from "swiper";
+SwiperCore.use([Autoplay, Navigation, Pagination]);
 
 
 export function Events() {
@@ -11,35 +12,39 @@ export function Events() {
                 title: "FranchSweetga marhamat",
                 desc: "yangicha uslubda yangicha tam va yangicha his",
                 author: "Sobirjon",
-                date: "2023.11.16",
+                date: "2023/11/16",
                 location: "tashkent, nurafshon ko'cha",
                 img:"/restaurant/nusret.png",
             },
+
             {
                 title: "Nonushtaga marhamat",
                 desc: "yangicha uslubda yangicha tam va yangicha his",
                 author: "Sobirjon",
-                date: "2023.11.16",
+                date: "2023/11/16",
                 location: "tashkent, nurafshon ko'cha",
                 img: "/restaurant/nusret.png",
             },
+
             {
                 title: "Uzbegimga marhamat",
                 desc: "yangicha uslubda yangicha tam va yangicha his",
                 author: "Sobirjon",
-                date: "2023.11.16",
+                date: "2023/11/16",
                 location: "tashkent, nurafshon ko'cha",
                 img: "/restaurant/nusret.png",
             },
+
             {
                 title: "Sariq Bola Pitsaga marhamat",
                 desc: "yangicha uslubda yangicha tam va yangicha his",
                 author: "Sobirjon",
-                date: "2023.11.16",
+                date: "2023/11/16",
                 location: "tashkent, nurafshon ko'cha",
                 img: "/restaurant/nusret.png",
             },
         ];
+   
 
     return (
         <div className={"events_frame"}>
@@ -50,12 +55,16 @@ export function Events() {
                     </Box>
                     <Box className={"prev_next_frame"}>
                         <img
-                        src={"/icons/arrow-right.png"}
+                        src={"/icons/arrow-left.svg"}
                         className={"swiper-button-prev"}
-                        style={{ transform: "rotate(-180deg" }}
                         />
                         <div className={"dot_frame_pagination swiper-pagination"}></div>
-                        
+                        <img
+                            src={"/icons/arrow-right.svg"}
+                            className={"swiper-button-next"}
+
+                        />
+
                     </Box>
                     <Swiper 
                      className={"events_info swiper-wrapper"}

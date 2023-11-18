@@ -12,7 +12,7 @@ export function NavbarRestaurant(props: any) {
                 justifyContent={"space-between"}
             >
                 <Box>
-                    <img src='/icons/papay_footer.svg'/>
+                <img src='/icons/Papay..svg'/>
                 </Box>
                 <Stack
                     flexDirection={"row"}
