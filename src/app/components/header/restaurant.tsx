@@ -59,7 +59,7 @@ export function NavbarRestaurant(props: any) {
                             aria-expanded={undefined}
                         >
                             <Badge badgeContent={3} color="secondary">
-                                <img src={'/icons/shopping_cart.svg'}/>
+                                <img src={'/icons/shopping-cart.png'}/>
                             </Badge>
                         </IconButton>
                     </Box>

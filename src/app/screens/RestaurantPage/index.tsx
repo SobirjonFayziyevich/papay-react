@@ -4,6 +4,7 @@ import { Route, Switch, useRouteMatch } from "react-router-dom";
 import { OneRestaurant } from "./oneRestaurant";
 import { AllRestaurants } from "./allRestaurants";
 import { ChosenDish } from "./chosenDish";
+import "../../../css/restaurant.css";
 
 export function RestaurantPage() {
     let restaurant = useRouteMatch();
@@ -13,7 +14,7 @@ export function RestaurantPage() {
           <Switch>
               <Route path={`${restaurant.path}/dish/:dish_id`}>
                   <ChosenDish />
-              </Route>    {/*restaurant objectni ichidan path ni olib dish_id parametrni initilaze qilish usuli. */}
+              </Route>                 {/*restaurant objectni ichidan path ni olib dish_id parametrni initilaze qilish usuli. */}
               <Route path={`${restaurant.path}/:restaurant_id`}>
                   <OneRestaurant />
                   </Route>

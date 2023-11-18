@@ -381,7 +381,7 @@
 
 .homepage .bott_info .bott_info_main {
     margin-left: 10px;
-    display: flex;
+    display: inline-block;
     justify-content: flex-end;
     flex-direction: row;
     width: auto;
