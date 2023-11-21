@@ -62,10 +62,10 @@ export function BestRestaurants() {
                                         />
                                     </IconButton>
                                 </CardOverflow>
-                                <Typography level="h2" sx={{fontSize: "md", mt: 2}}>
+                                <Typography level="h2" sx={{fontSize: "md", mt: 0.1}}>
                                     Uzbegim Halol Food
                                 </Typography>
-                                <Typography level="body-sm" sx={{mt: 0.5, mb: 2}}>
+                                <Typography level="body-sm" sx={{mt: 0.5, mb: 0.1}}>
                                     <Link
                                         href=""
                                         startDecorator={<LocationOnRoundedIcon/>}
@@ -74,7 +74,7 @@ export function BestRestaurants() {
                                         Tashkent, Yakka Saroy 12-5
                                     </Link>
                                 </Typography>
-                                <Typography level="body-sm" sx={{mt: 0.5, mb: 2}}>
+                                <Typography level="body-sm" sx={{mt: 0.5, mb: 0.1}}>
                                     <Link
                                         href=""
                                         startDecorator={<CallIcon/>}
@@ -161,10 +161,10 @@ export function BestRestaurants() {
                                         />
                                     </IconButton>
                                 </CardOverflow>
-                                <Typography level="h2" sx={{fontSize: "md", mt: 2}}>
+                                <Typography level="h2" sx={{fontSize: "md", mt: 0.1}}>
                                     Uzbegim Halol Food
                                 </Typography>
-                                <Typography level="body-sm" sx={{mt: 0.5, mb: 2}}>
+                                <Typography level="body-sm" sx={{mt: 0.5, mb: 0.1}}>
                                     <Link
                                         href=""
                                         startDecorator={<LocationOnRoundedIcon/>}
@@ -173,7 +173,7 @@ export function BestRestaurants() {
                                         Tashkent, Yakka Saroy 12-5
                                     </Link>
                                 </Typography>
-                                <Typography level="body-sm" sx={{mt: 0.5, mb: 2}}>
+                                <Typography level="body-sm" sx={{mt: 0.5, mb: 0.1}}>
                                     <Link
                                         href=""
                                         startDecorator={<CallIcon/>}
@@ -260,10 +260,10 @@ export function BestRestaurants() {
                                         />
                                     </IconButton>
                                 </CardOverflow>
-                                <Typography level="h2" sx={{fontSize: "md", mt: 2}}>
+                                <Typography level="h2" sx={{fontSize: "md", mt: 0.1}}>
                                     Uzbegim Halol Food
                                 </Typography>
-                                <Typography level="body-sm" sx={{mt: 0.5, mb: 2}}>
+                                <Typography level="body-sm" sx={{mt: 0.5, mb: 0.1}}>
                                     <Link
                                         href=""
                                         startDecorator={<LocationOnRoundedIcon/>}
@@ -272,7 +272,7 @@ export function BestRestaurants() {
                                         Tashkent, Yakka Saroy 12-5
                                     </Link>
                                 </Typography>
-                                <Typography level="body-sm" sx={{mt: 0.5, mb: 2}}>
+                                <Typography level="body-sm" sx={{mt: 0.5, mb: 0.1}}>
                                     <Link
                                         href=""
                                         startDecorator={<CallIcon/>}
@@ -359,10 +359,10 @@ export function BestRestaurants() {
                                         />
                                     </IconButton>
                                 </CardOverflow>
-                                <Typography level="h2" sx={{fontSize: "md", mt: 2}}>
+                                <Typography level="h2" sx={{fontSize: "md", mt: 0.1}}>
                                     Uzbegim Halol Food
                                 </Typography>
-                                <Typography level="body-sm" sx={{mt: 0.5, mb: 2}}>
+                                <Typography level="body-sm" sx={{mt: 0.5, mb: 0.1}}>
                                     <Link
                                         href=""
                                         startDecorator={<LocationOnRoundedIcon/>}
@@ -371,7 +371,7 @@ export function BestRestaurants() {
                                         Tashkent, Yakka Saroy 12-5
                                     </Link>
                                 </Typography>
-                                <Typography level="body-sm" sx={{mt: 0.5, mb: 2}}>
+                                <Typography level="body-sm" sx={{mt: 0.5, mb: 0.1}}>
                                     <Link
                                         href=""
                                         startDecorator={<CallIcon/>}

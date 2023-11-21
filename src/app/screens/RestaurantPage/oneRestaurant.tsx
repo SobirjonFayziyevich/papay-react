@@ -13,8 +13,8 @@ import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import StarIcon from "@mui/icons-material/Star";
 
 
-const restaurant_list = Array.from(Array(7).keys());
-const product_list = Array.from(Array(5).keys());
+const restaurant_list = Array.from(Array(10).keys());
+const product_list = Array.from(Array(8).keys());
 
 
 export function OneRestaurant () {
@@ -50,7 +50,8 @@ export function OneRestaurant () {
                 flexDirection={"row"}
                 sx={{ mt: "35px" }}
                 >
-                   <Box className={"prev_btn_retaurant-prev"}>
+                   <Box 
+                   className={"prev_btn restaurant-prev"}>
                      <ArrowBackIosNewIcon
                      sx={{ fontSize: 40 }}
                      style={{ color:  "white"}} 
@@ -73,8 +74,8 @@ export function OneRestaurant () {
                                key={index}
                                className={"restaurant_avatars"}
                                >
-                                   <img src={"/restaurant/mado.png"} />
-                                   <span>Mado</span>
+                                   <img src={"/restaurant/nusret.png"} />
+                                   <span>Nusret</span>
                                </SwiperSlide>
                            );
                        })}
@@ -91,7 +92,7 @@ export function OneRestaurant () {
                 display={"flex"}
                 flexDirection={"row"}
                 justifyContent={"flex-end"}
-                width={"90%"}
+                width={"75%"}
                 sx={{ mt: "65px"}}
                 >
                     <Box className={"dishs_filter_box"}>
@@ -209,10 +210,10 @@ export function OneRestaurant () {
                 justifyContent={"space-between"}
                 width={"100"}
                 >
-                    {Array.from(Array(1).keys()).map((ele, index) => {
+                    {Array.from(Array(4).keys()).map((ele, index) => {
                         return (
                             <Box className={"review_box"} key={index}>
-                                <Box display={"flex"} justifyContent={"center"}>
+                                <Box display={"flex"} justifyContent={"space-between"}>
                                     <img
                                     src={"/community/ranaldo.jpg"}
                                     className={"review_img"}
@@ -220,7 +221,7 @@ export function OneRestaurant () {
                                 </Box>
 
                                 <span className={"review_name"}>Cristiano Ronaldo</span>
-                                <span className={"review_name"}>Foydalanuvchi</span>
+                                <span className={"review_name_user"}>Foydalanuvchi</span>
                                 <p className={"review_desc"}>
                                     Menga bu restarant taomlari yoqadi. 
                                     Barchanggizga tavsiya qilaman!!!
@@ -288,7 +289,7 @@ export function OneRestaurant () {
                 <Box className={"category_title"}>Oshxona Manzili</Box>
                 <iframe
                 style={{ marginTop: "60px" }}
-                // src="https://maps.apple.com/?address=%EC%96%91%EC%82%B0%EC%8B%9C,%20%EA%B2%BD%EC%83%81%EB%82%A8%EB%8F%84,%2050612%20%EB%8C%80%ED%95%9C%EB%AF%BC%EA%B5%AD&auid=15286827124622977503&ll=35.326940,129.004750&lsp=7618&q=My%20Location"
+                src="https://image.cnbcfm.com/api/v1/image/100416482-google-map-maker-north-korea-google-youtube.jpg?v=1359477081&w=1600&h=900"
                 width="1320"
                 height="500"
                 referrerPolicy="no-referrer-when-downgrade"

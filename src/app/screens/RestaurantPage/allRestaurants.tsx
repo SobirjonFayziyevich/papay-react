@@ -96,10 +96,10 @@ export function AllRestaurants() {
                                     </IconButton>
     
                                     </CardOverflow>
-                                <Typography level="h2" sx={{ fontSize: "lg", mt: 2}}>
+                                <Typography level="h2" sx={{ fontSize: "lg", mt: 0.1}}>
                                     Nusret
                                 </Typography>
-                                <Typography level="body-sm" sx={{ mt: 0.5, mb: 2}}>
+                                <Typography level="body-sm" sx={{ mt: 0.1, mb: 0.5}}>
                                     <Link
                                         href=""
                                         startDecorator={<LocationOnRoundedIcon />}
@@ -109,7 +109,7 @@ export function AllRestaurants() {
                                     Tashkent city
                                 </Typography>
     
-                                <Typography level="body-sm" sx={{ mt: 0.5, mb: 2 }}>
+                                <Typography level="body-sm" sx={{ mt: 0.5, mb: 0.5 }}>
                                     <Link
                                         href=""
                                         startDecorator={<CallIcon />}
