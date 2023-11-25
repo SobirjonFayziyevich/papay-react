@@ -1,4 +1,4 @@
-import { TabPanel } from "@mui/joy/TabPanel";
+import  TabPanel  from "@mui/lab/TabPanel";
 import { Box, Stack } from "@mui/material";
 
 const finishedOrders = [
