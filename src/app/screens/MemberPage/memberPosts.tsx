@@ -14,17 +14,17 @@ export function MemberPosts(props: any) {
                     <Stack className={"all_article_box"} sx={{ cursor: "pointer"}}>
                         <Box 
                         className={"all_article_img"}
-                        sx={{ backgroundImage: `url('/auth/odamcha.png')`,
+                        sx={{ backgroundImage: `url('/auth/john.jpeg')`,
                         }}
                         ></Box>
                         <Box className={"all_article_container"}>
                             <Box alignItems={"center"} display={"flex"}>
                                 <img
-                                  src={"/auth/odamcha.png"}
+                                  src={"/auth/default_img.png"}
                                   width={"35px"}
                                   style={{ borderRadius: "50%", backgroundSize: "cover" }} />
                                 <span className={"all_article_author_user"}>
-                                    Alen
+                                    John
                                 </span>
                             </Box>
                             <Box 

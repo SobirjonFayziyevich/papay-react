@@ -10,8 +10,8 @@ import TelegramIcon from "@mui/icons-material/Telegram";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import YouTubeIcon from "@mui/icons-material/YouTube";
-import  MySettings  from "@mui/icons-material/Settings";
-
+import { MySettings } from "./mySettings";
+import Marginer from "../../components/marginer";
 //OTHERS
 
 import  ArrowBackIcon from "@mui/icons-material/ArrowBack";
@@ -38,12 +38,44 @@ export function VisitOtherPage(props: any) {
                    <Stack className={"my_page_left"}>
                      <Box display={"flex"} flexDirection={"column"}>
                          <TabPanel value={"1"}>
-                             <Box className={"menu_name"}>My Contents</Box>
+                             <Box className={"menu_name"}>Mening Maqolalarim</Box>
+                             <Marginer
+                              width="300"
+                              bg="#E4E4E4D4"
+                              height="1"
+                              direction="horizontal"
+                             />
                              <Box className={"menu_content"}>
                                  <MemberPosts />
+                                 <Stack
+                                   sx={{ my: "40px" }}
+                                   direction="row"
+                                   alignItems="center"
+                                   justifyContent="center"
+                                   >
+                                       <Box className={"bottom_box"}>
+                                           <Pagination
+                                           count={4}
+                                           page={1}
+                                           renderItem={(item) => (
+                                               <PaginationItem
+                                               components={{
+                                                   previous: ArrowBackIcon,
+                                                   next: ArrowForwardIcon,
+                                               }}
+                                               {...item}
+                                               color={"primary"}
+                                            />
+                                          )}
+                                        />
+
+                                       </Box>
+                                     </Stack>
                                      </Box>
+                                  </TabPanel>
                                  <TabPanel value={"2"}>
                                    <Box className={"menu_name"}>Followers</Box>
+                                   
                                    <Box className={"menu_content"}>
                                  <MemberFollowers actions_enabled={false} />
                                   </Box>
@@ -51,21 +83,32 @@ export function VisitOtherPage(props: any) {
 
                                <TabPanel value={"3"}>
                                   <Box className={"menu_name"}>Following</Box>
+                                  
                                    <Box className={"menu_content"}>
                                  <MemberFollowing actions_enabled={false} />
                                    </Box>
                               </TabPanel>
 
                               <TabPanel value={"4"}>
-                                 <Box className={"menu_name"}>Write an Content</Box>
+                                 <Box className={"menu_name"}>Maqola Yozish</Box>
+                                 
                                  <Box className={"write_content"}></Box>
                               </TabPanel>
 
                               <TabPanel value={"5"}>
-                                <Box className={"menu_name"}>Chosen an Content</Box>
+                                <Box className={"menu_name"}>Tanlangan Maqola</Box>
                                 <Box className={"menu_content"}></Box>
                               </TabPanel>
-                         </TabPanel>
+                              <TabPanel value="6">
+                                 <Box className="my_articles_title_write">
+                                   Ma'lumotlarni o'zgartirish
+                                 </Box>
+                                 
+
+                             <Stack className="menu_content">
+                           <MySettings />
+                           </Stack>
+                           </TabPanel>
                        </Box>
                     </Stack>
 
@@ -78,14 +121,14 @@ export function VisitOtherPage(props: any) {
                             >
                                 <div className={"order_user_img"}>
                                     <img 
-                                    src={"auth/default_img.png"} 
+                                    src={"auth/john.svg"} 
                                     className={"order_user_avatar"}
                                     />
                                     <div className={"order_user_icon_box"}>
                                     <img src={"auth/odamcha.png"} />
                                     </div>
                                     </div>
-                                    <span className={"order_user_name"}>Alen</span>
+                                    <span className={"order_user_name"}>John</span>
                                     <span className={"order_user_prof"}>USER</span>
                             </Box>
                             <Box className={"user_media_box"}>

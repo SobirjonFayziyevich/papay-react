@@ -1,6 +1,7 @@
 import React from "react";
 import { Avatar, Box, Stack } from "@mui/material";
 import { Send } from "@mui/icons-material";
+
 import "../../../css/community.css";
 
 // const [massagesList, setMassagesList] = useState({});

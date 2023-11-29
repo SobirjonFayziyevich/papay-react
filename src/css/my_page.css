@@ -1,0 +1,465 @@
+.member_page {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+/*Visit-MyPage css*/
+
+.my_page {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  background: #0b0e11;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+
+.my_page .menu_name {
+  width: 821px;
+  height: 70px;
+  color: #FFF;
+  text-align: center;
+  font-family: Poppins;
+  font-size: 45px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  border-bottom: 1px solid white;
+}
+
+.my_page .all_article_box {
+  width: 871px;
+  height: 175px;
+  margin-top: 15px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background: #182226;
+  box-shadow: 0px 4px 40px rgba(0, 0, 0, 0.25);
+  border-radius: 30px;
+}
+
+.my_page .all_article_img {
+  width: 157px;
+  height: 155px;
+  flex-shrink: 0;
+  border-radius: 30px 0px 0px 30px;
+  background-size: cover;
+
+}
+
+.my_page .user_article_img {
+  width: 35px;
+  height: 35px;
+  border-radius: 35px;
+  margin-left: 172px;
+
+}
+
+
+.my_page .all_article_container {
+  margin-left: 15px;
+  width: 75%;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+}
+
+.post_content .all_article_author_user {
+  margin-left: 10px;
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 26px;
+  color: #ffffff;
+}
+
+.post_content .all_article_title {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 33px;
+  color: #e3c08d;
+}
+
+.post_content .all_article_desc {
+  margin-top: 5px;
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 26px;
+  color: #ffffff;
+  padding: 0;
+  margin: 0;
+}
+
+.post_content .article_share {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.post_content .article_share_share_main {
+  color: rgb(255, 255, 255);
+  margin-left: 150px;
+  display: flex;
+  position: relative;
+  align-items: center;
+  font-weight: 400;
+  flex-direction: row;
+  font-size: 1rem;
+  margin-bottom: 60px;
+}
+
+
+/*my_page_right*/
+
+.my_page {
+  width: 100%;
+  height: auto;
+  display: flex;
+  position: relative;
+}
+
+.my_page .my_page_right {
+  margin-left: 57px;
+  position: relative;
+  width: 372.58px;
+  height: 408px;
+  border-radius: 16px;
+  display: flex;
+  background: #FFF;
+  flex-direction: column;
+  box-shadow: 0px 4px 16px 0px rgba(242, 189, 87, 0.04) inset,
+  0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset,
+  0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;
+}
+
+.my_page_right .order_info_box {
+  justify-content: space-between;
+  position: relative;
+  flex-direction: column;
+  align-items: center;
+  display: flex;
+}
+
+.my_page_right .settings_btn {
+  width: 18px;
+  height: 15px;
+  stroke-width: 2px;
+  stroke: #000;
+  display: flex;
+  margin-left: 220px;
+  margin-top: 20px;
+}
+
+.my_page_right .order_user_img {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.my_page_right .order_user_avatar {
+  width: 117px;
+  height: 112px;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  border-radius: 30px;
+  margin-bottom: 0px;
+}
+
+.my_page_right .order_user_prof_img {
+  position: relative;
+  width: 25px;
+  height: 25px;
+  flex-shrink: 0;
+  border-radius: 37px;
+  background: rgba(0, 0, 0, 0.33);
+  margin-left: 115px;
+  flex-direction: row;
+  display: flex;
+}
+
+.my_page_right .order_user_name {
+  font-family: "Commissioner";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 28px;
+  line-height: 36px;
+  color: #08090d;
+}
+
+.my_page_right .order_user_prof {
+  font-family: "Commissioner";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 36px;
+  color: #a1a1a1;
+}
+
+.my_page_right .user_media_box {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 141.319px;
+  height: 20.318px;
+  margin-top: 10px;
+}
+
+.my_page_right .user_media_box_follow {
+  position: relative;
+  flex-direction: row;
+  justify-content: space-evenly;
+
+  color: #616164;
+  font-family: DM Sans;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.my_page_right .user_media_box_follow .follows {
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.my_page_right .user_desc {
+  position: relative;
+  display: flex;
+  color: #616164;
+  font-family: DM Sans;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.my_page_menu {
+  margin-top: 40px;
+  align-items: center;
+  flex-direction: column;
+  display: flex;
+  justify-content: space-between;
+}
+
+.my_page_right .menu_box {
+  width: 372.58px;
+  height: 50px;
+  border-radius: 20px;
+  background: #FFF;
+  margin-top: 11px;
+  align-items: center;
+  position: relative;
+  justify-content: center;
+  display: inline-flex;
+  box-shadow: 0px 4px 16px 0px rgba(242, 189, 87, 0.04) inset,
+  0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset,
+  0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;
+}
+
+
+
+
+/*Followers*/
+
+.my_followers_page {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  position: relative;
+}
+
+ .follow_box {
+  width: 821.42px;
+  height: 140px;
+  border-radius: 17px;
+  padding:  25px 45px;
+  border: 1px solid red;
+
+  background: linear-gradient(180deg,
+  rgba(38, 112, 129, 0.90) 0%,
+  rgba(21, 61, 70, 0.90) 100%);
+  box-shadow: 0px 4px 12px 0px
+  rgba(0, 0, 0, 0.15), 3px 2px 9px 0px
+  rgba(255, 255, 255, 0.25) inset;
+
+  position: relative;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  margin-top: 15px;
+}
+
+.member_page .follow_box .username_text {
+  width: 400px;
+  height: 15px;
+  flex-shrink: 0;
+
+  color: #FFF;
+  font-family: Montserrat;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  margin-top: 25px;
+}
+
+
+
+.follow_back {
+  width: 160px;
+  height: 40px;
+  align-items: center;
+  position: relative;
+  display: flex;
+  border-radius: 50px;
+}
+
+
+.following_already span {
+  width: 102px;
+  height: 25px;
+  color: #FFF;
+  display: flex;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: normal;
+}
+
+
+
+
+/*    MY-settings_css*/
+
+
+
+.my_settings_page {
+  width: auto;
+  height: 1450px;
+  flex-direction: column;
+  display: flex;
+}
+
+.my_settings_page .member_media_frame {
+  width: 821.42px;
+  height: 120px;
+  border-radius: 5px;
+  background: #F6F6F6;
+  margin-bottom: 59px;
+
+  flex-direction: row;
+  display: flex;
+  padding: 10px 10px;
+  margin-right: 20px;
+}
+
+.my_settings_page .member_media_frame  .media_change_box {
+  margin-left: 20px;
+  color: #08090d;
+
+}
+
+.my_settings_page .member_media_frame  .span {
+  margin-bottom: 1px;
+  color: #140342;
+  font-family: Poppins;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+
+}
+
+
+.my_settings_page .member_media_frame  .media_change_box p {
+  color: #4F547B;
+  font-family: Poppins;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+
+}
+
+.my_settings_page .member_media_frame .up_del_box {
+  width: 40px;
+  height: 27px;
+  flex-shrink: 0;
+  border-radius: 15px;
+  background: #D9D9D9;
+
+}
+
+
+.my_settings_page .spec_input_mb_nick {
+  width: 821.42px;
+  height: 54px;
+  flex-shrink: 0;
+  border-radius: 5px;
+  background: #F6F6F6;
+  margin-bottom: 59px;
+  margin-top: 10px;
+}
+
+.my_settings_page .spec_label {
+  color: #FFF;
+  font-family: Poppins;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  margin-bottom: 10px;
+}
+
+.my_settings_page .input_frame {
+  flex-direction: row;
+  display: flex;
+  align-items: center;
+
+}
+
+
+.my_settings_page .input_frame .spec_input_mb_phone {
+  width: 380.48px;
+  height: 54px;
+  flex-shrink: 0;
+  border-radius: 5px;
+  background: #F6F6F6;
+  margin-bottom: 50px;
+  align-items: center;
+  /*justify-content: center;*/
+}
+
+
+.my_settings_page .input_frame .spec_input_mb_address {
+  width: 380.48px;
+  height: 54px;
+  flex-shrink: 0;
+  border-radius: 5px;
+  background: #F6F6F6;
+  margin-bottom: 50px;
+  margin-right: 17.52px;
+
+}
+
+.my_settings_page .spec_textarea_mb_description {
+  width: 821.42px;
+  height: 200px;
+  flex-shrink: 0;
+}
