@@ -20,6 +20,8 @@ import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import TabList from "@mui/lab/TabList";
 import {Button, Tab} from "@mui/material";
 import Marginer from "../../components/marginer";
+import { TuiEditor } from "../../components/tuiEditor/TuiEditor";
+import TViewer from "../../components/tuiEditor/TViewer";
 
 
 export function VisitMyPage(props: any) {
@@ -88,12 +90,16 @@ export function VisitMyPage(props: any) {
 
                                 <TabPanel value={"4"}>
                                     <Box className={"menu_name"}>Maqola yozish</Box>
-                                    <Box className={"write_content"}></Box>
+                                    <Box className={"write_content"}>
+                                        <TuiEditor />
+                                    </Box>
                                 </TabPanel>
 
                                 <TabPanel value={"5"}>
-                                    <Box className={"menu_name"}>Chosen an Content</Box>
-                                    <Box className={"menu_content"}></Box>
+                                    <Box className={"menu_name"}>Tanlangan Maqolalar</Box>
+                                    <Box className={"menu_content"}>
+                                        <TViewer text={`<h3>Hello</h3>`}/>
+                                    </Box>
                                 </TabPanel>
 
                                 <TabPanel value={"6"}>

@@ -4,9 +4,9 @@ import {Stack} from "@mui/system";
 
 
 const followings = [
-    {mb_nick: "abbos"},
-    {mb_nick: "latif"},
-    {mb_nick: "saidamir"},
+    { mb_nick: "abbos" },
+    { mb_nick: "latif" },
+    { mb_nick: "saidamir" },
 ];
 
 export function MemberFollowing(props: any) {
