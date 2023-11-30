@@ -25,7 +25,7 @@ import TViewer from "../../components/tuiEditor/TViewer";
 
 export function VisitOtherPage(props: any) {
     /** INITIALIZATIONS */
-    const [value, setValue] = React.useState("5");
+    const [value, setValue] = React.useState("7");
 
     /** HANDLERS */
     const handleChange = (event: any, newValue: string) => {
@@ -42,12 +42,41 @@ export function VisitOtherPage(props: any) {
                         <Stack className={"my_page_left"}>
                             <Box display={"flex"} flexDirection={"column"}>
                                 <TabPanel value={"1"}>
-                                    <Box className={"menu_name"}> Maqolalarim</Box>
-
+                                    <Box className={"menu_name"}>Content</Box>
                                     <Box className={"menu_content"}>
                                         <MemberPosts/>
                                         <Stack
                                             sx={{my: "40px"}}
+                                            direction="row"
+                                            alignItems="center"
+                                            justifyContent="center"
+                                        >
+                                            <Box className={"bottom_box"}>
+                                                <Pagination
+                                                    count={3}
+                                                    page={1}
+                                                    renderItem={(item) => (
+                                                        <PaginationItem
+                                                            components={{
+                                                                previous: ArrowBackIcon,
+                                                                next: ArrowForwardIcon,
+                                                            }}
+                                                            {...item}
+                                                            color={"secondary"}
+                                                        />
+                                                    )}
+                                                />
+                                             </Box>
+                                        </Stack>
+                                    </Box>
+                                </TabPanel>
+
+                                <TabPanel value={"7"}>
+                                    <Box className={"menu_name"}> Tanlangan Maqolalarim</Box>
+                                    <Box className={"menu_content"}>
+                                    <TViewer text={`<h3>Hello</h3>`}/>
+                                        <Stack
+                                            sx={{my: "40px", height: "600px"}}
                                             direction="row"
                                             alignItems="center"
                                             justifyContent="center"
@@ -107,7 +136,8 @@ export function VisitOtherPage(props: any) {
                                 </TabPanel>
                             </Box>
                         </Stack>
-                        <Stack className={"my_page_right"}>
+                        <Stack className={"my_page_right"}
+                        style={{ height: "355px"}}>
                             <Box className={"order_info_box"}>
 
                                 <a onClick={() => setValue("6")} className={"settings_btn"}>
@@ -148,7 +178,7 @@ export function VisitOtherPage(props: any) {
                                     <p className={"follows"}>Followers: 3 Following: 2</p>
                                 </Box>
                                 <p className={"user_desc"}>qushimcha ma'lumotlar mavjud emas</p>
-                                <Box
+                                {/* <Box
                                     display={"flex"}
                                     justifyContent={"flex-end"}
                                     sx={{mb: "10px"}}
@@ -170,7 +200,7 @@ export function VisitOtherPage(props: any) {
                                             )}
                                         />
                                     </TabList>
-                                </Box>
+                                </Box> */}
                             </Box>
 
                             <Box className={"my_page_menu"}
@@ -195,10 +225,24 @@ export function VisitOtherPage(props: any) {
                                                     onClick={() => setValue("1")}
                                                 >
                                                     <img src={"/icons/Pencil.svg"} alt=""/>
-                                                    <span> Mening Maqolalarim</span>
+                                                    <span> Content </span>
                                                 </div>
                                             )}
                                         />
+
+                                        <Tab
+                                            style={{flexDirection: "column",}}
+                                            value={"7"}
+                                            component={() => (
+                                                <div
+                                                    className={`menu_box ${value}`}
+                                                    onClick={() => setValue("7")}
+                                                >
+                                                    <img src={"/icons/Pencil.svg"} alt=""/>
+                                                    <span> Mening Maqolalarim</span>
+                                                </div>
+                                            )}
+                                        />        
                                         <Tab
                                             style={{flexDirection: "column",}}
                                             value={"2"}

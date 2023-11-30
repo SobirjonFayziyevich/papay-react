@@ -1,6 +1,6 @@
 import  Favorite from "@mui/icons-material/Favorite";
 import Checkbox  from "@mui/material/Checkbox";
-import { Box, Stack } from "@mui/system";
+import { Box, height, Stack } from "@mui/system";
 import  FavoriteBorder  from "@mui/icons-material/FavoriteBorder";
 import RemoveRedEyeIcon  from "@mui/icons-material/RemoveRedEye";
 import moment from "moment";
@@ -8,6 +8,8 @@ import moment from "moment";
 
 export function MemberPosts(props: any) {
     return (
+        <Stack className={"containd_page"}
+        style={{width: "821px", height: "600px"}}>
         <Box className={"post_content"}>
             {["1", "2", "3"].map((article) => {
                 return (
@@ -70,6 +72,7 @@ export function MemberPosts(props: any) {
                             );
                         })}
                   </Box>
+              </Stack>
    );
 }
 
