@@ -2,8 +2,17 @@ import React from 'react';
 import { Box, Button, Container, IconButton, Stack} from "@mui/material";
 import {NavLink} from "react-router-dom";
 import Badge from "@mui/material/Badge";
+import { useState } from "react";
+
+
+
 export function NavbarHome(props: any) {
-  return (
+    /** INITIALIZATIONS **/
+   const [count, setCount] =  useState(0);
+   //setCount countni qiymatini uzgartiraoladigan method.
+
+   
+return (
       <div className="format home_navbar">
       <Container>
           <Stack
@@ -89,7 +98,7 @@ export function NavbarHome(props: any) {
                   </Box>
 
                   <Box className="timeline_service">
-                      24 soat xizmatinggizdamiz.
+                      {count} soat xizmatinggizdamiz.
                   </Box>
                   <Box sx={{mt: "90px"}}>
                       <Button
@@ -97,7 +106,9 @@ export function NavbarHome(props: any) {
                           style={{width: "210px",
                               height: "60px",
                               background: "#1976d2",
-                              color: "#FFFFF",}}
+                              color: "#FFFFF",
+                            }}
+                            onClick={() => setCount(count + 1)}
                       >
                           RO'YXATDAN O'TISH
                       </Button>
@@ -112,5 +123,9 @@ export function NavbarHome(props: any) {
       </Container>
   </div>
     );
+}
+
+function initialState(initialState: any): [any, any] {
+    throw new Error('Function not implemented.');
 }
 
