@@ -2,14 +2,21 @@ import React from 'react';
 import { Box, Button, Container, IconButton, Stack} from "@mui/material";
 import {NavLink} from "react-router-dom";
 import Badge from "@mui/material/Badge";
-import { useState } from "react";
+import { useState , useEffect } from "react";
 
 
 
 export function NavbarHome(props: any) {
     /** INITIALIZATIONS **/
    const [count, setCount] =  useState(0);
+   const [value, setValue] =  useState(true);
    //setCount countni qiymatini uzgartiraoladigan method.
+
+   useEffect(() => {
+     setCount(count + 1);
+
+   }, [value]); // useStatening array dependenceni pustoy bulganida faqat 1tagina qiymatni oladi.
+   // agarda arrayning ichiga qiymat kiritilsa, va shu valuening soni ortib borishi bn arrayning ham qiymati oshib boradi.
 
    
 return (
@@ -108,7 +115,7 @@ return (
                               background: "#1976d2",
                               color: "#FFFFF",
                             }}
-                            onClick={() => setCount(count + 1)}
+                            onClick={() => setValue(!value)} // valueni teskari qiymatini olib ber.
                       >
                           RO'YXATDAN O'TISH
                       </Button>

@@ -22,7 +22,7 @@ class Car extends Component {
      }
 
      componentWillUnmount() {
-        console.log("ran componentWillMount");
+        console.log("ran componentWillUnMount");
        // runs after component unmount == component yashirina yotgan payt ishga tushadi.
      } 
        
