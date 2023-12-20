@@ -11,13 +11,16 @@ import '../../../css/home.css';
 
 export function Homepage() {
 
-    // useEffect(() => {
-    //     console.log('componentDidMount => Data fetch');
+     // Selector(malumot uquvchi) bizga Storedan datani olib beradi.
 
-    //     return () => {
-    //         console.log("componentWillUnmount process");
-    //     };
-    //  }, []);
+    useEffect(() => {
+        // backend data request => data ni olganimizda malumotni Redux Store ga borib yozib olamiz.
+        // bu holatda bizga 2ta mantiq kerak buladi: SLICE va SELECTOR => biri borib storega mantiq yozadi,
+        // biri yozilgan mantiqni olib uqiydi.
+
+        // backenddan olgan datani Redux Storega borib yozadi, buning un SLICE(malumot yozuvchi degani) yordam beradi.
+        
+     }, []);
 
 
 
