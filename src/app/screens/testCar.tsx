@@ -15,7 +15,7 @@ class Car extends Component {
     changeColor = () => {
       this.setState({color: "blue"});
     };
-     // lifecycle methods on React:
+     // lifecycle hook methods on React:
      componentDidMount() {
          console.log("ran componentDidMount");
       // runs after first render = RETRIEVE DATA FROM BACKEND SERVER==Backend Serverdan datalarni chaqirib olish. 

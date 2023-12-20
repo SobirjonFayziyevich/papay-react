@@ -11,13 +11,13 @@ import '../../../css/home.css';
 
 export function Homepage() {
 
-    useEffect(() => {
-        console.log('componentDidMount => Data fetch');
+    // useEffect(() => {
+    //     console.log('componentDidMount => Data fetch');
 
-        return () => {
-            console.log("componentWillUnmount process");
-        };
-     }, []);
+    //     return () => {
+    //         console.log("componentWillUnmount process");
+    //     };
+    //  }, []);
 
 
 

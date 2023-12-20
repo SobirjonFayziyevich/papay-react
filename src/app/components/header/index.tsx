@@ -105,7 +105,8 @@ return (
                   </Box>
 
                   <Box className="timeline_service">
-                      {count} soat xizmatinggizdamiz.
+                      {/* {count} soat xizmatinggizdamiz. */}
+                      24 soat xizmatinggizdamiz.
                   </Box>
                   <Box sx={{mt: "90px"}}>
                       <Button
@@ -115,7 +116,7 @@ return (
                               background: "#1976d2",
                               color: "#FFFFF",
                             }}
-                            onClick={() => setValue(!value)} // valueni teskari qiymatini olib ber.
+                            // onClick={() => setValue(!value)} // valueni teskari qiymatini olib ber.
                       >
                           RO'YXATDAN O'TISH
                       </Button>
