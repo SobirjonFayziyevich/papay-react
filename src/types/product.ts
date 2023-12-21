@@ -1,7 +1,7 @@
 export interface MeLiked {
     mb_id: string,
     like_ref_id: string,
-    mb_favorite: boolean
+    my_favorite: boolean
 }
 
 
