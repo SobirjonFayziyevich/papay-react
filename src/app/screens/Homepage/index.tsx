@@ -13,7 +13,7 @@ import '../../../css/home.css';
 import { useDispatch, useSelector } from "react-redux";
 import {Dispatch} from "@reduxjs/toolkit";
 import {createSelector} from "reselect";
-import {setTopRestaurants, bestRestaurants} from "../../screens/Homepage/slice";
+import {setTopRestaurants, setBestRestaurants} from "../../screens/Homepage/slice";
 import {retrieveTopRestaurants} from "../../screens/Homepage/selector";
 import { Restaurant } from "../../../types/user";
 import RestaurantApiService from "../../apiServices/restaurantApiServices";
@@ -21,13 +21,14 @@ import RestaurantApiService from "../../apiServices/restaurantApiServices";
 /** REDUX SLICE */ 
 const actionDispatch = (dispach: Dispatch) => ({ // buning mantiqi HomepageSlicedan setTopRestaurantni chaqirib olish edi.
   setTopRestaurants: (data: Restaurant[]) => dispach(setTopRestaurants(data)),
+  setBestRestaurants: (data: Restaurant[]) => dispach(setBestRestaurants(data)),
 });
 
 export function Homepage() {
 
     /** INITIALIZATION */
 
-    const {setTopRestaurants} = actionDispatch(useDispatch()); //HomePageSlicedan setTopRestaurantni chaqirib oldim.
+    const {setTopRestaurants, setBestRestaurants } = actionDispatch(useDispatch()); //HomePageSlicedan setTopRestaurantni chaqirib oldim.
     
 
      // Selector(malumot uquvchi) bizga Storedan datani olib beradi.
@@ -39,15 +40,21 @@ export function Homepage() {
         // biri yozilgan mantiqni olib uqiydi.
         // backenddan olgan datani Redux Storega borib yozadi, buning un SLICE(malumot yozuvchi degani) yordam beradi.
  
-        useEffect(() => {
-     // backend data request => data:
+        useEffect(() => {  
      const restaurantService = new RestaurantApiService();
      restaurantService
         .getTopRestaurants()
-        .then(data => {  //useEffectni ichidagi jarayonlar syncrins usulida bulishi keraak.
+        .then((data) => {  //useEffectni ichidagi jarayonlar syncrins usulida bulishi keraak.
          setTopRestaurants(data);
-     })
-     .catch(err => console.log(err)); 
+
+     }).catch(err => console.log(err)); 
+
+     restaurantService   // BestRestaurantning datalarini STORE qildik, 
+        .getRestaurants({ page: 1, limit: 4, order: 'mb_point'})
+        .then((data) => {
+        setBestRestaurants(data);
+     }).catch(err => console.log(err));
+
     }, []);
     
     return  <div className="homepage">

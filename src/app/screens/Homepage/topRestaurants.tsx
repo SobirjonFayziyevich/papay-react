@@ -27,7 +27,8 @@ const topRestaurantRetriever = createSelector(
     );
 
 export function TopRestaurants() {
-    const {topRestaurants} = useSelector(topRestaurantRetriever); //useSelectorga topRestaurantRetrieverni kiritib undan topRestaurantni qabul qilib olayopman. 
+     /** INITIALIZATION */
+    const {topRestaurants} = useSelector(topRestaurantRetriever); //useSelectorga topRestaurantRetrieverni kiritib undan topRestaurantni qabul qilib olayopman.
     console.log("topRestaurants:::", topRestaurants);
     return(
         <div className="top_restaurant_frame">

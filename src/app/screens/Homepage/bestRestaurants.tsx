@@ -9,8 +9,26 @@ import Typography from "@mui/joy/Typography";
 import LocationOnRoundedIcon from "@mui/icons-material/LocationOnRounded";
 import CallIcon from "@mui/icons-material/Call";
 
+// REDUX tegishli bulgan importlar.
+import { useSelector } from "react-redux";
+import {createSelector} from "reselect";
+import {retrieveBestRestaurants} from "../../screens/Homepage/selector";
+import { Restaurant } from '../../../types/user';
+import { serviceApi } from '../../../lib/config';
+
+
+/** REDUX SELECTOR */
+const bestRestaurantRetriever = createSelector(
+    retrieveBestRestaurants,
+    (bestRestaurants) => ({
+        bestRestaurants,
+      })
+    );
+
 
 export function BestRestaurants() {
+     /** INITIALIZATION */
+    const {bestRestaurants} = useSelector(bestRestaurantRetriever); //useSelectorga topRestaurantRetrieverni kiritib undan topRestaurantni qabul qilib olayopman.
     // @ts-ignore
     return (
         <div className="best_restaurant_frame">
@@ -23,408 +41,120 @@ export function BestRestaurants() {
             <Container sx={{paddingTop: "153px"}}>
                 <Stack flexDirection={"column"} alignItems={"center"}>
                     <Box className="category_title">Zo'r Restaurantlar</Box>
-
-                    <Stack sx={{mt: "43px"}} flexDirection={"row"} alignItems={"center"}
-                    >
-                        <CssVarsProvider>
-                            <Card
-                                variant="outlined"
-                                sx={{
-                                    minHeight: 483,
-                                    minWidth: 320,
-                                    mr: "35px",
-                                }}
-                            >
-                                <CardOverflow>
-                                    <AspectRatio ratio="1">
-                                        <img src={"restaurant/uzbegim.png"} alt=""/>
-                                    </AspectRatio>
-
-                                    <IconButton aria-label="Like minimal Photography"
-                                                size="md"
-                                                variant="solid"
-                                                color="neutral"
-                                                sx={{
-                                                    position: "absolute",
-                                                    zIndex: 2,
-                                                    borderRadius: "50%",
-                                                    right: "1rem",
-                                                    bottom: 1,
-                                                    transform: "translateY(50%)",
-                                                    color: "rgba(0,0,0,.4)",
-                                                }}
-                                    >
-                                        <Favorite
-                                            /*@ts-ignore*/
-                                            style={{
-                                                color: "white",
-                                            }}
-                                        />
-                                    </IconButton>
-                                </CardOverflow>
-                                <Typography level="h2" sx={{fontSize: "md", mt: 0.1}}>
-                                    Uzbegim Halol Food
-                                </Typography>
-                                <Typography level="body-sm" sx={{mt: 0.5, mb: 0.1}}>
-                                    <Link
-                                        href=""
-                                        startDecorator={<LocationOnRoundedIcon/>}
-                                        textColor="neutral.700"
-                                    >
-                                        Tashkent, Yakka Saroy 12-5
-                                    </Link>
-                                </Typography>
-                                <Typography level="body-sm" sx={{mt: 0.5, mb: 0.1}}>
-                                    <Link
-                                        href=""
-                                        startDecorator={<CallIcon/>}
-                                        textColor="neutral.700"
-                                    >
-                                        +99894 4805313
-                                    </Link>
-                                </Typography>
-
-                                <CardOverflow
-                                    variant="soft"
+                     <Stack sx={{mt: "43px"}} flexDirection={"row"} alignItems={"center"}>
+                         {bestRestaurants.map((ele: Restaurant) => {
+                             const image_path = `${serviceApi}/${ele.mb_image}`;
+                             return(
+                                <CssVarsProvider>
+                                <Card
+                                    variant="outlined"
                                     sx={{
-                                        display: "flex",
-                                        flexDirection: "row",
-                                        gap: 1.5,
-                                        py: 1.5,
-                                        px: "var(--Card-padding)",
-                                        borderTop: "1px solid",
-                                        borderColor: "neutral.outlinedBorder",
-                                        bgcolor: "background.level1",
+                                        minHeight: 483,
+                                        minWidth: 320,
+                                        mr: "35px",
                                     }}
                                 >
-                                    <Typography
-                                        level="body-sm"
-                                        sx={{
-                                            fontSize: "16px",
-                                            lineHeight: "1.5",
-                                            fontWeight: "md",
-                                            color: "black",
-                                            alignItems: "center",
-                                            display: "flex",
-                                        }}
-                                    >
-                                        100{" "}
-                                        <Visibility sx={{fontSize: 20, marginLeft: "5px"}}/>
-                                    </Typography>
-                                    <Box sx={{width: 2, bgcolor: "divider"}}/>
-                                    <Typography
-                                        level="body-sm"
-                                        sx={{
-                                            fontWeight: "md",
-                                            color: "black",
-                                            alignItems: "center",
-                                            display: "flex",
-                                        }}
-                                    >
-                                        <div>500</div>
-                                        <Favorite sx={{fontSize: 20, marginLeft: "5px"}}/>
-                                    </Typography>
-                                </CardOverflow>
-                            </Card>
-                            <Card
-                                variant="outlined"
-                                sx={{
-                                    minHeight: 483,
-                                    minWidth: 320,
-                                    mr: "35px",
-                                }}
-                            >
-                                <CardOverflow>
-                                    <AspectRatio ratio="1">
-                                        <img src={"restaurant/uzbegim.png"} alt=""/>
-                                    </AspectRatio>
-
-                                    <IconButton aria-label="Like minimal Photography"
-                                                size="md"
-                                                variant="solid"
-                                                color="neutral"
-                                                sx={{
-                                                    position: "absolute",
-                                                    zIndex: 2,
-                                                    borderRadius: "50%",
-                                                    right: "1rem",
-                                                    bottom: 2,
-                                                    transform: "translateY(50%)",
-                                                    color: "rgba(0,0,0,.4)",
+                                    <CardOverflow>
+                                        <AspectRatio ratio="1">
+                                            <img src={image_path} alt=""/>
+                                        </AspectRatio>
+    
+                                        <IconButton aria-label="Like minimal Photography"
+                                                    size="md"
+                                                    variant="solid"
+                                                    color="neutral"
+                                                    sx={{
+                                                        position: "absolute",
+                                                        zIndex: 2,
+                                                        borderRadius: "50%",
+                                                        right: "1rem",
+                                                        bottom: 1,
+                                                        transform: "translateY(50%)",
+                                                        color: "rgba(0,0,0,.4)",
+                                                    }}
+                                        >
+                                            <Favorite
+                                                /*@ts-ignore*/
+                                                style={{
+                                                    color: "white",
                                                 }}
+                                            />
+                                        </IconButton>
+                                    </CardOverflow>
+                                    <Typography level="h2" sx={{fontSize: "md", mt: 0.1}}>
+
+                                        {ele.mb_nick}
+                                    </Typography>
+                                    <Typography level="body-sm" sx={{mt: 0.5, mb: 0.1}}>
+                                        <Link
+                                            href=""
+                                            startDecorator={<LocationOnRoundedIcon/>}
+                                            textColor="neutral.700"
+                                        >
+                                            Tashkent, Yakka Saroy 12-5
+                                        {/* {ele.mb_address} */}
+
+                                        </Link>
+                                    </Typography>
+                                    <Typography level="body-sm" sx={{mt: 0.5, mb: 0.1}}>
+                                        <Link
+                                            href=""
+                                            startDecorator={<CallIcon/>}
+                                            textColor="neutral.700"
+                                        >
+                                            {/* +99894 4805313 */}
+                                            {ele.mb_phone}
+                                        </Link>
+                                    </Typography>
+    
+                                    <CardOverflow
+                                        variant="soft"
+                                        sx={{
+                                            display: "flex",
+                                            flexDirection: "row",
+                                            gap: 1.5,
+                                            py: 1.5,
+                                            px: "var(--Card-padding)",
+                                            borderTop: "1px solid",
+                                            borderColor: "neutral.outlinedBorder",
+                                            bgcolor: "background.level1",
+                                        }}
                                     >
-                                        <Favorite
-                                            /*@ts-ignore*/
-                                            style={{
-                                                color: "white",
+                                        <Typography
+                                            level="body-sm"
+                                            sx={{
+                                                fontSize: "16px",
+                                                lineHeight: "1.5",
+                                                fontWeight: "md",
+                                                color: "black",
+                                                alignItems: "center",
+                                                display: "flex",
                                             }}
-                                        />
-                                    </IconButton>
-                                </CardOverflow>
-                                <Typography level="h2" sx={{fontSize: "md", mt: 0.1}}>
-                                    Uzbegim Halol Food
-                                </Typography>
-                                <Typography level="body-sm" sx={{mt: 0.5, mb: 0.1}}>
-                                    <Link
-                                        href=""
-                                        startDecorator={<LocationOnRoundedIcon/>}
-                                        textColor="neutral.700"
-                                    >
-                                        Tashkent, Yakka Saroy 12-5
-                                    </Link>
-                                </Typography>
-                                <Typography level="body-sm" sx={{mt: 0.5, mb: 0.1}}>
-                                    <Link
-                                        href=""
-                                        startDecorator={<CallIcon/>}
-                                        textColor="neutral.700"
-                                    >
-                                        +99894 4805313
-                                    </Link>
-                                </Typography>
-
-                                <CardOverflow
-                                    variant="soft"
-                                    sx={{
-                                        display: "flex",
-                                        flexDirection: "row",
-                                        gap: 1.5,
-                                        py: 1.5,
-                                        px: "var(--Card-padding)",
-                                        borderTop: "1px solid",
-                                        borderColor: "neutral.outlinedBorder",
-                                        bgcolor: "background.level1",
-                                    }}
-                                >
-                                    <Typography
-                                        level="body-sm"
-                                        sx={{
-                                            fontSize: "16px",
-                                            lineHeight: "1.5",
-                                            fontWeight: "md",
-                                            color: "black",
-                                            alignItems: "center",
-                                            display: "flex",
-                                        }}
-                                    >
-                                        100{" "}
-                                        <Visibility sx={{fontSize: 20, marginLeft: "5px"}}/>
-                                    </Typography>
-                                    <Box sx={{width: 2, bgcolor: "divider"}}/>
-                                    <Typography
-                                        level="body-sm"
-                                        sx={{
-                                            fontWeight: "md",
-                                            color: "black",
-                                            alignItems: "center",
-                                            display: "flex",
-                                        }}
-                                    >
-                                        <div>500</div>
-                                        <Favorite sx={{fontSize: 20, marginLeft: "5px"}}/>
-                                    </Typography>
-                                </CardOverflow>
-                            </Card>
-                            <Card
-                                variant="outlined"
-                                sx={{
-                                    minHeight: 483,
-                                    minWidth: 320,
-                                    mr: "35px",
-                                }}
-                            >
-                                <CardOverflow>
-                                    <AspectRatio ratio="1">
-                                        <img src={"restaurant/uzbegim.png"} alt=""/>
-                                    </AspectRatio>
-
-                                    <IconButton aria-label="Like minimal Photography"
-                                                size="md"
-                                                variant="solid"
-                                                color="neutral"
-                                                sx={{
-                                                    position: "absolute",
-                                                    zIndex: 2,
-                                                    borderRadius: "50%",
-                                                    right: "1rem",
-                                                    bottom: 2,
-                                                    transform: "translateY(50%)",
-                                                    color: "rgba(0,0,0,.4)",
-                                                }}
-                                    >
-                                        <Favorite
-                                            /*@ts-ignore*/
-                                            style={{
-                                                color: "white",
+                                        >
+                                            {ele.mb_views}
+                                            <Visibility sx={{fontSize: 20, marginLeft: "5px"}}/>
+                                        </Typography>
+                                        <Box sx={{width: 2, bgcolor: "divider"}}/>
+                                        <Typography
+                                            level="body-sm"
+                                            sx={{
+                                                fontWeight: "md",
+                                                color: "black",
+                                                alignItems: "center",
+                                                display: "flex",
                                             }}
-                                        />
-                                    </IconButton>
-                                </CardOverflow>
-                                <Typography level="h2" sx={{fontSize: "md", mt: 0.1}}>
-                                    Uzbegim Halol Food
-                                </Typography>
-                                <Typography level="body-sm" sx={{mt: 0.5, mb: 0.1}}>
-                                    <Link
-                                        href=""
-                                        startDecorator={<LocationOnRoundedIcon/>}
-                                        textColor="neutral.700"
-                                    >
-                                        Tashkent, Yakka Saroy 12-5
-                                    </Link>
-                                </Typography>
-                                <Typography level="body-sm" sx={{mt: 0.5, mb: 0.1}}>
-                                    <Link
-                                        href=""
-                                        startDecorator={<CallIcon/>}
-                                        textColor="neutral.700"
-                                    >
-                                        +99894 4805313
-                                    </Link>
-                                </Typography>
+                                        >
+                                            <div>{ele.mb_likes}</div>
+                                            <Favorite sx={{fontSize: 20, marginLeft: "5px"}}/>
+                                        </Typography>
+                                    </CardOverflow>
+                                </Card>
+                               
+                            </CssVarsProvider>
 
-                                <CardOverflow
-                                    variant="soft"
-                                    sx={{
-                                        display: "flex",
-                                        flexDirection: "row",
-                                        gap: 1.5,
-                                        py: 1.5,
-                                        px: "var(--Card-padding)",
-                                        borderTop: "1px solid",
-                                        borderColor: "neutral.outlinedBorder",
-                                        bgcolor: "background.level1",
-                                    }}
-                                >
-                                    <Typography
-                                        level="body-sm"
-                                        sx={{
-                                            fontSize: "16px",
-                                            lineHeight: "1.5",
-                                            fontWeight: "md",
-                                            color: "black",
-                                            alignItems: "center",
-                                            display: "flex",
-                                        }}
-                                    >
-                                        100{" "}
-                                        <Visibility sx={{fontSize: 20, marginLeft: "5px"}}/>
-                                    </Typography>
-                                    <Box sx={{width: 2, bgcolor: "divider"}}/>
-                                    <Typography
-                                        level="body-sm"
-                                        sx={{
-                                            fontWeight: "md",
-                                            color: "black",
-                                            alignItems: "center",
-                                            display: "flex",
-                                        }}
-                                    >
-                                        <div>500</div>
-                                        <Favorite sx={{fontSize: 20, marginLeft: "5px"}}/>
-                                    </Typography>
-                                </CardOverflow>
-                            </Card>
-                            <Card
-                                variant="outlined"
-                                sx={{
-                                    minHeight: 483,
-                                    minWidth: 320,
-                                    mr: "35px",
-                                }}
-                            >
-                                <CardOverflow>
-                                    <AspectRatio ratio="1">
-                                        <img src={"restaurant/uzbegim.png"} alt=""/>
-                                    </AspectRatio>
-
-                                    <IconButton aria-label="Like minimal Photography"
-                                                size="md"
-                                                variant="solid"
-                                                color="neutral"
-                                                sx={{
-                                                    position: "absolute",
-                                                    zIndex: 2,
-                                                    borderRadius: "50%",
-                                                    right: "1rem",
-                                                    bottom: 2,
-                                                    transform: "translateY(50%)",
-                                                    color: "rgba(0,0,0,.4)",
-                                                }}
-                                    >
-                                        <Favorite
-                                            /*@ts-ignore*/
-                                            style={{
-                                                color: "white",
-                                            }}
-                                        />
-                                    </IconButton>
-                                </CardOverflow>
-                                <Typography level="h2" sx={{fontSize: "md", mt: 0.1}}>
-                                    Uzbegim Halol Food
-                                </Typography>
-                                <Typography level="body-sm" sx={{mt: 0.5, mb: 0.1}}>
-                                    <Link
-                                        href=""
-                                        startDecorator={<LocationOnRoundedIcon/>}
-                                        textColor="neutral.700"
-                                    >
-                                        Tashkent, Yakka Saroy 12-5
-                                    </Link>
-                                </Typography>
-                                <Typography level="body-sm" sx={{mt: 0.5, mb: 0.1}}>
-                                    <Link
-                                        href=""
-                                        startDecorator={<CallIcon/>}
-                                        textColor="neutral.700"
-                                    >
-                                        +99894 4805313
-                                    </Link>
-                                </Typography>
-
-                                <CardOverflow
-                                    variant="soft"
-                                    sx={{
-                                        display: "flex",
-                                        flexDirection: "row",
-                                        gap: 1.5,
-                                        py: 1.5,
-                                        px: "var(--Card-padding)",
-                                        borderTop: "1px solid",
-                                        borderColor: "neutral.outlinedBorder",
-                                        bgcolor: "background.level1",
-                                    }}
-                                >
-                                    <Typography
-                                        level="body-sm"
-                                        sx={{
-                                            fontSize: "16px",
-                                            lineHeight: "1.5",
-                                            fontWeight: "md",
-                                            color: "black",
-                                            alignItems: "center",
-                                            display: "flex",
-                                        }}
-                                    >
-                                        100{" "}
-                                        <Visibility sx={{fontSize: 24, marginLeft: "5px"}}/>
-                                    </Typography>
-                                    <Box sx={{width: 2, bgcolor: "divider"}}/>
-                                    <Typography
-                                        level="body-sm"
-                                        sx={{
-                                            fontWeight: "md",
-                                            color: "black",
-                                            alignItems: "center",
-                                            display: "flex",
-                                        }}
-                                    >
-                                        <div>500</div>
-                                        <Favorite sx={{fontSize: 24, marginLeft: "5px"}}/>
-                                    </Typography>
-                                </CardOverflow>
-                            </Card>
-                        </CssVarsProvider>
-                    </Stack>
+                             )
+                         })};
+                         </Stack>
 
                     <Stack
                         flexDirection={"row"}
