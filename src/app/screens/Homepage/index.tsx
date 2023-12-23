@@ -12,9 +12,7 @@ import '../../../css/home.css';
 // REDUX tegishli bulgan importlar.
 import { useDispatch, useSelector } from "react-redux";
 import {Dispatch} from "@reduxjs/toolkit";
-import {createSelector} from "reselect";
 import {setTopRestaurants, setBestRestaurants} from "../../screens/Homepage/slice";
-import {retrieveTopRestaurants} from "../../screens/Homepage/selector";
 import { Restaurant } from "../../../types/user";
 import RestaurantApiService from "../../apiServices/restaurantApiServices";
 
