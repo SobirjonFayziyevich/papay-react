@@ -84,6 +84,7 @@ return (
                       <Button
                           variant="contained"
                           style={{color: "#FFFFFF",background: "#1976d2"}}
+                          onClick={props.handleLoginOpen}
                       >
                           KIRISH
                       </Button>
@@ -117,6 +118,7 @@ return (
                               color: "#FFFFF",
                             }}
                             // onClick={() => setValue(!value)} // valueni teskari qiymatini olib ber.
+                            onClick={props.handleSignUpOpen}
                       >
                           RO'YXATDAN O'TISH
                       </Button>

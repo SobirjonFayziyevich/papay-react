@@ -16,24 +16,48 @@ import {NavbarRestaurant} from "./components/header/restaurant";
 import {NavbarOthers} from "./components/header/others";
 import {Footer} from "./components/footer";
 import Car from './screens/testCar';
+import AuthenticationModel from "./components/auth";
 
 
 // useStateni REACT dan import qilib olamz.
 // bizning path imiz uzgarganda viewimizni qayta qurub beradi.
 function App () {
+    /** INITIALIZATIONS */
     const [path, setPath] = useState();
     const main_path = window.location.pathname;
+    const [signUpOpen, setSignUpOpen] = useState(false); // signUpOpen ni qiymati false bulgani un shu qiymatni pass qildim.
+    const [loginOpen, setLoginOpen] = useState(false);
+
+    /** HANDLERS */
+    const handleSignUpOpen = () => setSignUpOpen(true); //setSignUpOpen true bulganda faqat signup ishga tushishi kerak.
+    
+    const handleSignUpClose = () => setSignUpOpen(false);
+    
+    const handleLoginOpen = () => setLoginOpen(true);
+       
+    const handleLoginClose = () => setLoginOpen(false);
+    
+
 
     // @ts-ignore
     // @ts-ignore
     return (
         <Router>
             {main_path == "/" ? (
-                <NavbarHome setPath={setPath} />
+                <NavbarHome setPath={setPath} 
+                handleLoginOpen={handleLoginOpen} // buyerdagi vazifalari login va signupni bosganda sahifani ochib beradi.
+                handleSignUpOpen={ handleSignUpOpen}
+                />
             ) : main_path.includes("/restaurant") ? (
-                <NavbarRestaurant setPath={setPath} />
+                <NavbarRestaurant setPath={setPath} 
+                handleLoginOpen={handleLoginOpen}
+                handleSignUpOpen={ handleSignUpOpen}
+                />
             ) : (
-                <NavbarOthers setPath={setPath} />
+                <NavbarOthers setPath={setPath} 
+                handleLoginOpen={handleLoginOpen}
+                handleSignUpOpen={ handleSignUpOpen}
+                />
             )}
 
             {/*buyerdan swich routerlar boshlandi*/}
@@ -63,12 +87,20 @@ function App () {
 
             {/*FOOTER SECTION*/}
             <Footer />
+            <AuthenticationModel 
+              loginOpen={loginOpen}
+              handleLoginOpen={handleLoginOpen}
+              handleLoginClose={handleLoginClose}
+              signUpOpen={signUpOpen}
+              handleSignUpOpen={handleSignUpOpen}
+              handleSignUpClose={handleSignUpClose}
+            />
 
         </Router>
     );
 }
 export default App;
 
-function Home() {
-    return <h2>Home</h2>;
-}
+// function Home() {
+//     return <h2>Home</h2>;
+// }
