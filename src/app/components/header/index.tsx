@@ -1,12 +1,19 @@
 import React from 'react';
-import { Box, Button, Container, IconButton, Stack} from "@mui/material";
+import { Box, Button, Container, IconButton, ListItemIcon, Stack} from "@mui/material";
 import {NavLink} from "react-router-dom";
 import Badge from "@mui/material/Badge";
 import { useState , useEffect } from "react";
+import { set } from 'immer/dist/internal';
+import { Menu, MenuItem } from '@mui/material';
+import { Logout } from '@mui/icons-material';
+
+
+
 
 
 
 export function NavbarHome(props: any) {
+    
     /** INITIALIZATIONS **/
    const [count, setCount] =  useState(0);
    const [value, setValue] =  useState(true);
@@ -60,6 +67,14 @@ return (
                       </NavLink>
                   </Box>
 
+                  {props.verifiedMemberData ? (
+                   <Box className="hover-line" onClick={props.setPath}>
+                   <NavLink to="/member-page" activeClassName="underline">
+                       Sahifam
+                   </NavLink>
+               </Box>
+                  ) : null }
+
                   <Box className="hover-line" onClick={props.setPath}>
                       <NavLink to="/help" activeClassName="underline">
                           Yordam
@@ -80,6 +95,7 @@ return (
                       </IconButton>
                   </Box>
 
+                    {!props.verifiedMemberData ? (
                    <Box>
                       <Button
                           variant="contained"
@@ -89,6 +105,57 @@ return (
                           KIRISH
                       </Button>
                   </Box>
+                ) : (
+                  <img style={{width: '48px', height: '48px', borderRadius: '24px'}} 
+                  src={props.verifiedMemberData.mb_image}
+                  onClick={props.handleLogOutClick}
+                  />
+                )}
+
+               <Menu
+                anchorEl={props.anchorEl}
+                open={props.open}
+                onClose={props.handleCloseLogOut}
+                onClick={props.handleCloseLogOut}
+                slotProps={{
+                  // Use slotProps instead of PaperProps
+                  paper: {
+                    elevation: 0,
+                    sx: {
+                      overflow: "visible",
+                      filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
+                      mt: 1.5,
+                      "& .MuiAvatar-root": {
+                        width: 32,
+                        height: 32,
+                        ml: -0.5,
+                        mr: 1
+                      },
+                      "&:before": {
+                        content: '""',
+                        display: "block",
+                        position: "absolute",
+                        top: 0,
+                        right: 14,
+                        width: 10,
+                        height: 10,
+                        bgcolor: "background.paper",
+                        transform: "translateY(-50%) rotate(45deg)",
+                        zIndex: 0
+                      }
+                    }
+                  }
+                }}
+                transformOrigin={{ horizontal: "right", vertical: "top" }}
+                anchorOrigin={{ horizontal: "right", vertical: "bottom" }}>
+                <MenuItem onClick={props.handleLogOutRequest}> 
+                  <ListItemIcon>
+                    <Logout fontSize="small" style={{ color: "blue" }} />
+                  </ListItemIcon>
+                  Logout
+                </MenuItem>
+              </Menu>
+                
               </Stack>
           </Stack>
 
@@ -110,18 +177,20 @@ return (
                       24 soat xizmatinggizdamiz.
                   </Box>
                   <Box sx={{mt: "90px"}}>
-                      <Button
-                          variant="contained"
-                          style={{width: "210px",
-                              height: "60px",
-                              background: "#1976d2",
-                              color: "#FFFFF",
-                            }}
-                            // onClick={() => setValue(!value)} // valueni teskari qiymatini olib ber.
-                            onClick={props.handleSignUpOpen}
-                      >
-                          RO'YXATDAN O'TISH
-                      </Button>
+                      {!props.verifiedMemberData ? (
+                       <Button
+                       variant="contained"
+                       style={{width: "210px",
+                           height: "60px",
+                           background: "#1976d2",
+                           color: "#FFFFF",
+                         }}
+                          onClick={props.handleSignUpOpen}
+                        >
+                       RO'YXATDAN O'TISH
+                       </Button>
+                      ) : null}
+                      
                   </Box>
                   </Stack>
               <Stack flexDirection={'column'}>
