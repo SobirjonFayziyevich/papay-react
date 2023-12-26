@@ -141,9 +141,9 @@ return (
                         height: 10,
                         bgcolor: "background.paper",
                         transform: "translateY(-50%) rotate(45deg)",
-                        zIndex: 0
-                      }
-                    }
+                        zIndex: 0,
+                      },
+                    },
                   }
                 }}
                 transformOrigin={{ horizontal: "right", vertical: "top" }}
@@ -202,9 +202,5 @@ return (
       </Container>
   </div>
     );
-}
-
-function initialState(initialState: any): [any, any] {
-    throw new Error('Function not implemented.');
 }
 

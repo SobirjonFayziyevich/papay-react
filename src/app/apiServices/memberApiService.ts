@@ -45,7 +45,7 @@ class MemberApiService {
         localStorage.setItem("member_data", JSON.stringify(member)); //locaStoregdan memberdatani hosil qilayopman, malumotni saqlashim un.
         return member;
         } catch (err: any) {
-          console.log(`ERROR ::: loginRequest ${err.message}`);
+          console.log(`ERROR ::: signupRequest ${err.message}`);
           throw err;
 
         }
@@ -68,9 +68,6 @@ class MemberApiService {
 
       }
   }
-
-
-
 }
 
 export default MemberApiService; 

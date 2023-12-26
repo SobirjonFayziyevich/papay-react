@@ -70,20 +70,19 @@ function App () {
        const handleCloseLogOut = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorEl(null);
        };
-
        const handleLogOutRequest = async () => {
-          try{
-              const memberApiService = new MemberApiService();
-              await memberApiService.logOutRequest();
-              await sweetTopSmallSuccessAlert('success', 700, true);
-            //  assert.ok(false, "test");
-          } catch(err: any) {
+        try{
+            let member_data: any = null; // nay qiymatni null boshlangich qiymat bn olyabman
+            const memberApiService = new MemberApiService();
+            await memberApiService.logOutRequest(); // memberApiService ni  logOutRequest methodini chaqirib olyabman
+            await sweetTopSmallSuccessAlert('success', 700, true);
+            localStorage.removeItem('member_data');
+        } catch(err: any) {
             console.log(err);
             sweetFailureProvider(Definer.general_err1);
-          }
-       };
-    
-
+        }
+    };
+   
 
     // @ts-ignore
     // @ts-ignore

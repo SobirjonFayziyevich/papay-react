@@ -10,7 +10,7 @@ if(cookie.get("access_token")) { // cookieni ichida access_token mavjud bulsagin
     member_data = memberDataJson ? JSON.parse(memberDataJson) : null; //member_datani qiymatini yangilab olib,
 
 } else {
-    localStorage.removeItem("member_data"); //boshqa holatda localStorag ichida emoveItem mavjud uni ichidan member_datani delete qilamn.
+    localStorage.removeItem(member_data); //boshqa holatda localStorag ichida emoveItem mavjud uni ichidan member_datani delete qilamn.
 }
 console.log('== verify ==');
 console.log(member_data);
