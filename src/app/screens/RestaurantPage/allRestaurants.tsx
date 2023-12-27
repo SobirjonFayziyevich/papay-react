@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {Box, Button, Stack,} from "@mui/material";
 import Typography from "@mui/joy/Typography";
 import SearchIcon from "@mui/icons-material/Search";
@@ -14,13 +14,46 @@ import { PaginationItem } from "@mui/material/";
 import Pagination from "@mui/material/Pagination";
 import SwiperCore, { Autoplay, Navigation } from "swiper";
 import { Container } from "@mui/system";
+import { Restaurant } from "../../../types/user";
+
+// REDUX tegishli bulgan importlar.
+import { setTargetRestaurants } from "../RestaurantPage/slice";
+import { createSelector, Dispatch } from "@reduxjs/toolkit";
+import { retrieveTargetRestaurants } from "../../screens/RestaurantPage/selector";
+import { useDispatch, useSelector } from "react-redux";
 SwiperCore.use([Autoplay, Navigation, ]);
 
- const order_list = Array.from(Array(8).keys());    // 8ta restaurantni kelishi
-console.log(order_list);
+
+
+
+const order_list = Array.from(Array(8).keys());    // 8ta restaurantni kelishi
+// console.log(order_list);
+
+/** REDUX SLICE */ 
+const actionDispatch = (dispach: Dispatch) => ({ // buning mantiqi HomepageSlicedan setTopRestaurantni chaqirib olish edi.
+    setTargetRestaurants: (data: Restaurant[]) =>
+     dispach(setTargetRestaurants(data)),
+    });
+  
+
+/** REDUX SELECTOR */
+const targetRestaurantsRetriever = createSelector(
+    retrieveTargetRestaurants,
+    (targetRestaurants) => ({
+        targetRestaurants,
+      })
+    );
 
 
 export function AllRestaurants() {
+    /** INITIALIZATION */
+    const {setTargetRestaurants} = actionDispatch(useDispatch());
+    const { targetRestaurants } = useSelector(targetRestaurantsRetriever);
+
+    useEffect(() => {
+        // TODO: Retrieve targetRestaurantsData
+    }, [])
+
     return (
         < div className="all_restaurant">
             <Container>

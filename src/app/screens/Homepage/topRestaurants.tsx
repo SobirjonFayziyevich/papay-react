@@ -10,12 +10,6 @@ import { IconButton } from '@mui/joy';
 import {Favorite} from "@mui/icons-material";
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import Typography from '@mui/joy/Typography';
-
-// REDUX tegishli bulgan importlar.
-import { useSelector } from "react-redux";
-import {createSelector} from "reselect";
-import {retrieveTopRestaurants} from "../../screens/Homepage/selector";
-import { Restaurant } from '../../../types/user';
 import { serverApi } from '../../../lib/config';
 import { sweetErrorHandling, sweetTopSmallSuccessAlert } from '../../../lib/sweetAlert';
 import  assert  from 'assert';
@@ -24,6 +18,24 @@ import MemberApiService from '../../apiServices/memberApiService';
 import { useRef } from 'react';
 import { useHistory } from 'react-router-dom';
 
+// REDUX tegishli bulgan importlar.
+import { useDispatch, useSelector } from "react-redux";
+import {Dispatch} from "@reduxjs/toolkit";
+import {setTopRestaurants, setBestRestaurants} from "../../screens/Homepage/slice";
+import { Restaurant } from "../../../types/user";
+import RestaurantApiService from "../../apiServices/restaurantApiServices";
+import {createSelector} from "reselect";
+import {} from "../../screens/RestaurantPage/selector";
+import { setTargetRestaurants } from '../RestaurantPage/slice';
+import { retrieveTopRestaurants } from './selector';
+
+/** REDUX SLICE */ 
+const actionDispatch = (dispach: Dispatch) => ({ // buning mantiqi HomepageSlicedan setTopRestaurantni chaqirib olish edi.
+    setTargetRestaurants: (data: Restaurant[]) => dispach(setTargetRestaurants(data)),
+    setBestRestaurants: (data: Restaurant[]) => dispach(setBestRestaurants(data)),
+  });
+  
+
 /** REDUX SELECTOR */
 const topRestaurantRetriever = createSelector(
     retrieveTopRestaurants,
@@ -31,6 +43,7 @@ const topRestaurantRetriever = createSelector(
         topRestaurants,
       })
     );
+
 
 export function TopRestaurants() {
      /** INITIALIZATION */
