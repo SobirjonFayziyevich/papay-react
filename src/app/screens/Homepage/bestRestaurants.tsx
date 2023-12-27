@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import {Box, Button, Container, Stack} from "@mui/material";
 import {CssVarsProvider} from "@mui/joy/styles";
 import Card from "@mui/joy/Card";
@@ -15,6 +15,11 @@ import {createSelector} from "reselect";
 import {retrieveBestRestaurants} from "../../screens/Homepage/selector";
 import { Restaurant } from '../../../types/user';
 import { serverApi } from '../../../lib/config';
+import assert from "assert";
+import { Definer } from "../../../lib/Definer";
+import MemberApiService from "../../apiServices/memberApiService";
+import { sweetErrorHandling, sweetTopSmallSuccessAlert } from "../../../lib/sweetAlert";
+import { useHistory } from "react-router-dom";
 
 
 /** REDUX SELECTOR */
@@ -28,8 +33,44 @@ const bestRestaurantRetriever = createSelector(
 
 export function BestRestaurants() {
      /** INITIALIZATION */
+     const history = useHistory(); //react router-domdan qabul qilib oldim.
     const {bestRestaurants} = useSelector(bestRestaurantRetriever); //useSelectorga topRestaurantRetrieverni kiritib undan topRestaurantni qabul qilib olayopman.
-    // @ts-ignore
+    const refs: any = useRef([]); 
+
+    /** HANDLERS */
+    const chosenRestaurantHandler = (id: string) => {
+        history.push(`/restaurant/${id}`); // historyni push qilayopman pushga locationni kiritib olgan holatda.
+    };
+    /** saw all Restaurants section */
+    const goRestaurantsHandler = () =>
+     history.push("/restaurant");
+
+    const targetLikeBest = async (e: any, id: string) => {
+        try {
+        assert.ok(localStorage.getItem("member_data"), Definer.auth_err1);
+
+        const memberService = new MemberApiService(),
+        like_result: any = await memberService.memberLikeTarget({ //variableni hosil qilib uni, serviceModel ichida=>memberlikeTarget mathodini hosil qildim.
+            like_ref_id: id, 
+            group_type: 'member',
+          }); 
+          assert.ok(like_result, Definer.general_err1);
+
+          if(like_result.like_status > 0) {
+            e.target.style.fill = 'red';
+            refs.current[like_result.like_ref_id].innerHTML++;
+
+          } else {
+           e.target.style.fill = 'white'
+           refs.current[like_result.like_ref_id].innerHTML--;
+          }
+
+          await sweetTopSmallSuccessAlert('success', 700, false);
+        } catch(err: any) {
+          console.log('targetLikeTop, ERROR:', err);
+          sweetErrorHandling(err).then();
+        }
+    };
     return (
         <div className="best_restaurant_frame">
             <img src={"icons/kvadrat.svg"}
@@ -47,11 +88,13 @@ export function BestRestaurants() {
                              return(
                                 <CssVarsProvider>
                                 <Card
+                                 onClick={() => chosenRestaurantHandler(ele._id)}
                                     variant="outlined"
                                     sx={{
                                         minHeight: 483,
                                         minWidth: 320,
                                         mr: "35px",
+                                        cursor: "pointer",
                                     }}
                                 >
                                     <CardOverflow>
@@ -72,9 +115,10 @@ export function BestRestaurants() {
                                                         transform: "translateY(50%)",
                                                         color: "rgba(0,0,0,.4)",
                                                     }}
+                                                    onClick={(e) => {e.stopPropagation()}}
                                         >
                                             <Favorite
-                                                // /*@ts-ignore*/
+                                                onClick={(e) => targetLikeBest(e, ele._id)} 
                                                 style={{
                                                     fill: 
                                                       ele?.me_liked && ele?.me_liked[0]?.my_favorite
@@ -147,7 +191,12 @@ export function BestRestaurants() {
                                                 display: "flex",
                                             }}
                                         >
-                                            <div>{ele.mb_likes}</div>
+                                            <div
+                                            ref={(element) => (refs.current[ele._id] = element)} // like bosilgan payt success bulishimi taminlaydi
+                                            >
+                                                {ele.mb_likes}
+                                                </div>
+
                                             <Favorite sx={{fontSize: 20, marginLeft: "5px"}}/>
                                         </Typography>
                                     </CardOverflow>
@@ -167,7 +216,9 @@ export function BestRestaurants() {
                             marginTop: "16px"
                         }}>
                         <Button style={{background: "#1976d2", color: "#ffffff"}}
-                        >Barchasini ko'rish</Button>
+                        onClick={goRestaurantsHandler}
+                        >
+                         Barchasini ko'rish</Button>
                     </Stack>
                 </Stack>
             </Container>

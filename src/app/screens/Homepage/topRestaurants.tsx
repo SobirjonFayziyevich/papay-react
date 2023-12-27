@@ -17,7 +17,7 @@ import {createSelector} from "reselect";
 import {retrieveTopRestaurants} from "../../screens/Homepage/selector";
 import { Restaurant } from '../../../types/user';
 import { serverApi } from '../../../lib/config';
-import { sweetErrorHandling } from '../../../lib/sweetAlert';
+import { sweetErrorHandling, sweetTopSmallSuccessAlert } from '../../../lib/sweetAlert';
 import  assert  from 'assert';
 import { Definer } from '../../../lib/Definer';
 import MemberApiService from '../../apiServices/memberApiService';
@@ -37,12 +37,12 @@ export function TopRestaurants() {
      const history = useHistory(); //react router-domdan qabul qilib oldim.
     const {topRestaurants} = useSelector(topRestaurantRetriever); //useSelectorga topRestaurantRetrieverni kiritib undan topRestaurantni qabul qilib olayopman.
     console.log("topRestaurants:::", topRestaurants);
-    const refs: any = useRef([]); //
+    const refs: any = useRef([]); 
 
     /** HANDLERS */
 
     const chosenRestaurantHandler = (id: string) => {
-        history.push(`/restaurant/${id}`) // historyni push qilayopman pushga locationni kiritib olgan holatda.
+        history.push(`/restaurant/${id}`); // historyni push qilayopman pushga locationni kiritib olgan holatda.
     }
 
     const targetLikeTop = async (e: any, id: string) => {
@@ -64,13 +64,14 @@ export function TopRestaurants() {
            e.target.style.fill = 'white'
            refs.current[like_result.like_ref_id].innerHTML--;
           }
-
-
+          
+          await sweetTopSmallSuccessAlert('success', 700, false);
         } catch(err: any) {
           console.log('targetLikeTop, ERROR:', err);
           sweetErrorHandling(err).then();
         }
     };
+
     return(
         <div className="top_restaurant_frame">
             <Container>
@@ -149,8 +150,10 @@ export function TopRestaurants() {
                                         transform: "translateY(50%)",
                                         color: "rgba(0,0,0,.4)",
                                       }}        
+                                      onClick={(e) => {e.stopPropagation()}}
                                     >
-                                      <Favorite onClick={(e) => targetLikeTop(e, ele._id)} 
+                                      <Favorite
+                                       onClick={(e) => targetLikeTop(e, ele._id)} 
                                         style={{
                                             fill: 
                                              ele?.me_liked && ele?.me_liked[0]?.my_favorite
@@ -184,7 +187,7 @@ export function TopRestaurants() {
                                         }}
                                     >
                                         <div 
-                                          ref={(element) => (refs.current[ele._id] = element)}
+                                          ref={(element) => (refs.current[ele._id] = element)} // like bosilgan payt success bulishimi taminlaydi
                                         >
                                         {ele.mb_likes}
                                         </div>

@@ -16,7 +16,8 @@ async getTopRestaurants() {
 
     try{
       const url = "/restaurants?order=top&page=1&limit=4",  // postmandagi getrestaurantni URLi.
-        result = await axios.get(this.path + url, { withCredentials: true });
+        result = await axios.get(this.path + url, 
+          { withCredentials: true });
         assert.ok(result, Definer.general_err1);
 
         console.log("state:", result.data.state); //backenddan qaytargan malumotimiz res.json formatni ichidagi state hamda successlar datani ichida berilmoqda.
@@ -36,7 +37,8 @@ async getRestaurants(data: SearchObj) { //SearchObj interface hosil qildim
 
   try{
     const url = `/restaurants?order=${data.order}&page=${data.page}&limit=${data.limit}`,  // postmandagi getrestaurantni URLi.
-      result = await axios.get(this.path + url, { withCredentials: true });
+      result = await axios.get(this.path + url, 
+        { withCredentials: true });
       assert.ok(result, Definer.general_err1);
 
       console.log("state:", result.data.state); //backenddan qaytargan malumotimiz res.json formatni ichidagi state hamda successlar datani ichida berilmoqda.
