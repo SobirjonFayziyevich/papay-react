@@ -1,4 +1,4 @@
-import * as React from 'react';
+import  React from 'react';
 import Card from '@mui/joy/Card';
 import CardCover from '@mui/joy/CardCover';
 import CardContent from '@mui/joy/CardContent';
@@ -17,6 +17,12 @@ import {createSelector} from "reselect";
 import {retrieveTopRestaurants} from "../../screens/Homepage/selector";
 import { Restaurant } from '../../../types/user';
 import { serverApi } from '../../../lib/config';
+import { sweetErrorHandling } from '../../../lib/sweetAlert';
+import  assert  from 'assert';
+import { Definer } from '../../../lib/Definer';
+import MemberApiService from '../../apiServices/memberApiService';
+import { useRef } from 'react';
+import { useHistory } from 'react-router-dom';
 
 /** REDUX SELECTOR */
 const topRestaurantRetriever = createSelector(
@@ -28,8 +34,43 @@ const topRestaurantRetriever = createSelector(
 
 export function TopRestaurants() {
      /** INITIALIZATION */
+     const history = useHistory(); //react router-domdan qabul qilib oldim.
     const {topRestaurants} = useSelector(topRestaurantRetriever); //useSelectorga topRestaurantRetrieverni kiritib undan topRestaurantni qabul qilib olayopman.
     console.log("topRestaurants:::", topRestaurants);
+    const refs: any = useRef([]); //
+
+    /** HANDLERS */
+
+    const chosenRestaurantHandler = (id: string) => {
+        history.push(`/restaurant/${id}`) // historyni push qilayopman pushga locationni kiritib olgan holatda.
+    }
+
+    const targetLikeTop = async (e: any, id: string) => {
+        try {
+        assert.ok(localStorage.getItem("member_data"), Definer.auth_err1);
+
+        const memberService = new MemberApiService(),
+        like_result: any = await memberService.memberLikeTarget({ //variableni hosil qilib uni, serviceModel ichida=>memberlikeTarget mathodini hosil qildim.
+            like_ref_id: id, 
+            group_type: 'member',
+          }); 
+          assert.ok(like_result, Definer.general_err1);
+
+          if(like_result.like_status > 0) {
+            e.target.style.fill = 'red';
+            refs.current[like_result.like_ref_id].innerHTML++;
+
+          } else {
+           e.target.style.fill = 'white'
+           refs.current[like_result.like_ref_id].innerHTML--;
+          }
+
+
+        } catch(err: any) {
+          console.log('targetLikeTop, ERROR:', err);
+          sweetErrorHandling(err).then();
+        }
+    };
     return(
         <div className="top_restaurant_frame">
             <Container>
@@ -40,11 +81,13 @@ export function TopRestaurants() {
                 >
                     <Box className={'category_title'}>TOP Restaurantlar</Box>
                     <Stack sx={{mt: "43px"}} flexDirection={'row'} m={"16px"}>
+                        
                         {topRestaurants.map((ele: Restaurant) => {
                             const image_path = `${serverApi}/${ele.mb_image}`;
                                 return (
                                 <CssVarsProvider key={ele._id}>
-                                    <Card
+                                    <Card 
+                                    onClick={() => chosenRestaurantHandler(ele._id)}
                                 sx={{
                                     minHeight: 430,
                                     minWidth: 325,
@@ -92,26 +135,29 @@ export function TopRestaurants() {
                                     borderTop: "1px solid",
                                 }}
                                 >
-                                    <IconButton aria-label="Like minimal Photography"
-                                                size="md"
-                                                variant="solid"
-                                                color="neutral"
-                                                sx={{
-                                                    position: "absolute",
-                                                    zIndex: 2,
-                                                    borderRadius: "50%",
-                                                    right: "1rem",
-                                                    bottom: 45,
-                                                    transform: "translateY(50%)",
-                                                    color: "rgba(0,0,0,.4)",
-                                                }}
+                                    <IconButton 
+                                      aria-label="Like minimal Photography"
+                                      size="md"
+                                      variant="solid"
+                                      color="neutral"
+                                      sx={{
+                                        position: "absolute",
+                                        zIndex: 2,
+                                        borderRadius: "50%",
+                                        right: "1rem",
+                                        bottom: 45,
+                                        transform: "translateY(50%)",
+                                        color: "rgba(0,0,0,.4)",
+                                      }}        
                                     >
-                                        <Favorite style={{fill: 
-                                            ele?.me_liked && ele?.me_liked[0]?.my_favorite
-                                            ? "red"
-                                            : "white",
-                                             }}
-                                              />
+                                      <Favorite onClick={(e) => targetLikeTop(e, ele._id)} 
+                                        style={{
+                                            fill: 
+                                             ele?.me_liked && ele?.me_liked[0]?.my_favorite
+                                               ? "red"
+                                                : "white",
+                                        }}
+                                        />
                                     </IconButton>
 
                                     <Typography
@@ -137,10 +183,14 @@ export function TopRestaurants() {
                                             display: "flex",
                                         }}
                                     >
-                                        <div>{ele.mb_likes}</div>
+                                        <div 
+                                          ref={(element) => (refs.current[ele._id] = element)}
+                                        >
+                                        {ele.mb_likes}
+                                        </div>
+
                                         <Favorite sx={{ fontSize: 20, marginLeft: "5px" }} />
                                     </Typography>
-
                                 </CardOverflow>
                         </Card>
                    

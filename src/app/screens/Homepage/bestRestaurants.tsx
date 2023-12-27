@@ -74,11 +74,14 @@ export function BestRestaurants() {
                                                     }}
                                         >
                                             <Favorite
-                                                /*@ts-ignore*/
+                                                // /*@ts-ignore*/
                                                 style={{
-                                                    color: "white",
+                                                    fill: 
+                                                      ele?.me_liked && ele?.me_liked[0]?.my_favorite
+                                                      ? "red"
+                                                      : "white",
                                                 }}
-                                            />
+                                             />
                                         </IconButton>
                                     </CardOverflow>
                                     <Typography level="h2" sx={{fontSize: "md", mt: 0.1}}>
