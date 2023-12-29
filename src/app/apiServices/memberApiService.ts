@@ -70,25 +70,25 @@ class MemberApiService {
       }
   }
 
-public async memberLikeTarget(data: any) {
-  try {
-   const url = "/member-liken",
-   result = await axios.post(this.path + url, data, 
-    {withCredentials: true,
-  });
-  assert.ok(result?.data, Definer.general_err1);
-  assert.ok(result?.data?.state != 'fail', result?.data?.message); //state teng bulmasa failga, xatolik bbulsa, datani messagedan olib bersin.
+  async memberLikeTarget(data: any) {
+    try {
+        const result = await axios.post(this.path + "/member-liken", data, {
+            withCredentials: true,
+        });
 
-  console.log('state:', result.data.data);
-  const like_result: MemberLiken = result.data.data;
-  return like_result;
+        console.log("res", result);
+        assert.ok(result?.data, Definer.general_err1);
+        assert.ok(result?.data?.state !== "fail", result?.data?.message);
 
-  } catch(err: any){
-    console.log(`ERROR ::: memberLikeTarget ${err.message}`);
-    throw err;
+        const like_result: MemberLiken = result.data.data;
+        console.log("like", like_result);
 
-  }
-}
+        return like_result;
+    } catch (err: any) {
+        console.log(`ERROR ::: memberLikeTarget ${err.message}`);
+        throw err;
+    }
+};
 
 }
 

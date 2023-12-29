@@ -28,6 +28,7 @@ import MemberApiService from "../../apiServices/memberApiService";
 import { sweetErrorHandling, sweetTopSmallSuccessAlert } from "../../../lib/sweetAlert";
 import { SearchObj } from "../../../types/others";
 import { serverApi } from "../../../lib/config";
+import { useHistory } from "react-router-dom";
 
 SwiperCore.use([Autoplay, Navigation, ]);
 
@@ -48,6 +49,7 @@ const targetRestaurantsRetriever = createSelector(
     );
 export function AllRestaurants() {
     /** INITIALIZATION */
+    const history = useHistory();
     const {setTargetRestaurants} = actionDispatch(useDispatch());
     const { targetRestaurants } = useSelector(targetRestaurantsRetriever);
     const [targetSearchObject, setTargetSearchObject] = useState<SearchObj>({
@@ -66,7 +68,10 @@ export function AllRestaurants() {
           .catch((err) => console.log(err));
       }, [targetSearchObject]);
     
-      /** HANDLERS */
+      /** HANDLERS */ 
+      const chosenRestaurantHandler = (id: string) => {
+          history.push(`/restaurant/${id}`);
+      };
       const searchHandler = (category: string) => {
         targetSearchObject.page = 1;
         targetSearchObject.order = category;
@@ -143,12 +148,14 @@ export function AllRestaurants() {
                         const image_path = `${serverApi}/${ele.mb_image}`;
                             return (
                                 <Card
+                                onClick={() => chosenRestaurantHandler(ele._id)}
                                 variant="outlined"
                                 sx={{
                                     minHeight: 410,
                                     minWidth: 290,
                                     mx: "17px",
                                     my: "20px",
+                                    cursor: "pointer",
                                 }}
                                 >
                                 <CardOverflow>
