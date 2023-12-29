@@ -25,7 +25,6 @@ import {setTopRestaurants, setBestRestaurants} from "../../screens/Homepage/slic
 import { Restaurant } from "../../../types/user";
 import RestaurantApiService from "../../apiServices/restaurantApiServices";
 import {createSelector} from "reselect";
-import {} from "../../screens/RestaurantPage/selector";
 import { setTargetRestaurants } from '../RestaurantPage/slice';
 import { retrieveTopRestaurants } from './selector';
 

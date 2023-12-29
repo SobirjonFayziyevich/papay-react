@@ -44,6 +44,7 @@ export function BestRestaurants() {
     /** saw all Restaurants section */
     const goRestaurantsHandler = () =>
      history.push("/restaurant");
+    
 
     const targetLikeBest = async (e: any, id: string) => {
         try {
@@ -67,7 +68,7 @@ export function BestRestaurants() {
 
           await sweetTopSmallSuccessAlert('success', 700, false);
         } catch(err: any) {
-          console.log('targetLikeTop, ERROR:', err);
+          console.log('targetLikeBest, ERROR:', err);
           sweetErrorHandling(err).then();
         }
     };

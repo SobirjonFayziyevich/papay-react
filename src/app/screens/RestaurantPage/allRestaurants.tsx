@@ -17,14 +17,12 @@ import { Container } from "@mui/system";
 import { Restaurant } from "../../../types/user";
 
 // REDUX tegishli bulgan importlar.
-import { setTargetRestaurants } from "../RestaurantPage/slice";
+import { setTargetRestaurants } from "../../screens/RestaurantPage/slice";
 import { createSelector, Dispatch } from "@reduxjs/toolkit";
 import { retrieveTargetRestaurants } from "../../screens/RestaurantPage/selector";
 import { useDispatch, useSelector } from "react-redux";
+
 SwiperCore.use([Autoplay, Navigation, ]);
-
-
-
 
 const order_list = Array.from(Array(8).keys());    // 8ta restaurantni kelishi
 // console.log(order_list);
@@ -32,19 +30,15 @@ const order_list = Array.from(Array(8).keys());    // 8ta restaurantni kelishi
 /** REDUX SLICE */ 
 const actionDispatch = (dispach: Dispatch) => ({ // buning mantiqi HomepageSlicedan setTopRestaurantni chaqirib olish edi.
     setTargetRestaurants: (data: Restaurant[]) =>
-     dispach(setTargetRestaurants(data)),
+     dispach(setTargetRestaurants(data)), // bu setTargetRestaurant slice.tsdan kelayotgan restaurantdir.
     });
-  
-
-/** REDUX SELECTOR */
+  /** REDUX SELECTOR */
 const targetRestaurantsRetriever = createSelector(
     retrieveTargetRestaurants,
     (targetRestaurants) => ({
         targetRestaurants,
       })
     );
-
-
 export function AllRestaurants() {
     /** INITIALIZATION */
     const {setTargetRestaurants} = actionDispatch(useDispatch());

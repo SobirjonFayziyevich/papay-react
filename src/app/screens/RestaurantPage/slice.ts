@@ -6,10 +6,9 @@ import { RestaurantPageState } from "../../../types/screen";
 const initialState: RestaurantPageState = {
     targetRestaurants: [], //restaurant interfacedan iborat array.
     randomRestaurants: [],
-    chosenRestaurant:   null,
+    chosenRestaurant: null,
     targetProducts: [],
-    chosenProduct:  null,
-
+    chosenProduct: null,
 };
 
 const restaurantPageSlice = createSlice({
@@ -17,19 +16,19 @@ const restaurantPageSlice = createSlice({
     initialState,  // initialState yuqoridagidek bulishi kerak 
     reducers: {   //  malumotni borib Redux Store ga yozadigan actionlar buladi.
         setTargetRestaurants: (state, action) => { //setTopRestaurant faqat topRestaurantni qiymatini uzgartiradi.
-           state.targetRestaurants = action.payload  //InitialStateni olib beradi. actiondan kelayotgan datani payload orqali olaman.
+           state.targetRestaurants = action.payload;  //InitialStateni olib beradi. actiondan kelayotgan datani payload orqali olaman.
         }, // payloadlar orqali backenddan malumotlarni olamiz.
         setRandomRestaurants: (state, action) => { 
-           state.randomRestaurants = action.payload  
+           state.randomRestaurants = action.payload;  
         }, 
         setChosenRestaurant: (state, action) => { 
-           state.chosenRestaurant = action.payload  
+           state.chosenRestaurant = action.payload;  
         },
         setTargetProducts: (state, action) => { 
-           state.targetProducts = action.payload  
+           state.targetProducts = action.payload;  
         },
         setChosenProduct: (state, action) => { 
-           state.chosenProduct = action.payload  
+           state.chosenProduct = action.payload;  
         },
     },
 });
@@ -42,5 +41,5 @@ export const {
     setChosenProduct,
 } = restaurantPageSlice.actions;
 
-const RestayrantPageReducer = restaurantPageSlice.reducer;
-export default RestayrantPageReducer;
+const RestaurantPageReducer = restaurantPageSlice.reducer;
+export default RestaurantPageReducer;
