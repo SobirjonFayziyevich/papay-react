@@ -1,11 +1,15 @@
 import { BoArticle } from "./boArticle";
 import { Product } from "./product";
 import { Restaurant } from "./user";
+import { Order } from "./order";
 
 /** REACT APP STATE */
 export interface AppRootState {  // app dagi barcha interfacelarni integratsiya iqlayopman.
     homePage: HomePageState;  // homepage => homepage typedan iborat;
     restaurantPage: RestaurantPageState;
+    orderPage: OrdersPageState;
+    
+      
 }
 
 
@@ -30,3 +34,10 @@ export interface  RestaurantPageState {
 
 }
 
+
+// ORDERS PAGE//
+export interface OrdersPageState {
+    pausedOrders: Order[];
+    processOrders: Order[];
+    finishedOrders: Order[];
+}
