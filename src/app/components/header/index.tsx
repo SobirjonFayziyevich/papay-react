@@ -117,9 +117,8 @@ return (
                 open={props.open}
                 onClose={props.handleCloseLogOut}
                 onClick={props.handleCloseLogOut}
-                slotProps={{
-                  // Use slotProps instead of PaperProps
-                  paper: {
+                // Use slotProps instead of PaperProps
+                PaperProps={{
                     elevation: 0,
                     sx: {
                       overflow: "visible",
@@ -144,10 +143,10 @@ return (
                         zIndex: 0,
                       },
                     },
-                  }
                 }}
                 transformOrigin={{ horizontal: "right", vertical: "top" }}
-                anchorOrigin={{ horizontal: "right", vertical: "bottom" }}>
+                anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+                >
                 <MenuItem onClick={props.handleLogOutRequest}> 
                   <ListItemIcon>
                     <Logout fontSize="small" style={{ color: "blue" }} />

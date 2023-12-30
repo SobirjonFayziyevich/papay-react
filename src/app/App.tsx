@@ -64,27 +64,26 @@ function App () {
     const handleSignUpClose = () => setSignUpOpen(false);
     const handleLoginOpen = () => setLoginOpen(true);
     const handleLoginClose = () => setLoginOpen(false);
+
     const handleLogOutClick = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorEl(event.currentTarget);
-       }
-       const handleCloseLogOut = (event: React.MouseEvent<HTMLElement>) => {
+       };
+    const handleCloseLogOut = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorEl(null);
        };
-       const handleLogOutRequest = async () => {
+    const handleLogOutRequest = async () => {
         try{
-            let member_data: any = null; // nay qiymatni null boshlangich qiymat bn olyabman
+            // nay qiymatni null boshlangich qiymat bn olyabman
             const memberApiService = new MemberApiService();
             await memberApiService.logOutRequest(); // memberApiService ni  logOutRequest methodini chaqirib olyabman
             await sweetTopSmallSuccessAlert('success', 700, true);
-            localStorage.removeItem('member_data');
+            localStorage.removeItem("member_data");
         } catch(err: any) {
             console.log(err);
             sweetFailureProvider(Definer.general_err1);
         }
     };
-   
 
-    // @ts-ignore
     // @ts-ignore
     return (
         <Router>
@@ -163,7 +162,3 @@ function App () {
     );
 }
 export default App;
-
-// function Home() {
-//     return <h2>Home</h2>;
-// }

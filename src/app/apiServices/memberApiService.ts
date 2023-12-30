@@ -13,7 +13,7 @@ class MemberApiService {
     constructor() {
         this.path = serverApi;
     }
-
+    
     public async loginRequest(login_data: any): Promise<Member>  {
         try {
            const result = await axios.post(this.path+"/login", login_data, {
@@ -75,13 +75,11 @@ class MemberApiService {
         const result = await axios.post(this.path + "/member-liken", data, {
             withCredentials: true,
         });
-
-        console.log("res", result);
         assert.ok(result?.data, Definer.general_err1);
-        assert.ok(result?.data?.state !== "fail", result?.data?.message);
+        assert.ok(result?.data?.state != "fail", result?.data?.message);
 
+        console.log("state:", result.data.data);
         const like_result: MemberLiken = result.data.data;
-        console.log("like", like_result);
 
         return like_result;
     } catch (err: any) {
