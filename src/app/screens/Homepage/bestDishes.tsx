@@ -11,6 +11,7 @@ import ProductApiService from "../../apiServices/productApiService";
 import { retrieveTrendProducts } from "./selector";
 import {createSelector} from "reselect";
 import { serverApi } from "../../../lib/config";
+import { useHistory } from "react-router-dom";
 
 /** REDUX SLICE */ 
 const actionDispatch = (dispach: Dispatch) => ({ // buning mantiqi HomepageSlicedan setTopRestaurantni chaqirib olish edi.
@@ -29,6 +30,7 @@ const trendProductsRetriever = createSelector(
 export function BestDishes() { 
     
      /** INITIALIZATION */
+    const history = useHistory();
      const {setTrendProducts} = actionDispatch(useDispatch());
      const {trendProducts} = useSelector(trendProductsRetriever); //useSelectorga topRestaurantRetrieverni kiritib undan topRestaurantni qabul qilib olayopman.
    useEffect(() => {
@@ -37,6 +39,11 @@ export function BestDishes() {
         .then(data => setTrendProducts(data))  // productApiServicedan return bulgan qiymatni olib kelamiz.
         .catch(err => console.log(err));
     }, []);
+
+    /** HANDLERS */
+    const chosenDishHandler = (id: string) => {
+        history.push(`/restaurant/dish/${id}`);
+    };
 
     return(
         <div className="best_dishes_frame">
@@ -64,7 +71,12 @@ export function BestDishes() {
                                 >
                                     <div className={"dish_sale"}>{size_volume}</div>
                                     <div className={"view_btn"}>
-                                        Batafsil ko'rinish
+
+                                        {/*buyerdagi mantiq tugridan tugri chosen dishga kirish */}
+                                         <div onClick={() => chosenDishHandler(product._id)}>  
+                                            Batafsil ko'rinish
+                                            </div>
+                                            
                                         <img
                                             src={"/icons/strilka.png"}
                                             style={{ marginLeft: "9px" }}

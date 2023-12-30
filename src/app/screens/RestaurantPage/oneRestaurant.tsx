@@ -20,7 +20,11 @@ import {
 } from "../../screens/RestaurantPage/slice";
 import { Restaurant } from "../../../types/user";
 import { Product } from "../../../types/product";
-import { retrieveChosenRestaurant, retrieveRandomRestaurants, retrieveTargetProducts } from "../../screens/RestaurantPage/selector";
+import {
+     retrieveChosenRestaurant, 
+     retrieveRandomRestaurants, 
+     retrieveTargetProducts 
+    } from "../../screens/RestaurantPage/selector";
 import { createSelector, Dispatch} from "@reduxjs/toolkit";
 import { useDispatch, useSelector } from "react-redux";
 import { ProductSearchObj } from "../../../types/others";
@@ -41,7 +45,7 @@ const actionDispatch = (dispach: Dispatch) => ({ // buning mantiqi HomepageSlice
     setRandomRestaurants: (data: Restaurant[]) =>
      dispach(setRandomRestaurants(data)), // bu setTargetRestaurant slice.tsdan kelayotgan restaurantdir.
      
-     setChosenRestaurant: (data: Restaurant) =>
+     setChosenRestaurant: (data: Restaurant[]) =>
      dispach(setChosenRestaurant(data)), // bu setTargetRestaurant slice.tsdan kelayotgan restaurantdir.
     
      setTargetProducts: (data: Product[]) =>
@@ -95,12 +99,17 @@ export function OneRestaurant () {
         .then((data) => setRandomRestaurants(data))
         .catch((err) => console.log(err));
 
+        restaurantService
+        .getChosenRestaurant(chosenRestaurantId)
+        .then((data) => setChosenRestaurant(data))
+        .catch((err) => console.log(err));
+
         const productService = new ProductApiService(); //ProductApiServicedan => productServiceni hosil qilib oldim
         productService // productServicedagi => getTargetProductsga => targetProductSearchObjni pass qildim.
           .getTargetProducts(targetProductSearchObj)
           .then((data) => setTargetProducts(data))  // malumotni qabul qilganda, setTargetProducts(action createrimiz) datani pass
           .catch((err) => console.log(err));
-      }, [targetProductSearchObj, productRebuild]);
+      }, [targetProductSearchObj, productRebuild, chosenRestaurantId]);
 
 
       /** HANDLER */
@@ -121,6 +130,9 @@ export function OneRestaurant () {
         targetProductSearchObj.page = 1;
         targetProductSearchObj.order = order;
         setTargetProductSearchObj({ ...targetProductSearchObj });
+      };
+      const chosenDishHandler = (id: string) => {
+          history.push(`/restaurant/dish/${id}`);
       };
       
       const targetLikeProduct = async (e: any) => {
@@ -420,11 +432,12 @@ export function OneRestaurant () {
                 <Box
                 className={"about_left"}
                 sx={{
-                    backgroundImage: `url('/restaurant/texasde.jpg')`
+                    backgroundImage: `url(${serverApi}/${chosenRestaurant?.mb_image})`,
                 }}
                 >
                     <div className={"about_left_desc"}>
-                        <span>eng mazzali oshxona</span>
+                        <span>{chosenRestaurant?.mb_nick}</span>
+                        <p>{chosenRestaurant?.mb_description}</p>
                     </div>
                 </Box>
                 <Box className={"about_right"}>
