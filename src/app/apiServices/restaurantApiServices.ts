@@ -12,7 +12,7 @@ class RestaurantApiService {
       this.path = serverApi;
     }
 
-async getTopRestaurants() {
+async getTopRestaurants(): Promise<Restaurant[]>  {
 
     try{
       const url = "/restaurants?order=top&page=1&limit=4",  // postmandagi getrestaurantni URLi.
@@ -33,7 +33,7 @@ async getTopRestaurants() {
   }
 
 
-async getRestaurants(data: SearchObj) { //SearchObj interface hosil qildim
+async getRestaurants(data: SearchObj): Promise<Restaurant[]> { //SearchObj interface hosil qildim
 
   try{
     const url = `/restaurants?order=${data.order}&page=${data.page}&limit=${data.limit}`,  // postmandagi getrestaurantni URLi.

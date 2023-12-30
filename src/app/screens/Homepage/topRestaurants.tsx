@@ -54,7 +54,7 @@ export function TopRestaurants() {
     /** HANDLERS */
 
     const chosenRestaurantHandler = (id: string) => {
-        history.push(`/restaurant/${id}`); // historyni push qilayopman pushga locationni kiritib olgan holatda.
+        history.push(`/restaurant/${id}`);  // historyni push qilayopman pushga locationni kiritib olgan holatda.
     }
     const targetLikeTop = async (e: any, id: string) => {
         try {
@@ -67,7 +67,7 @@ export function TopRestaurants() {
             });
             assert.ok(like_result, Definer.general_err1);
 
-            if (like_result.like_status > 0) {
+            if (like_result.like_status >= 0) {   //like - qarab ketmaydi
                 e.target.style.fill = "red";
                 refs.current[like_result.like_ref_id].innerHTML++;
             } else {
@@ -80,32 +80,7 @@ export function TopRestaurants() {
             sweetErrorHandling(err).then();
         }
     };
-    // const targetLikeTop = async (e: any, id: string) => {
-    //     try {
-    //     assert.ok(localStorage.getItem("member_data"), Definer.auth_err1);
 
-    //     const memberService = new MemberApiService(),
-    //     like_result: any = await memberService.memberLikeTarget({ //variableni hosil qilib uni, serviceModel ichida=>memberlikeTarget mathodini hosil qildim.
-    //         like_ref_id: id, 
-    //         group_type: 'member',
-    //       }); 
-    //       assert.ok(like_result, Definer.general_err1);
-
-    //       if(like_result.like_status > 0) {
-    //         e.target.style.fill = 'red';
-    //         refs.current[like_result.like_ref_id].innerHTML++;
-
-    //       } else {
-    //        e.target.style.fill = 'white'
-    //        refs.current[like_result.like_ref_id].innerHTML--;
-    //       }
-          
-    //       await sweetTopSmallSuccessAlert('success', 700, false);
-    //     } catch(err: any) {
-    //       console.log('targetLikeTop, ERROR:', err);
-    //       sweetErrorHandling(err).then();
-    //     }
-    // };
 
     return(
         <div className="top_restaurant_frame">
@@ -188,12 +163,12 @@ export function TopRestaurants() {
                                       onClick={(e) => {e.stopPropagation()}}
                                     >
                                       <Favorite
-                                                    onClick={(e) => targetLikeTop(e, ele._id)}
-                                                    style={{
-                                                        fill:
-                                                            ele?.me_liked && ele?.me_liked[0]?.my_favorite
-                                                                ? "red"
-                                                                : "white",
+                                            onClick={(e) => targetLikeTop(e, ele._id)}
+                                             style={{
+                                              fill:
+                                                ele?.me_liked && ele?.me_liked[0]?.my_favorite
+                                                    ? "red"
+                                                    : "white",
                                                     }}
                                                 />
                                     </IconButton>
@@ -222,7 +197,7 @@ export function TopRestaurants() {
                                         }}
                                     >
                                         <div 
-                                          ref={(element) => (refs.current[ele._id] = element)} // like bosilgan payt success bulishimi taminlaydi
+                                          ref={(element) => (refs.current[ele._id] = element)}  // like bosilgan payt success bulishimi taminlaydi
                                         >
                                         {ele.mb_likes}
                                         </div>
