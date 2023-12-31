@@ -7,7 +7,7 @@ import { Order } from "./order";
 export interface AppRootState {  // app dagi barcha interfacelarni integratsiya iqlayopman.
     homePage: HomePageState;  // homepage => homepage typedan iborat;
     restaurantPage: RestaurantPageState;
-    orderPage: OrdersPageState;
+    ordersPage: OrdersPageState;
     
       
 }
