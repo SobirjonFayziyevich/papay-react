@@ -12,6 +12,15 @@ import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import StarIcon from "@mui/icons-material/Star";
 import { useHistory, useParams } from "react-router-dom";
+import { ProductSearchObj } from "../../../types/others";
+import ProductApiService from "../../apiServices/productApiService";
+import { serverApi } from "../../../lib/config";
+import RestaurantApiService from "../../apiServices/restaurantApiServices";
+import assert from "assert";
+import { Definer } from "../../../lib/Definer";
+import MemberApiService from "../../apiServices/memberApiService";
+import { sweetErrorHandling, sweetTopSmallSuccessAlert } from "../../../lib/sweetAlert";
+
 /** REDUX */
 import { 
     setChosenRestaurant, 
@@ -27,18 +36,14 @@ import {
     } from "../../screens/RestaurantPage/selector";
 import { createSelector, Dispatch} from "@reduxjs/toolkit";
 import { useDispatch, useSelector } from "react-redux";
-import { ProductSearchObj } from "../../../types/others";
-import ProductApiService from "../../apiServices/productApiService";
-import { serverApi } from "../../../lib/config";
-import RestaurantApiService from "../../apiServices/restaurantApiServices";
-import assert from "assert";
-import { Definer } from "../../../lib/Definer";
-import MemberApiService from "../../apiServices/memberApiService";
-import { sweetErrorHandling, sweetTopSmallSuccessAlert } from "../../../lib/sweetAlert";
-
-// const restaurant_list = Array.from(Array(10).keys());
-// const product_list = Array.from(Array(8).keys());
-// console.log("product_list:", product_list);
+// import { ProductSearchObj } from "../../../types/others";
+// import ProductApiService from "../../apiServices/productApiService";
+// import { serverApi } from "../../../lib/config";
+// import RestaurantApiService from "../../apiServices/restaurantApiServices";
+// import assert from "assert";
+// import { Definer } from "../../../lib/Definer";
+// import MemberApiService from "../../apiServices/memberApiService";
+// import { sweetErrorHandling, sweetTopSmallSuccessAlert } from "../../../lib/sweetAlert";
 
 /** REDUX SLICE */ 
 const actionDispatch = (dispach: Dispatch) => ({ // buning mantiqi HomepageSlicedan setTopRestaurantni chaqirib olish edi.
