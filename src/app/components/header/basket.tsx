@@ -15,6 +15,7 @@ import {useHistory} from "react-router-dom";
 
 export default function Basket(props: any) {
     /** INITIALIZATIONS **/
+    
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
     const history = useHistory();
