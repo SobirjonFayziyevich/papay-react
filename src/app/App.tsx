@@ -24,6 +24,8 @@ import { Definer } from '../lib/Definer';
 import assert from 'assert';
 import MemberApiService from './apiServices/memberApiService';
 import "../app/apiServices/verify";
+import { CartItem } from '../types/others';
+import { Product } from '../types/product';
 
 // useStateni REACT dan import qilib olamz.
 // bizning path imiz uzgarganda viewimizni qayta qurub beradi.
@@ -39,6 +41,11 @@ function App () {
 
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);  //openstetni boolen qilib olamiz.
+      
+    const cartJson: any = localStorage.getItem("cart_data");  // boshlangich qiymatni shakillantirish un getItem mathodi orqali amalga oshiriladi.
+    const current_cart: CartItem[] = JSON.parse(cartJson) ?? []; //
+
+    const [cartItems,setCartItems] = useState<CartItem[]>(current_cart);
     
 
     useEffect(() => {  // componantDidMount bulgan manshu qiymatlarni olib bersin.
@@ -84,6 +91,36 @@ function App () {
         }
     };
 
+    const onAdd = (product: Product) => { //mahsulot qushish, bosganda productni olib bersin.onAdd restaurant pagega child sifatida pass buladi.
+        const exist: any = cartItems.find(
+            (item: CartItem) => item._id === product._id); // itemning Id teng bulsin Productning Idsiga.
+        if(exist) { // agar mavjud bulsa;
+            const cart_updated = cartItems.map((item: CartItem) =>
+            item._id === product._id  //itemning idsi productning idsiga teng bulgan holatda.
+            ? { ...exist, quantity: exist.quantity + 1 } // existni uzidan qiymatni olib, existni ichiagi quantityni qiymatini bittaga oshirsin.
+            : item // aks holat itemni qaytarsin.
+      );
+          setCartItems(cart_updated);
+          localStorage.setItem("cart_data", JSON.stringify(cart_updated));
+
+        } else { //qiymatlar mavjud bulmsaa:
+            const new_item: CartItem = {
+             _id: product._id,
+             quantity: 1,
+             name: product.product_name,
+             price: product.product_price,
+             image: product.product_images[0],
+            };
+            const cart_updated = [...cartItems, { ...new_item }];
+              setCartItems(cart_updated);
+              localStorage.setItem("cart_data", JSON.stringify(cart_updated));
+        }
+    };
+    const onRemove = () => {};      // mahsulotni birtaga kamaytirsin,
+    const onDelete = () => {};      // mahsulotni uchirsin
+    const onDeleteAll = () => {};   // buyurtma amalga oshgach cartimni tozalab bersin 
+
+
     // @ts-ignore
     return (
         <Router>
@@ -108,6 +145,8 @@ function App () {
                 handleCloseLogOut={handleCloseLogOut}
                 handleLogOutRequest={handleLogOutRequest}
                 verifiedMemberData={verifiedMemberData}
+                cartItems={cartItems}
+                onAdd={onAdd}
                 />
             ) : (
                 <NavbarOthers setPath={setPath} 
@@ -119,13 +158,14 @@ function App () {
                 handleCloseLogOut={handleCloseLogOut}
                 handleLogOutRequest={handleLogOutRequest}
                 verifiedMemberData={verifiedMemberData}
+               
                 />
             )}
 
             {/*buyerdan swich routerlar boshlandi*/}
                   <Switch>
                       <Route path="/restaurant">
-                          < RestaurantPage/>
+                          < RestaurantPage onAdd ={onAdd}/>
                       </Route>
                       <Route path="/community">
                           < CommunityPage/>

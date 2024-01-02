@@ -18,9 +18,11 @@ async getTopRestaurants(): Promise<Restaurant[]>  {
       const url = "/restaurants?order=top&page=1&limit=4",  // postmandagi getrestaurantni URLi.
         result = await axios.get(this.path + url, 
           { withCredentials: true });
-        assert.ok(result, Definer.general_err1);
+       
+          assert.ok(result?.data, Definer.general_err1);
+          assert.ok(result?.data.state !== "fail", Definer.general_err1);
+          console.log("state:::", result.data.state);
 
-        console.log("state:", result.data.state); //backenddan qaytargan malumotimiz res.json formatni ichidagi state hamda successlar datani ichida berilmoqda.
         const top_restaurants: Restaurant[] = result.data.data; //toprestaurantsni type: interface Restaurant bulayopti, 
         // resultni ichidan kelayotgan datani ichidagi data; resultni ichidagi data axios bn keladi, 2chi data backendda hosil qilingan data.
         return top_restaurants;
@@ -39,9 +41,10 @@ async getRestaurants(data: SearchObj): Promise<Restaurant[]> { //SearchObj inter
     const url = `/restaurants?order=${data.order}&page=${data.page}&limit=${data.limit}`,  // postmandagi getrestaurantni URLi.
       result = await axios.get(this.path + url, 
         { withCredentials: true });
-      assert.ok(result, Definer.general_err1);
-
-      console.log("state:", result.data.state); //backenddan qaytargan malumotimiz res.json formatni ichidagi state hamda successlar datani ichida berilmoqda.
+     
+        assert.ok(result?.data, Definer.general_err1);
+        assert.ok(result?.data.state !== "fail", Definer.general_err1);
+        console.log("state:::", result.data.state);
       const restaurants: Restaurant[] = result.data.data; //toprestaurantsni type: interface Restaurant bulayopti, 
       // resultni ichidan kelayotgan datani ichidagi data; resultni ichidagi data axios bn keladi, 2chi data backendda hosil qilingan data.
       return restaurants;
@@ -55,9 +58,11 @@ async getChosenRestaurant(id: string) {
   try{
     const url = `/restaurants/${id}`,
        result = await axios.get(this.path + url, { withCredentials: true });
-    assert.ok(result, Definer.general_err1);
-
-    console.log("state:", result.data.data); //backenddan qaytargan malumotimiz res.json formatni ichidagi state hamda successlar datani ichida berilmoqda.
+    
+       assert.ok(result?.data, Definer.general_err1);
+       assert.ok(result?.data.state !== "fail", Definer.general_err1);
+      console.log("state:::", result.data.state);
+      
       const restaurant: Restaurant[] = result.data.data; //toprestaurantsni type: interface Restaurant bulayopti, 
       // resultni ichidan kelayotgan datani ichidagi data; resultni ichidagi data axios bn keladi, 2chi data backendda hosil qilingan data.
       return restaurant;

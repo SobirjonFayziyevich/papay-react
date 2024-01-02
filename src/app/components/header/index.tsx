@@ -6,11 +6,7 @@ import { useState , useEffect } from "react";
 import { set } from 'immer/dist/internal';
 import { Menu, MenuItem } from '@mui/material';
 import { Logout } from '@mui/icons-material';
-
-
-
-
-
+import  Basket from "./basket";
 
 export function NavbarHome(props: any) {
     
@@ -81,20 +77,7 @@ return (
                           Yordam
                       </NavLink>
                   </Box>
-
-                  <Box className="hover-line">
-                      <IconButton
-                          aria-label="cart"
-                          id="basic-button"
-                          aria-controls={undefined}
-                          aria-haspopup="true"
-                          aria-expanded={undefined}
-                      >
-                          <Badge badgeContent={3} color="secondary">
-                              <img src={'/icons/shopping-cart.png'}/>
-                          </Badge>
-                      </IconButton>
-                  </Box>
+                  <Basket />
 
                     {!props.verifiedMemberData ? (
                    <Box>

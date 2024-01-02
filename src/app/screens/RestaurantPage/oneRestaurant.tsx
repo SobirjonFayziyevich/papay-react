@@ -36,14 +36,7 @@ import {
     } from "../../screens/RestaurantPage/selector";
 import { createSelector, Dispatch} from "@reduxjs/toolkit";
 import { useDispatch, useSelector } from "react-redux";
-// import { ProductSearchObj } from "../../../types/others";
-// import ProductApiService from "../../apiServices/productApiService";
-// import { serverApi } from "../../../lib/config";
-// import RestaurantApiService from "../../apiServices/restaurantApiServices";
-// import assert from "assert";
-// import { Definer } from "../../../lib/Definer";
-// import MemberApiService from "../../apiServices/memberApiService";
-// import { sweetErrorHandling, sweetTopSmallSuccessAlert } from "../../../lib/sweetAlert";
+
 
 /** REDUX SLICE */ 
 const actionDispatch = (dispach: Dispatch) => ({ // buning mantiqi HomepageSlicedan setTopRestaurantni chaqirib olish edi.
@@ -77,7 +70,7 @@ const randomRestaurantsRetriever = createSelector(
         })
       );
     
-export function OneRestaurant () {
+export function OneRestaurant (props: any) {
     /** INITIALIZATION */
     const history = useHistory();
     let {restaurant_id} = useParams<{restaurant_id: string}>();
@@ -309,16 +302,17 @@ export function OneRestaurant () {
 
                     <Stack className={"dish_wrapper"}>
 
-                    {targetProducts.map((product: Product) => {
+                    {targetProducts.map((product: Product, index) => {
                        const image_path = `${serverApi}/${product.product_images[0]}`;
                        const size_volume =
                        product.product_collection === "drink"
                         ? product.product_volume + " l"
                         : product.product_size + " size";
-                          
-
-                          return (
-                             <Box className={"dish_box"} key={product._id}>
+                        return (
+                             <Box 
+                             onClick={() => chosenDishHandler(product._id)}
+                             className={"dish_box"} key={product._id}
+                             >
                                <Box className={"dish_img"}
                                sx={{
                                    backgroundImage: `url(${image_path})`,
@@ -334,18 +328,24 @@ export function OneRestaurant () {
                                              icon={<FavoriteBorder style={{ color: "white" }} />}
                                              id={product._id}
                                             checkedIcon={<Favorite style={{ color: "red" }} />} 
-                                            onClick={targetLikeProduct}
-                                             /*@ts-ignore*/
+                                            onClick={(e) => {
+                                                targetLikeProduct(e);
+                                                e.stopPropagation();
+                                            }}
                                             checked={
-                                                product?.me_liked && 
-                                                product?.me_liked[0]?.my_favorite 
-                                                   ? true 
-                                                   : false
-                                                }
+                                                product?.me_liked &&
+                                                product?.me_liked[0]?.my_favorite
+                                                    ? true
+                                                    : false
+                                            }
                                             />
                                        </Badge>
                                    </Button>
-                                   <Button className={"view_btn"}>
+                                   <Button className={"view_btn"}
+                                   onClick={(e) => {props.onAdd(product);
+                                    e.stopPropagation();
+                                   }} 
+                                 >
                                        <img 
                                        src={"/icons/shopping-cart.png"}
                                        style={{ display: "flex"}}

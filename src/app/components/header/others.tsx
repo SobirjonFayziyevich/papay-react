@@ -3,6 +3,9 @@ import {Box, Button, Container, IconButton, ListItemIcon, Menu, MenuItem, Stack}
 import {NavLink} from "react-router-dom";
 import Badge from "@mui/material/Badge";
 import { Logout } from '@mui/icons-material';
+import  Basket  from "./basket";
+
+
 export function NavbarOthers(props: any) {
     return (
         <div className="format_others home_navbar">
@@ -55,20 +58,7 @@ export function NavbarOthers(props: any) {
                                 Yordam
                             </NavLink>
                         </Box>
-
-                        <Box className="hover-line" onClick={props.setPath}>
-                            <IconButton
-                                aria-label="cart"
-                                id="basic-button"
-                                aria-controls={undefined}
-                                aria-haspopup="true"
-                                aria-expanded={undefined}
-                            >
-                                <Badge badgeContent={3} color="secondary">
-                                    <img src={'/icons/shopping-cart.png'}/>
-                                </Badge>
-                            </IconButton>
-                        </Box>
+                        <Basket />
 
                         <Box>
                         {!props.verifiedMemberData ? (

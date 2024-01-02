@@ -13,8 +13,6 @@ const finishedOrdersRetriever = createSelector(
     finishedOrders,
   })
 );
-
-
 const finishedOrders = [
   [1, 2, 3],
   [1, 2, 3],
