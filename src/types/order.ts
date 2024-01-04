@@ -20,6 +20,6 @@ export interface Order {
     createAt: Date,
     updateAt: Date,
     /** from aggregations */
-    order_item: any[],
+    order_items: OrderItem[],
     product_data: Product[]
 }

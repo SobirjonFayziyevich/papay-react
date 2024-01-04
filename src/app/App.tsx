@@ -37,6 +37,8 @@ function App () {
     const main_path = window.location.pathname;
     const [signUpOpen, setSignUpOpen] = useState(false); // signUpOpen ni qiymati false bulgani un shu qiymatni pass qildim.
     const [loginOpen, setLoginOpen] = useState(false);
+    const [orderRebuild, setOrderRebuild] = useState<Date>(new Date());
+
 
 
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -71,6 +73,7 @@ function App () {
     const handleSignUpClose = () => setSignUpOpen(false);
     const handleLoginOpen = () => setLoginOpen(true);
     const handleLoginClose = () => setLoginOpen(false);
+
 
     const handleLogOutClick = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorEl(event.currentTarget);
@@ -168,6 +171,7 @@ function App () {
                 onRemove={onRemove}
                 onDelete={onDelete}
                 onDeleteAll={onDeleteAll}
+                setOrderRebuild={setOrderRebuild}
                 />
             ) : main_path.includes("/restaurant") ? (
                 <NavbarRestaurant setPath={setPath} 
@@ -184,6 +188,7 @@ function App () {
                 onRemove={onRemove}
                 onDelete={onDelete}
                 onDeleteAll={onDeleteAll}
+                setOrderRebuild={setOrderRebuild}
                 />
             ) : (
                 <NavbarOthers setPath={setPath} 
@@ -199,7 +204,8 @@ function App () {
                 onAdd={onAdd}
                 onRemove={onRemove}
                 onDelete={onDelete}
-                onDeleteAll={onDeleteAll}
+                onDeleteAll={onDeleteAll} 
+                setOrderRebuild={setOrderRebuild}
                
                 />
             )}
@@ -213,7 +219,11 @@ function App () {
                           < CommunityPage/>
                       </Route>
                       <Route path="/orders">
-                          < OrdersPage/>
+                          < OrdersPage
+                           orderRebuild={orderRebuild} 
+                           setOrderRebuild={setOrderRebuild}
+                           verifiedMemberData={verifiedMemberData}
+                            />
                       </Route>
                       <Route path="/member-page">
                           < MemberPage />
