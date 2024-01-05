@@ -49,13 +49,15 @@ export function CommunityPage() {
     page: 1, 
     limit: 5,
 });
+     
+const [articlesRebuild, setArticlesRebuild] = useState<Date>(new Date);
 
   useEffect(() => {
     const communityService = new CommunityApiService();
     communityService.getTargetArticles(searchArticlesObj)
     .then((data) => setTargetBoArticles(data))
     .catch((err) => console.log(err));
-  }, [searchArticlesObj]);
+  }, [searchArticlesObj, articlesRebuild]);
 
   /** HANDLERS *****/
   const handleChange = (event: any, newValue: string) => {
@@ -111,20 +113,29 @@ export function CommunityPage() {
 
                 <Box className="article_main" overflow={"hidden"}>
                   <TabPanel value="1">
-                    <TargetArticles targetBoArticles={targetBoArticles}
-                    test={"Maqolalar"} 
+                    <TargetArticles 
+                    targetBoArticles={targetBoArticles}
+                    setArticlesRebuild={setArticlesRebuild}
+
                     />
                   </TabPanel>
                   <TabPanel value="2">
-                    <TargetArticles targetBoArticles={targetBoArticles} 
-                    test={"Mashxurlar"} 
+                    <TargetArticles 
+                    targetBoArticles={targetBoArticles} 
+                    setArticlesRebuild={setArticlesRebuild}
+
                     />
                   </TabPanel>
                   <TabPanel value="3">
-                    <TargetArticles targetBoArticles={targetBoArticles} />
+                    <TargetArticles 
+                    targetBoArticles={targetBoArticles}
+                     setArticlesRebuild={setArticlesRebuild} />
                   </TabPanel>
+
                   <TabPanel value="4">
-                    <TargetArticles targetBoArticles={targetBoArticles} />
+                    <TargetArticles 
+                    targetBoArticles={targetBoArticles} 
+                    setArticlesRebuild={setArticlesRebuild} />
                   </TabPanel>
                 </Box>
 

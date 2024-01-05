@@ -5,8 +5,35 @@ import Favorite from "@mui/icons-material/Favorite";
 import moment from "moment"
 import { BoArticle } from "../../../types/boArticle";
 import { serverApi } from "../../../lib/config";
+import { sweetErrorHandling, sweetTopSmallSuccessAlert } from "../../../lib/sweetAlert";
+import  assert  from "assert";
+import { Definer } from "../../../lib/Definer";
+import MemberApiService from "../../apiServices/memberApiService";
 
 export function TargetArticles(props: any) {
+  const { setArticlesRebuild} = props;
+
+  /**HANDLERS */
+  const targetLikeHandler = async (e: any) => {
+    try {
+      assert.ok(localStorage.getItem('member_data'), Definer.auth_err1);
+
+      const memberService = new MemberApiService();
+      const like_result: any = await memberService.memberLikeTarget({
+        like_ref_id: e.target.id, 
+        group_type: 'community',
+      });
+      assert.ok(like_result, Definer.general_err1);
+      await sweetTopSmallSuccessAlert('success', 700, false);
+      props.setArticlesRebuild(new Date());
+
+
+    } catch(err: any) {
+      console.log("targetLikeHandler, ERROR:", err);
+      sweetErrorHandling(err).then();
+   }
+};
+
   return (
     <Stack>
       {props.targetBoArticles?.map((articles: BoArticle) => {
@@ -66,8 +93,12 @@ export function TargetArticles(props: any) {
                     icon={<FavoriteBorder />}
                     checkedIcon={<Favorite style={{ color: "red" }} />}
                     id={articles?._id} 
-                    /**@ts-ignore */
-                    checked={false}
+                    onClick={targetLikeHandler}
+                    checked={
+                      articles?.me_liked && articles.me_liked[0]?.my_favorite 
+                      ? true
+                      : false
+                    }
                    />                    
                     <span style={{ marginRight: "18px" }}>{articles?.art_likes}</span>
                     <RemoveRedEye />
