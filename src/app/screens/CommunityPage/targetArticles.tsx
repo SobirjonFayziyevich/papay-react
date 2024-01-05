@@ -1,15 +1,16 @@
 import React from "react";
-import { Box, Link, Stack } from "@mui/material";
-import { RemoveRedEye } from "@mui/icons-material";
-import { FavoriteBorder } from "@mui/icons-material";
+import { Box, Checkbox, Link, Stack } from "@mui/material";
+import { FavoriteBorder, RemoveRedEye } from "@mui/icons-material";
 import Favorite from "@mui/icons-material/Favorite";
 import moment from "moment"
+import { BoArticle } from "../../../types/boArticle";
+import { serverApi } from "../../../lib/config";
 
 export function TargetArticles(props: any) {
   return (
     <Stack>
-      {props.targetBoArticles?.map((articles: any, index: string) => {
-        const art_image_url = "/auth/john.jpeg";
+      {props.targetBoArticles?.map((articles: BoArticle) => {
+        const art_image_url = articles?.art_image ? `${serverApi}/${articles.art_image}` : "/auth/john.jpeg";
         return (
           <Link
             className="all_article_box"
@@ -32,7 +33,7 @@ export function TargetArticles(props: any) {
                   className="all_article_auth_user"
                   style={{ marginLeft: "10px" }}
                 >
-                  John
+                  {articles?.member_data.mb_nick}
                 </span>
               </Box>
               <Box
@@ -40,22 +41,37 @@ export function TargetArticles(props: any) {
                 flexDirection={"column"}
                 sx={{ mt: "15px" }}
               >
-                <span className="all_article_title">evaluation</span>
+                <span className="all_article_title">{articles?.bo_id}</span>
                 <p className="all_article_desc">
-                  Texas De Brazil zo'r restarant
+                    {articles?.art_subject}
                 </p>
               </Box>
               <Box>
                 <Box
                   className="article_share"
                   style={{ width: "100%", height: "auto" }}
+                  sx={{ mb: '10px' }}
                 >
-                  <Box className="article_share_main">
-                    <span style={{ marginRight: "35px" }}>23-11-25 23-50</span>
-                    <FavoriteBorder />
-                    <span style={{ margin: "0px 25px 0px 10px" }}>100</span>
+                  <Box className="article_share_main"
+                  style={{
+                    color: "#fff",
+                    marginLeft: '150px',
+                    display: 'flex',
+                    alignItems: "center",
+                  }}  
+                 >
+                    <span>{moment().format("YY-MM-DD HH:mm")}</span>
+                    <Checkbox
+                    sx={{ ml: "40px" }}
+                    icon={<FavoriteBorder />}
+                    checkedIcon={<Favorite style={{ color: "red" }} />}
+                    id={articles?._id} 
+                    /**@ts-ignore */
+                    checked={false}
+                   />                    
+                    <span style={{ marginRight: "18px" }}>{articles?.art_likes}</span>
                     <RemoveRedEye />
-                    <span style={{ marginLeft: "10px" }}>1000</span>
+                    <span style={{ marginLeft: "18px" }}>{articles?.art_views}</span>
                   </Box>
                 </Box>
               </Box>

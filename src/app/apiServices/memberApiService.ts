@@ -19,9 +19,9 @@ class MemberApiService {
            const result = await axios.post(this.path+"/login", login_data, {
             withCredentials: true,
         });
-        console.log("state:", result.data.state);
         assert.ok(result?.data, Definer.general_err1);  //resultning datasi mavjudmi.
         assert.ok(result?.data?.state != 'fail', result?.data?.message);  //statsi fail bulganmi yuqmi tekshiramiz.
+        console.log("state:", result.data.state);
 
         const member: Member = result.data.data; //yuqoriidai xatoliklardan utsa qiymatni Memberga tenglashtiraman  
         localStorage.setItem("member_data", JSON.stringify(member)); //locaStoregdan memberdatani hosil qilayopman, malumotni saqlashim un.
