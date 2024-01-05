@@ -6,6 +6,7 @@ import RestaurantPageReducer from './screens/RestaurantPage/slice';
 import OrdersPageReducer from './screens/OrdersPage/slice';
 import { CommunityPage } from './screens/CommunityPage';
 import CommunityPageReducer from './screens/CommunityPage/slice';
+import MemberPageRaducer from './screens/MemberPage/slice';
 
 export const store = configureStore({
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(reduxLogger),
@@ -14,6 +15,7 @@ export const store = configureStore({
     restaurantPage: RestaurantPageReducer,
     ordersPage: OrdersPageReducer,
     communityPage: CommunityPageReducer,
+    memberPage: MemberPageRaducer
   },
 });
 

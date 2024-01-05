@@ -136,8 +136,7 @@ export function VisitOtherPage(props: any) {
                                 </TabPanel>
                             </Box>
                         </Stack>
-                        <Stack className={"my_page_right"}
-                        style={{ height: "355px"}}>
+                        <Stack className={"my_page_right"}>
                             <Box className={"order_info_box"}>
 
                                 <a onClick={() => setValue("6")} className={"settings_btn"}>
@@ -178,7 +177,7 @@ export function VisitOtherPage(props: any) {
                                     <p className={"follows"}>Followers: 3 Following: 2</p>
                                 </Box>
                                 <p className={"user_desc"}>qushimcha ma'lumotlar mavjud emas</p>
-                                {/* <Box
+                                <Box
                                     display={"flex"}
                                     justifyContent={"flex-end"}
                                     sx={{mb: "10px"}}
@@ -200,7 +199,7 @@ export function VisitOtherPage(props: any) {
                                             )}
                                         />
                                     </TabList>
-                                </Box> */}
+                                </Box>
                             </Box>
 
                             <Box className={"my_page_menu"}

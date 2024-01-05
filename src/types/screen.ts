@@ -1,7 +1,8 @@
 import { BoArticle } from "./boArticle";
 import { Product } from "./product";
-import { Restaurant } from "./user";
+import { Member, Restaurant } from "./user";
 import { Order } from "./order";
+import { Follower, Following } from "./follow";
 
 /** REACT APP STATE */
 export interface AppRootState {  // app dagi barcha interfacelarni integratsiya iqlayopman.
@@ -9,8 +10,7 @@ export interface AppRootState {  // app dagi barcha interfacelarni integratsiya 
     restaurantPage: RestaurantPageState;
     ordersPage: OrdersPageState;
     communityPage: CommunityPageState;
-    
-      
+    memberPage: MemberPageState;
 }
 
 
@@ -45,4 +45,13 @@ export interface OrdersPageState {
 /** COMMUNITY PAGE */
 export interface CommunityPageState {
     targetBoArticles: BoArticle[];
+}
+
+/** MEMBERPAGE */
+export interface MemberPageState {
+    chosenMember: Member | null;
+    chosenMemberBoArticles: BoArticle[];
+    chosenSingleBoArticle: BoArticle | null;
+    memberFollowers: Follower[];
+    memberFollowings: Following[];
 }
