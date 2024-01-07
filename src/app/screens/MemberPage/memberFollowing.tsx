@@ -35,6 +35,7 @@ export function MemberFollowing(props: any) {
      /** INITIALIZATIONS **/
      const { setMemberFollowings,  } = actionDispatch(useDispatch());
      const { memberFollowings } = useSelector(memberFollowingsRetriever);
+
     return (
         <Stack className={"following_page"} >
             {followings.map((following) => {

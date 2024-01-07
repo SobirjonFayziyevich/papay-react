@@ -19,7 +19,7 @@ export function TargetArticles(props: any) {
       assert.ok(localStorage.getItem('member_data'), Definer.auth_err1);
 
       const memberService = new MemberApiService();
-      const like_result: any = await memberService.memberLikeTarget({
+      const like_result = await memberService.memberLikeTarget({
         like_ref_id: e.target.id, 
         group_type: 'community',
       });
@@ -88,7 +88,7 @@ export function TargetArticles(props: any) {
                   }}  
                  >
                     <span>{moment().format("YY-MM-DD HH:mm")}</span>
-                    <Checkbox
+                     <Checkbox
                     sx={{ ml: "40px" }}
                     icon={<FavoriteBorder />}
                     checkedIcon={<Favorite style={{ color: "red" }} />}
@@ -99,7 +99,7 @@ export function TargetArticles(props: any) {
                       ? true
                       : false
                     }
-                   />                    
+                   />                     
                     <span style={{ marginRight: "18px" }}>{articles?.art_likes}</span>
                     <RemoveRedEye />
                     <span style={{ marginLeft: "18px" }}>{articles?.art_views}</span>

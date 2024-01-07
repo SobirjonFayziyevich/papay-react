@@ -1,7 +1,7 @@
 import TabPanel from "@mui/lab/TabPanel";
 import TabContext from "@mui/lab/TabContext";
 import {Box, Container, Pagination, PaginationItem, Stack} from "@mui/material";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {MemberPosts} from "./memberPosts";
 import {MemberFollowers} from "./memberFollowers";
 import {MemberFollowing} from "./memberFollowing";
@@ -23,7 +23,7 @@ import Marginer from "../../components/marginer";
 import { TuiEditor } from "../../components/tuiEditor/TuiEditor";
 import TViewer from "../../components/tuiEditor/TViewer";
 import { Member } from "../../../types/user";
-import { BoArticle } from "../../../types/boArticle";
+import { BoArticle, SearchMemberArticlesObj } from "../../../types/boArticle";
 // REDUX
 import { useDispatch, useSelector } from "react-redux";
 import { createSelector } from "reselect";
@@ -38,6 +38,9 @@ import {
   setChosenMemberBoArticles,
   setChosenSingleBoArticle,
 } from "../../screens/MemberPage/slice";
+import { sweetErrorHandling, sweetFailureProvider } from "../../../lib/sweetAlert";
+import CommunityApiService from "../../apiServices/communityApiService";
+import MemberApiService from "../../apiServices/memberApiService";
 
 // REDUX SLICE
 const actionDispatch = (dispatch: Dispatch) => ({
@@ -66,11 +69,12 @@ const chosenSingleBoArticleRetriever = createSelector(
   (chosenSingleBoArticle) => ({
     chosenSingleBoArticle,
   })
-);
+); 
 
 
 export function VisitMyPage(props: any) {
     /** INITIALIZATIONS */
+    const {verifiedMemberData} = props;
     const {
         setChosenMember,
         setChosenMemberBoArticles,
@@ -79,12 +83,55 @@ export function VisitMyPage(props: any) {
       const { chosenMember } = useSelector(chosenMemberRetriever);
       const { chosenMemberBoArticles } = useSelector(chosenMemberBoArticlesRetriever);
       const { chosenSingleBoArticle } = useSelector(chosenSingleBoArticleRetriever);
-    const [value, setValue] = React.useState("1");
+      const [value, setValue] = React.useState("1");
+      const [ articlesRebuild, setArticlesRebuild] = useState<Date>(new Date());
+      const [memberArticleSearchObj, setMemberArticleSearchObj] = useState<SearchMemberArticlesObj>({
+          mb_id: 'none',
+          page: 1,
+          limit: 5,
+      });
+
+      useEffect(() => {
+          if(!localStorage.getItem('member_data')) {
+              sweetFailureProvider('Please login first', true, true);
+          }
+
+          const communityService = new CommunityApiService();
+          const memberService = new MemberApiService();
+         communityService
+         .getMemberCommunityArticles(memberArticleSearchObj)
+         .then((data) => setChosenMemberBoArticles(data))
+         .catch((err) => console.log(err));
+
+         memberService
+         .getChosenMember(verifiedMemberData)
+         .then((data) => setChosenMember(data))
+         .catch((err) => console.log(err));
+           
+      }, [memberArticleSearchObj, articlesRebuild]);
+   
 
     /** HANDLERS */
     const handleChange = (event: any, newValue: string) => {
         setValue(newValue);
     };
+    const handlePaginationChange = (event: any, value: number) => { //pagination un handler.
+        memberArticleSearchObj.page = value;
+        setMemberArticleSearchObj({...memberArticleSearchObj});
+    };
+
+    const renderChosenArticleHandler = async (art_id: string) => { // mening maqolamdagi matnni pass qilishi un 
+       try {
+        const communityService = new CommunityApiService();
+        communityService
+        .getChosenArticle(art_id)
+        .then((data) => setChosenSingleBoArticle(data))
+        .catch((err) => console.log(err));
+       } catch (err: any) {
+           console.log(err);
+           sweetErrorHandling(err).then()
+       }
+    }
 
     return (
         <div className={"my_page"}>
@@ -99,7 +146,10 @@ export function VisitMyPage(props: any) {
                                     <Box className={"menu_name"}>Mening Maqolalarim</Box>
 
                                     <Box className={"menu_content"}>
-                                        <MemberPosts/>
+                                        <MemberPosts 
+                                        chosenMemberBoArticles={chosenMemberBoArticles} 
+                                        renderChosenArticleHandler={renderChosenArticleHandler} 
+                                        setArticlesRebuild={setArticlesRebuild} />
                                         <Stack
                                             sx={{my: "40px"}}
                                             direction="row"
@@ -120,6 +170,7 @@ export function VisitMyPage(props: any) {
                                                             color={"secondary"}
                                                         />
                                                     )}
+                                                    onChange={handlePaginationChange} //paginationning nomer qiymatlarini uzgartirish
                                                 />
 
                                             </Box>

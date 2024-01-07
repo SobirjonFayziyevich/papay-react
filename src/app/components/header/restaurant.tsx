@@ -123,8 +123,7 @@ export function NavbarRestaurant(props: any) {
                 }}
                 transformOrigin={{ horizontal: "right", vertical: "top" }}
                 anchorOrigin={{ horizontal: "right", vertical: "bottom" }}>
-                <MenuItem>
-                  onClick={props.handleLogOutRequest}
+                <MenuItem onClick={props.handleLogOutRequest}>
                   <ListItemIcon>
                     <Logout fontSize="small" style={{ color: "blue" }} />
                   </ListItemIcon>
