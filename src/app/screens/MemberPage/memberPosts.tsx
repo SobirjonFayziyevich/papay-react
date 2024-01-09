@@ -32,12 +32,10 @@ export function MemberPosts(props: any) {
           });
           assert.ok(like_result, Definer.general_err1);
           await sweetTopSmallSuccessAlert('success', 700, false);
-          setArticlesRebuild(new Date());
-    
-    
+          setArticlesRebuild(new Date()); // yuqoridagi props dan qiymat kelyabdi
         } catch(err: any) {
           console.log("targetLikeHandler, ERROR:", err);
-          sweetErrorHandling(err).then();
+          sweetErrorHandling(err).then(); 
        }
     };
 

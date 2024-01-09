@@ -25,4 +25,11 @@ export interface Following {
     updatedAt: Date;
     follow_member_data: Member;
 }
+// buyerdagi FollowSearchObj followApiService.tsga data sifatida pass qilinadi.
+export interface FollowSearchObj { // bu follow emas bu interface.
+    page: number;
+    limit: number;
+    mb_id: string;
+
+}
 

@@ -124,12 +124,13 @@
 
 .my_page {
   width: 100%;
-  height: auto;
+  height: 800px;
   display: flex;
   position: relative;
 }
 
 .my_page .my_page_right {
+  margin-top: 85px;
   margin-left: 57px;
   position: relative;
   width: 372.58px;
@@ -144,6 +145,7 @@
 }
 
 .my_page_right .order_info_box {
+  height: auto;
   justify-content: space-between;
   position: relative;
   flex-direction: column;
@@ -275,10 +277,8 @@
 /*Followers*/
 
 .my_followers_page {
-  /* width: 871px; */
   width: 100%;
   height: 100%;
-  display: flex;
   position: relative;
 }
 
@@ -295,7 +295,7 @@
   height: 140px;
   border-radius: 17px;
   padding:  25px 45px;
-  border: 1px solid red;
+  
 
   background: linear-gradient(180deg,
   rgba(38, 112, 129, 0.90) 0%,

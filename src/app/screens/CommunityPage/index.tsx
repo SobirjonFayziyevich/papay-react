@@ -141,8 +141,8 @@ const [articlesRebuild, setArticlesRebuild] = useState<Date>(new Date);
 
                 <Box className="article_bott">
                   <Pagination
-                    count={4}
-                    page={1}
+                    count={searchArticlesObj.limit}
+                    page={searchArticlesObj.page}
                     renderItem={(item) => (
                       <PaginationItem
                         components={{

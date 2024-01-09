@@ -1,13 +1,21 @@
 import Button from "@mui/material/Button";
-import {Avatar, Box} from "@mui/material";
+import {Avatar, Box, Pagination, PaginationItem} from "@mui/material";
 import {Stack} from "@mui/system";
 // REDUX
 import { useDispatch, useSelector } from "react-redux";
 import { createSelector } from "reselect";
 import { retrieveMemberFollowings, } from "../../screens/MemberPage/selector";
 import { Dispatch } from "@reduxjs/toolkit";
-import { setMemberFollowings, } from "../../screens/MemberPage/slice";
-import { Following } from "../../../types/follow";
+import { setMemberFollowers, setMemberFollowings, } from "../../screens/MemberPage/slice";
+import { Following, FollowSearchObj } from "../../../types/follow";
+import FollowApiService from "../../apiServices/followApiService";
+import { useEffect, useState } from "react";
+import assert from "assert";
+import { sweetErrorHandling, sweetTopSmallSuccessAlert } from "../../../lib/sweetAlert";
+import { Definer } from "../../../lib/Definer";
+import { serverApi } from "../../../lib/config";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 
 // REDUX SLICE
 const actionDispatch = (dispatch: Dispatch) => ({
@@ -23,23 +31,53 @@ const memberFollowingsRetriever = createSelector(
   })
 );
 
-
-
-const followings = [
-    { mb_nick: "abbos" },
-    { mb_nick: "latif" },
-    { mb_nick: "saidamir" },
-];
-
 export function MemberFollowing(props: any) {
      /** INITIALIZATIONS **/
+     const {mb_id, followRebuild, setFollowRebuild } = props;
      const { setMemberFollowings,  } = actionDispatch(useDispatch());
      const { memberFollowings } = useSelector(memberFollowingsRetriever);
+     const [followingsSearchObj, setFollowingsSearchObj] = useState<FollowSearchObj>(
+         {page: 1, limit: 5, mb_id: mb_id });
+
+     useEffect(() => {
+        const followService = new FollowApiService();
+        followService
+        .getMemberFollowings(followingsSearchObj)
+        .then((data) => setMemberFollowings(data))
+        .catch((err) => console.log(err));
+     }, [followingsSearchObj, followRebuild ]);
+
+        
+         /** HANDLERS */
+         /** unsabscribe logic */
+         const unsubscribeHandler = async (e: any, id: string ) => {
+            try{
+                e.stopPropagation();
+                assert.ok(localStorage.getItem('member_data'), Definer.auth_err1);
+   
+                const followService = new FollowApiService();
+                await followService.unsubscribe(id);
+    
+                await sweetTopSmallSuccessAlert('unsubscribed', 700, false);
+                setFollowRebuild(!followRebuild);
+               } catch(err: any) {
+              console.log(err);
+              sweetErrorHandling(err).then();
+            }
+        };
+
+        const handlePaginationChange = (event: any, value: number) => { //pagination un handler.
+            followingsSearchObj.page = value;
+            setFollowingsSearchObj({...followingsSearchObj});
+        };
+
 
     return (
         <Stack className={"following_page"} >
-            {followings.map((following) => {
-                const image_url = "/auth/odamcha.png";
+            {memberFollowings.map((following: Following) => {
+                const image_url = following?.follow_member_data?.mb_image 
+                ? `${serverApi}/${following?.follow_member_data.mb_image}` 
+                : "/auth/odamcha.png";
                 return (
                     <Box className={"follow_box"}>
                         <Stack
@@ -56,8 +94,8 @@ export function MemberFollowing(props: any) {
                                     color: "#ffffff",
                                 }}
                             >
-                                <span className={"username_text"}>Saidamir</span>
-                                <span className={"name_text"}>@amir_2023</span>
+                                <span className={"username_text"}>{following?.follow_member_data?.mb_type}</span>
+                                <span className={"name_text"}>{following?.follow_member_data?.mb_nick}</span>
                             </div>
 
                             <Stack
@@ -77,8 +115,9 @@ export function MemberFollowing(props: any) {
                                                 src={"/icons/follow icon.svg"}
                                             />
                                         }
+                                        onClick={(e) => unsubscribeHandler(e, following?.follow_id)}
                                     >
-                                        Bekor Qilish
+                                        Bekor qilish
                                     </Button>
                                 )}
                             </Stack>
@@ -86,6 +125,32 @@ export function MemberFollowing(props: any) {
                     </Box>
                 );
             })}
+             <Stack
+                sx={{my: "40px"}}
+                direction="row"
+                alignItems="center"
+                justifyContent="center"
+                >
+                <Box className={"bottom_box"}>
+                <Pagination
+                  count={followingsSearchObj.page >= 3 ? followingsSearchObj.page + 1 :3
+                }
+                    page={followingsSearchObj.page}
+                     renderItem={(item) => (
+                     <PaginationItem
+                       components={{
+                        previous: ArrowBackIcon,
+                          next: ArrowForwardIcon,
+                            }}
+                         {...item}
+                        color={"secondary"}
+                       />
+                      )}
+                     onChange={handlePaginationChange} //paginationning nomer qiymatlarini uzgartirish
+                    />
+
+                </Box>
+              </Stack>
         </Stack>
 
     );

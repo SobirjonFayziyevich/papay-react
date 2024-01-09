@@ -43,12 +43,12 @@ import CommunityApiService from "../../apiServices/communityApiService";
 import MemberApiService from "../../apiServices/memberApiService";
 
 // REDUX SLICE
-const actionDispatch = (dispatch: Dispatch) => ({
-  setChosenMember: (data: Member) => dispatch(setChosenMember(data)),
+const actionDispatch = (dispach: Dispatch) => ({
+  setChosenMember: (data: Member) => dispach(setChosenMember(data)),
   setChosenMemberBoArticles: (data: BoArticle[]) =>
-    dispatch(setChosenMemberBoArticles(data)),
+    dispach(setChosenMemberBoArticles(data)),
   setChosenSingleBoArticle: (data: BoArticle) =>
-    dispatch(setChosenSingleBoArticle(data)),
+    dispach(setChosenSingleBoArticle(data)),
 });
 
 // REDUX SELECTOR
@@ -85,33 +85,30 @@ export function VisitMyPage(props: any) {
       const { chosenSingleBoArticle } = useSelector(chosenSingleBoArticleRetriever);
       const [value, setValue] = React.useState("1");
       const [ articlesRebuild, setArticlesRebuild] = useState<Date>(new Date());
+      const [followRebuild, setFollowRebuild] = useState<boolean>(false);
       const [memberArticleSearchObj, setMemberArticleSearchObj] = useState<SearchMemberArticlesObj>({
           mb_id: 'none',
           page: 1,
           limit: 5,
       });
-
       useEffect(() => {
           if(!localStorage.getItem('member_data')) {
               sweetFailureProvider('Please login first', true, true);
           }
-
           const communityService = new CommunityApiService();
-          const memberService = new MemberApiService();
-         communityService
+          communityService
          .getMemberCommunityArticles(memberArticleSearchObj)
          .then((data) => setChosenMemberBoArticles(data))
          .catch((err) => console.log(err));
 
+         const memberService = new MemberApiService();   
          memberService
          .getChosenMember(verifiedMemberData)
          .then((data) => setChosenMember(data))
          .catch((err) => console.log(err));
            
-      }, [memberArticleSearchObj, articlesRebuild]);
-   
-
-    /** HANDLERS */
+      }, [memberArticleSearchObj, articlesRebuild, followRebuild]);
+       /** HANDLERS */
     const handleChange = (event: any, newValue: string) => {
         setValue(newValue);
     };
@@ -119,16 +116,14 @@ export function VisitMyPage(props: any) {
         memberArticleSearchObj.page = value;
         setMemberArticleSearchObj({...memberArticleSearchObj});
     };
-
     /** sahifamga kirib evaluation, story ni bosganda matn chiqaradi. */
     const renderChosenArticleHandler = async (art_id: string) => { // mening maqolamdagi matnni pass qilishi un 
        try {
         const communityService = new CommunityApiService();
         communityService
         .getChosenArticle(art_id)
-        .then((data) => {
-            setChosenSingleBoArticle(data);
-            setValue('5');
+        .then((data) => {setChosenSingleBoArticle(data);
+            setValue("5");
         })
         .catch((err) => console.log(err));
        } catch (err: any) {
@@ -162,7 +157,8 @@ export function VisitMyPage(props: any) {
                                         >
                                             <Box className={"bottom_box"}>
                                                 <Pagination
-                                                    count={memberArticleSearchObj.limit}
+                                                    count={memberArticleSearchObj.page >= 3 ? memberArticleSearchObj.page + 1 : 3
+                                                    }
                                                     page={memberArticleSearchObj.page}
                                                     renderItem={(item) => (
                                                         <PaginationItem
@@ -176,8 +172,7 @@ export function VisitMyPage(props: any) {
                                                     )}
                                                     onChange={handlePaginationChange} //paginationning nomer qiymatlarini uzgartirish
                                                 />
-
-                                            </Box>
+                                                </Box>
                                         </Stack>
                                     </Box>
                                 </TabPanel>
@@ -185,14 +180,24 @@ export function VisitMyPage(props: any) {
                                 <TabPanel value={"2"}>
                                     <Box className={"menu_name"}>Followers</Box>
                                     <Box className={"menu_content"}>
-                                        <MemberFollowers actions_enabled={true}/>
+                                        <MemberFollowers 
+                                        actions_enabled={true} 
+                                        followRebuild={followRebuild}
+                                        setFollowRebuild={setFollowRebuild}
+                                        mb_id={props.verifiedMemberData?._id}
+                                         />
                                     </Box>
                                 </TabPanel>
 
                                 <TabPanel value={"3"}>
                                     <Box className={"menu_name"}>Following</Box>
                                     <Box className={"menu_content"}>
-                                        <MemberFollowing actions_enabled={true}/>
+                                        <MemberFollowing 
+                                        actions_enabled={true}
+                                        followRebuild={followRebuild}
+                                        setFollowRebuild={setFollowRebuild}
+                                         mb_id={props.verifiedMemberData?._id}
+                                       />
                                     </Box>
                                 </TabPanel>
 
@@ -206,7 +211,7 @@ export function VisitMyPage(props: any) {
                                 <TabPanel value={"5"}>
                                     <Box className={"menu_name"}>Tanlangan Maqolalar</Box>
                                     <Box className={"menu_content"}>
-                                        <TViewer chosenSingleBoArticle={ chosenSingleBoArticle} />
+                                        <TViewer chosenSingleBoArticle={chosenSingleBoArticle} />
                                     </Box>
                                 </TabPanel>
 
@@ -218,10 +223,10 @@ export function VisitMyPage(props: any) {
                                 </TabPanel>
                             </Box>
                         </Stack>
+
                         <Stack className={"my_page_right"}>
                             <Box className={"order_info_box"}>
-
-                                <a onClick={() => setValue("6")} className={"settings_btn"}>
+                                 <a onClick={() => setValue("6")} className={"settings_btn"}>
                                     <SettingsIcon/>
                                 </a>
                                 <Box
@@ -234,10 +239,18 @@ export function VisitMyPage(props: any) {
                                             src={"/auth/john.jpeg"}
                                             className={"order_user_avatar"}
                                         />
-
-                                    </div>
-                                    <span className={"order_user_name"}>John</span>
-                                    <span className={"order_user_prof"}>USER</span>
+                                        <div className={"order_user_icon_box"}>
+                                           <img 
+                                           src={
+                                           chosenMember?.mb_type === 'RESTAURANT' 
+                                              ? "/auth/odamcha.png" 
+                                              : "/icons/odamcha.svg" // buni ichida kimki user bulib kirsa shu yerda restaurantni iconi chiqadi.
+                                           } 
+                                           />
+                                        </div>
+                                        </div>
+                                    <span className={"order_user_name"}>{chosenMember?.mb_nick}</span>
+                                    <span className={"order_user_prof"}>{chosenMember?.mb_type}</span>
                                 </Box>
                                 <Box className={"user_media_box"}
                                      sx={{
@@ -256,9 +269,13 @@ export function VisitMyPage(props: any) {
                                      }}
 
                                 >
-                                    <p className={"follows"}>Followers: 3 Following: 2</p>
+                                    <p className={"follows"}>Followers: {chosenMember?.mb_subscriber_cnt} Following: {chosenMember?.mb_follow_cnt} </p>
                                 </Box>
-                                <p className={"user_desc"}>qushimcha ma'lumotlar mavjud emas</p>
+                                <p className={"user_desc"}>
+                                    {chosenMember?.mb_description ?? 
+                                      "qushimcha ma'lumotlar mavjud emas"
+                                      }
+                                </p>
                                 <Box
                                     display={"flex"}
                                     justifyContent={"flex-end"}
