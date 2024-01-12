@@ -102,7 +102,7 @@ export function VisitMyPage(props: any) {
     useState<SearchMemberArticlesObj>({
       mb_id: "none",
       page: 1,
-      limit: 5,
+      limit: 3,
     });
   useEffect(() => {
     if (!localStorage.getItem("member_data")) {
@@ -221,7 +221,9 @@ export function VisitMyPage(props: any) {
                 <TabPanel value={"4"}>
                   <Box className={"menu_name"}>Maqola yozish</Box>
                   <Box className={"write_content"}>
-                    <TuiEditor   />
+                    <TuiEditor 
+                    setValue={setValue}
+                    setArticlesRebuild={setArticlesRebuild}  />
                   </Box>
                 </TabPanel>
 

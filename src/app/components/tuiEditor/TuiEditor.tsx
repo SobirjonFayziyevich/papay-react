@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback, useState } from "react";
 import { useRef } from "react";
 import {
   Box,
@@ -12,9 +12,80 @@ import {
 } from "@mui/material";
 import { Editor } from "@toast-ui/react-editor";
 import "@toast-ui/editor/dist/toastui-editor.css";
+import CommunityApiService from "../../apiServices/communityApiService";
+import { useHistory } from "react-router-dom";
+import { BoArticleInput } from "../../../types/boArticle";
+import { serverApi } from "../../../lib/config";
+import assert from "assert";
+import { Definer } from "../../../lib/Definer";
+import { sweetErrorHandling, sweetTopSmallSuccessAlert } from "../../../lib/sweetAlert";
 
 export const TuiEditor = (props: any) => {
+  /** INITIALIZATION */
+    const history = useHistory();
     const editorRef = useRef();
+    const [communityArticleData, setCommunityArticleData] = useState<BoArticleInput>({
+      art_subject: "",
+      bo_id: "",
+      art_content: "",
+      art_image: "",
+    });
+
+    /** HANDLERS */
+    const uploadImage = async (image: any) => {
+       try{
+         const communityService = new CommunityApiService();
+          const image_name = await communityService.uploadImageToServer(image);
+          communityArticleData.art_image = image_name; //communityArticleData ichidagi art_imageni qiymatini uzgartiraman.
+          setCommunityArticleData({...communityArticleData});
+          const source = `${serverApi}/${image_name}`; //
+          return source;
+       } catch (err) {
+         console.log(`ERROR::: uploadImage ${err}`);
+
+       }
+    };
+ 
+    const changeCategoryHandler = (e: any) => { // 
+      communityArticleData.bo_id = e.target.value;  // communityArticleDatani ichidagi bo_id qiymatini uzgrtirsin,
+      setCommunityArticleData({ ...communityArticleData });
+    };
+    const changeTitleHandler = useCallback((e: any) => { //useCallback 4chi Hookimz; useRef, useState, useEffect
+        communityArticleData.art_subject = e.target.value;
+        setCommunityArticleData({ ...communityArticleData });
+      },
+      [communityArticleData.art_subject]
+    );
+
+    const handleRegisterButton = async () => {
+      try {
+        console.log("communityArticleData:", communityArticleData);
+        const editor: any = editorRef.current; // editorRefni ichidan current olibberadi.
+        const art_content = editor?.getInstance().getHTML();
+        console.log("art_content:", art_content);
+  
+        communityArticleData.art_content = art_content;
+        console.log("communityArticleData:", communityArticleData);
+        assert.ok(
+          communityArticleData.art_content !== "" && // communityArticleData art_contenti bush string emasmi? tekshiramiz 
+            communityArticleData.bo_id !== "" &&   // communityArticleData art_idsi bush string emasmi? tekshiramiz
+            communityArticleData.art_subject !== "", // communityArticleData art_subjecti bush string emasmi? tekshiramiz
+          Definer.input_err1 // image kiritmasligi ham mumkin pustot bolsa,
+        );
+  
+        const communityService = new CommunityApiService();
+        await communityService.createArticle(communityArticleData);
+        await sweetTopSmallSuccessAlert("Article is created successfully!");
+  
+        props.setArticlesRebuild(new Date());
+        props.setValue("1")
+      } catch (err) {
+        console.log(`ERROR::: handleRegisterButton, ${err}`);
+        sweetErrorHandling(err).then();
+      }
+    };
+    
+
     return (
       <Stack>
         <Stack
@@ -30,9 +101,10 @@ export const TuiEditor = (props: any) => {
             </Typography>
             <FormControl sx={{ width: "300px", background: "#fff" }}>
               <Select
-                value={"celebrity"}
+                value={communityArticleData.bo_id}
                 displayEmpty
                 inputProps={{ "aria-label": "Without label" }}
+                onChange={changeCategoryHandler}
               >
                 <MenuItem value="">
                   <span>Category tanlang</span>
@@ -55,6 +127,7 @@ export const TuiEditor = (props: any) => {
               label="Mavzu"
               variant="filled"
               style={{ width: "300px", background: "#fff" }}
+              onChange={changeTitleHandler}
             />
           </Box>
         </Stack>
@@ -73,6 +146,9 @@ export const TuiEditor = (props: any) => {
           ]}
           hooks={{
             addImageBlobHook: async (image: any, callback: any) => {
+              const uploadImageURL = await uploadImage(image);
+              console.log("uploadImageURL:", uploadImageURL);
+              callback(uploadImageURL);
               return false;
             },
           }}
@@ -85,6 +161,7 @@ export const TuiEditor = (props: any) => {
             variant="contained"
             color="primary"
             style={{ margin: "30px", width: "250px", height: "45px" }}
+            onClick={handleRegisterButton}
           >
             Register
           </Button>

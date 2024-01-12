@@ -124,17 +124,18 @@
 
 .my_page {
   width: 100%;
-  height: 850px;
+  height: auto;
   display: flex;
   position: relative;
 }
 
 .my_page .my_page_right {
-  margin-top: 85px;
+  
   margin-left: 57px;
+  margin-bottom: 25px;
   position: relative;
   width: 372.58px;
-  height: 408px;
+  height: 410px;
   border-radius: 16px;
   display: flex;
   background: #FFF;
