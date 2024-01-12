@@ -32,7 +32,7 @@ class CommunityApiService {
 
 
         }
-    }
+    };
 
     public async getMemberCommunityArticles(data: SearchMemberArticlesObj): Promise<BoArticle[]> {
         try {
@@ -43,8 +43,8 @@ class CommunityApiService {
              });
              
              assert.ok(result?.data, Definer.general_err1);
-             assert.ok(result?.data.state !== "fail", Definer.general_err1);
-             console.log("state:", result.data.state);
+             assert.ok(result?.data?.state !== "fail", result?.data?.message);
+             console.log("state:::", result.data.state);
      
                    // Articles qaytadi //resultni ichidagi datani olamiz va biz yuborayotgan data kerak buladi. 
              const articles: BoArticle[] = result.data.data;
@@ -61,9 +61,9 @@ class CommunityApiService {
             const result = await axios.get(this.path + url, {
                 withCredentials: true,
              });
-             assert.ok(result?.data, Definer.general_err1);
-             assert.ok(result?.data.state !== 'fail', Definer.general_err1);
-             console.log("state:", result.data.state);
+             assert.ok(result?.data, Definer.general_err1);  
+             assert.ok(result?.data?.state !== 'fail', result?.data?.message);
+             console.log("state:::", result.data.state);
      
                    // Articles qaytadi //resultni ichidagi datani olamiz va biz yuborayotgan data kerak buladi. 
              const article: BoArticle = result.data.data;
