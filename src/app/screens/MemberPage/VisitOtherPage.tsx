@@ -282,8 +282,7 @@ export function VisitOtherPage(props: any) {
                   <div className={"order_user_img"}>
                     <img
                       
-                      src={
-                        chosenMember?.mb_image
+                      src={chosenMember?.mb_image
                           ? `${serverApi}/${chosenMember?.mb_image}`
                           : "/auth/john.jpeg"
                       }

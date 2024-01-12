@@ -315,7 +315,8 @@ export function VisitMyPage(props: any) {
                         <Button
                           variant={"contained"}
                           onClick={() => setValue("4")}
-                        >
+                          style={{ marginTop: "14px"}}
+                           >
                           Maqola Yozish
                         </Button>
                       )}
