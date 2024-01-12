@@ -7,6 +7,7 @@ import {
   PaginationItem,
   Stack,
 } from "@mui/material";
+import  TabList  from "@mui/lab/TabList";
 import React, { useEffect, useState } from "react";
 import { MemberPosts } from "./memberPosts";
 import { MemberFollowers } from "./memberFollowers";
@@ -22,7 +23,7 @@ import YouTubeIcon from "@mui/icons-material/YouTube";
 
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import TabList from "@mui/lab/TabList";
+
 import { Button, Tab } from "@mui/material";
 import Marginer from "../../components/marginer";
 import { TuiEditor } from "../../components/tuiEditor/TuiEditor";
@@ -49,6 +50,8 @@ import {
 } from "../../../lib/sweetAlert";
 import CommunityApiService from "../../apiServices/communityApiService";
 import MemberApiService from "../../apiServices/memberApiService";
+
+
 
 // REDUX SLICE
 const actionDispatch = (dispach: Dispatch) => ({
@@ -218,7 +221,7 @@ export function VisitMyPage(props: any) {
                 <TabPanel value={"4"}>
                   <Box className={"menu_name"}>Maqola yozish</Box>
                   <Box className={"write_content"}>
-                    <TuiEditor />
+                    <TuiEditor   />
                   </Box>
                 </TabPanel>
 
@@ -322,11 +325,14 @@ export function VisitMyPage(props: any) {
                       )}
                     />
                   </TabList>
-                </Box>
+                </Box> 
               </Box>
 
               <Box className={"my_page_menu"} sx={{ flexDirection: "column" }} >
-                <TabList onChange={handleChange} aria-label="lab API tabs example" >
+                <TabList
+                onChange={handleChange}
+                aria-label="lab API tabs example"
+                >
                   <Stack flexDirection={"column"}>
                     <Tab
                       style={{ flexDirection: "column" }}
