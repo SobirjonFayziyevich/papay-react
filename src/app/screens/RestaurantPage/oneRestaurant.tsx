@@ -36,6 +36,7 @@ import {
     } from "../../screens/RestaurantPage/selector";
 import { createSelector, Dispatch} from "@reduxjs/toolkit";
 import { useDispatch, useSelector } from "react-redux";
+import { verifiedMemberData } from "../../apiServices/verify";
 
 
 /** REDUX SLICE */ 
@@ -135,7 +136,7 @@ export function OneRestaurant (props: any) {
       
       const targetLikeProduct = async (e: any) => {
         try {
-          assert.ok(localStorage.getItem("member_data"), Definer.auth_err1);
+          assert.ok(verifiedMemberData, Definer.auth_err1);
     
           const memberService = new MemberApiService(),
             like_result: any = await memberService.memberLikeTarget({

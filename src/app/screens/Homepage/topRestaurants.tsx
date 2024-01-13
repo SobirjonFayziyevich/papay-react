@@ -27,6 +27,7 @@ import RestaurantApiService from "../../apiServices/restaurantApiServices";
 import {createSelector} from "reselect";
 import { setTargetRestaurants } from '../RestaurantPage/slice';
 import { retrieveTopRestaurants } from './selector';
+import { verifiedMemberData } from '../../apiServices/verify';
 
 /** REDUX SLICE */ 
 const actionDispatch = (dispach: Dispatch) => ({ // buning mantiqi HomepageSlicedan setTopRestaurantni chaqirib olish edi.
@@ -58,7 +59,7 @@ export function TopRestaurants() {
     }
     const targetLikeTop = async (e: any, id: string) => {
         try {
-            assert.ok(localStorage.getItem("member_data"), Definer.auth_err1);
+            assert.ok(verifiedMemberData, Definer.auth_err1);
 
             const memberService = new MemberApiService();
             const like_result: any = await memberService.memberLikeTarget({

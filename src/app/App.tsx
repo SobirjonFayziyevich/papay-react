@@ -23,7 +23,7 @@ import { sweetFailureProvider, sweetTopSmallSuccessAlert } from '../lib/sweetAle
 import { Definer } from '../lib/Definer';
 import assert from 'assert';
 import MemberApiService from './apiServices/memberApiService';
-import "../app/apiServices/verify";
+import "./apiServices/verify";
 import { CartItem } from '../types/others';
 import { Product } from '../types/product';
 
@@ -32,7 +32,6 @@ import { Product } from '../types/product';
 
 function App () {
     /** INITIALIZATIONS */
-    const [verifiedMemberData, setVerifiedMemberData] = useState<Member | null>(null);
     const [path, setPath] = useState();
     const main_path = window.location.pathname;
     const [signUpOpen, setSignUpOpen] = useState(false); // signUpOpen ni qiymati false bulgani un shu qiymatni pass qildim.
@@ -48,25 +47,6 @@ function App () {
     const current_cart: CartItem[] = JSON.parse(cartJson) ?? []; //
 
     const [cartItems,setCartItems] = useState<CartItem[]>(current_cart);
-    
-
-    useEffect(() => {  // componantDidMount bulgan manshu qiymatlarni olib bersin.
-        console.log("=== useEffect: App ==="); //
-        const memberDataJson: any = localStorage.getItem("member_data") 
-        ? localStorage.getItem("member_data") 
-        : null;     //localStorageni ichidan member_data mavjud bulsa,
-                   // member_datani bergin, agar mavjud bulmasa null qilgin
-        const member_data = memberDataJson // JSONnni memberData objectini hosil qildim
-        ? JSON.parse(memberDataJson) //JSONdan qiymatni objectga qaytaraman.
-        : null;  // null qiymatni member_data qiymatiga tenglashtirib oldim. 
-
-        if(member_data) {
-            member_data.mb_image = member_data.mb_image  //memeber_datani ichidagi mb_imageni check qildim. agar image mavjud bulsa ,
-            ? `${serverApi}/${member_data.mb_image}` // quydagicha linkni hosil qilib oldim
-            : "/auth/papaychik.svg"; // agar mavjud bulmasa, quydagicha bulsin,
-        setVerifiedMemberData(member_data);
-        } 
-    }, [signUpOpen, loginOpen]);
 
     /** HANDLERS */
     const handleSignUpOpen = () => setSignUpOpen(true); //setSignUpOpen true bulganda faqat signup ishga tushishi kerak.
@@ -165,7 +145,6 @@ function App () {
                 handleLogOutClick={handleLogOutClick}
                 handleCloseLogOut={handleCloseLogOut}
                 handleLogOutRequest={handleLogOutRequest}
-                verifiedMemberData={verifiedMemberData}
                 cartItems={cartItems}
                 onAdd={onAdd}
                 onRemove={onRemove}
@@ -182,7 +161,6 @@ function App () {
                 handleLogOutClick={handleLogOutClick}
                 handleCloseLogOut={handleCloseLogOut}
                 handleLogOutRequest={handleLogOutRequest}
-                verifiedMemberData={verifiedMemberData}
                 cartItems={cartItems}
                 onAdd={onAdd}
                 onRemove={onRemove}
@@ -199,7 +177,6 @@ function App () {
                 handleLogOutClick={handleLogOutClick}
                 handleCloseLogOut={handleCloseLogOut}
                 handleLogOutRequest={handleLogOutRequest}
-                verifiedMemberData={verifiedMemberData}
                 cartItems={cartItems}
                 onAdd={onAdd}
                 onRemove={onRemove}
@@ -221,12 +198,11 @@ function App () {
                       <Route path="/orders">
                           < OrdersPage
                            orderRebuild={orderRebuild} 
-                           setOrderRebuild={setOrderRebuild}
-                           verifiedMemberData={verifiedMemberData}
+                           setOrderRebuild={setOrderRebuild} 
                             />
                       </Route>
                       <Route path="/member-page">
-                          < MemberPage verifiedMemberData={verifiedMemberData}/>
+                          < MemberPage />
                       </Route>
                       <Route path="/help">
                           < HelpPage />

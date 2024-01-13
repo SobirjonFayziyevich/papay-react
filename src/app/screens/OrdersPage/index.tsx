@@ -20,6 +20,7 @@ import {
 } from "../../screens/OrdersPage/slice";
 import OrderApiService from "../../apiServices/orderApiService";
 import { Member } from "../../../types/user";
+import { verifiedMemberData } from "../../apiServices/verify";
 
 // REDUX SLICE
 const actionDispatch = (dispatch: Dispatch) => ({
@@ -35,7 +36,7 @@ export function OrdersPage(props: any) {
     const [value, setValue] = useState("1");
     const { setPausedOrders, setProcessOrders, setFinishedOrders } =
     actionDispatch(useDispatch());
-    const verifiedMemberData: Member | null = props.verifiedMemberData;
+
     
     useEffect(() => {
         // set qilmoqchi bulgan narsalarimni shuni ichida yozaman. Orderlarimizni (componentdidmount)
