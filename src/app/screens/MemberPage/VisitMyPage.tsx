@@ -255,7 +255,7 @@ export function VisitMyPage(props: any) {
                 >
                   <div className={"order_user_img"}>
                     <img
-                      src={"/auth/john.jpeg"}
+                      src={verifiedMemberData?.mb_image}
                       className={"order_user_avatar"}
                     />
                     <div
@@ -272,10 +272,10 @@ export function VisitMyPage(props: any) {
                     </div>
                   </div>
                   <span className={"order_user_name"}>
-                    {chosenMember?.mb_nick}
+                    {verifiedMemberData?.mb_nick}
                   </span>
                   <span className={"order_user_prof"}>
-                    {chosenMember?.mb_type}
+                    {verifiedMemberData?.mb_type}
                   </span>
                 </Box>
                 <Box
@@ -300,10 +300,10 @@ export function VisitMyPage(props: any) {
                     {chosenMember?.mb_follow_cnt}{" "}
                   </p>
                 </Box>
-                <p className={"user_desc"}>
+                <Box className={"user_desc"} style={{marginBottom: "15px"}}>
                   {chosenMember?.mb_description ??
                     "qushimcha ma'lumotlar mavjud emas"}
-                </p>
+                </Box>
                 <Box
                   display={"flex"}
                   justifyContent={"flex-end"}
@@ -330,7 +330,7 @@ export function VisitMyPage(props: any) {
                 </Box> 
               </Box>
 
-              <Box className={"my_page_menu"} sx={{ flexDirection: "column" }} >
+              <Box className={"my_page_menu"}  >
                 <TabList
                 onChange={handleChange}
                 aria-label="lab API tabs example"

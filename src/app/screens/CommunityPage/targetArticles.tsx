@@ -43,7 +43,7 @@ export function TargetArticles(props: any) {
           <Link
             className="all_article_box"
             sx={{ textDecoration: "none" }}
-            href={``}
+            href={`/member-page/other?mb_id=${articles.mb_id}&art_id=${articles._id}`} //boshqa odamning member-pagega malumot qushsin
           >
             <Box
               className="all_article_img"

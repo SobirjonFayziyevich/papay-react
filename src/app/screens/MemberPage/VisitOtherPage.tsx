@@ -18,6 +18,7 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 
+
 //OTHERS
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
@@ -133,14 +134,12 @@ export function VisitOtherPage(props: any) {
       .catch((err) => console.log(err));
   }, [memberArticleSearchObj, chosen_mb_id, articlesRebuild]); // buyerdagi arra dependencening qiymatlari uzgarganda faqat shu useEffect ishga tushsin.
      // articlesRebuild sababli qayta ishga tushadi.
-  useEffect(() => {
-    if (chosen_mb_id === verifiedMemberData?._id) {
-      history.push("/member-page");
-    }
 
+     
+  useEffect(() => {
     const memberService = new MemberApiService();
     memberService
-      .getChosenMember(memberArticleSearchObj.mb_id)
+      .getChosenMember(chosen_mb_id)
       .then((data) => setChosenMember(data))
       .catch((err) => console.log(err));
   }, [verifiedMemberData, chosen_mb_id, followRebuild]); //followRebuild qiymati uzgarganda followlar sonini qayta qurib berishi un  kiritdim.
@@ -172,6 +171,7 @@ export function VisitOtherPage(props: any) {
  const subscribeHandler = async (e: any) => {  //FOLLOW qilishda ishlatamiz mantiqini.
     try {
       assert.ok(verifiedMemberData, Definer.auth_err1);
+
 
       const followService = new FollowApiService();
       await followService.subscribe(e.target.value);
@@ -301,10 +301,10 @@ export function VisitOtherPage(props: any) {
                     </div>
                   </div>
                   <span className={"order_user_name"}>
-                    {chosenMember?.mb_nick}
+                    {verifiedMemberData?.mb_nick}
                   </span>
                   <span className={"order_user_prof"}>
-                    {chosenMember?.mb_type}
+                    {verifiedMemberData?.mb_type}
                   </span>
                 </Box>
                 <Box
@@ -381,10 +381,10 @@ export function VisitOtherPage(props: any) {
                   onChange={handleChange}
                   aria-label="tabs API tabs example"
                 >
-                  <Stack flexDirection={"column"}>
+                  <Stack  flexDirection={"column"}>
                   <Tab
                     value={"1"}
-                    style={{ flexDirection: "column" }}
+                    style={{ flexDirection: "column"}}
                     component={() => (
                       <div
                         className={`menu_box ${value}`}

@@ -107,6 +107,7 @@ export function OrdersPage(props: any) {
                                     <img
                                         src={"/auth/odamcha.png"}
                                         className={"order_user_prof_ing"}
+                                        style={{marginLeft: "100px"}}
                                     />
                                 </div>
                             </div>

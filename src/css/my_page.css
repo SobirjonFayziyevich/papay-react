@@ -10,6 +10,7 @@
   display: flex;
   width: 100%;
   height: 100%;
+  min-height: 950px;
   background: #0b0e11;
   flex-direction: row;
   justify-content: space-between;
@@ -132,10 +133,9 @@
 .my_page .my_page_right {
   
   margin-left: 57px;
-  margin-bottom: 25px;
   position: relative;
   width: 372.58px;
-  height: 410px;
+  height: 450px;
   border-radius: 16px;
   display: flex;
   background: #FFF;
@@ -146,13 +146,12 @@
 }
 
 .my_page_right .order_info_box {
-  height: auto;
+  height: 100%;
   justify-content: space-between;
   position: relative;
   flex-direction: column;
   align-items: center;
   display: flex;
-
 }
 
 .my_page_right .settings_btn {
@@ -264,7 +263,7 @@
   height: 50px;
   border-radius: 20px;
   background: #FFF;
-  margin-top: 11px;
+  margin-bottom: 20px;
   align-items: center;
   position: relative;
   justify-content: center;
