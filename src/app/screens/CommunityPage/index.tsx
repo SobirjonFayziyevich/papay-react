@@ -36,10 +36,10 @@ const targetBoArticlesRetriever = createSelector(
     })
   );
 
-const targetBoArticles = [1, 2, 3, 4]
+// const targetBoArticles = [1, 2, 3, 4]
 
 export function CommunityPage() {
-  /** INITIALIZATION **/
+  /** INITIALIZATION **/  // Chaqirib olish mantiqi yoziladi:
   const { setTargetBoArticles } = actionDispatch(useDispatch());
   const { targetBoArticles } = useSelector(targetBoArticlesRetriever);
 
@@ -141,7 +141,8 @@ const [articlesRebuild, setArticlesRebuild] = useState<Date>(new Date);
 
                 <Box className="article_bott">
                   <Pagination
-                    count={searchArticlesObj.limit}
+                    count={searchArticlesObj.page >= 3
+                    ? searchArticlesObj.page + 1 : 3}
                     page={searchArticlesObj.page}
                     renderItem={(item) => (
                       <PaginationItem
