@@ -56,6 +56,7 @@ import { Definer } from "../../../lib/Definer";
 import FollowApiService from "../../apiServices/followApiService";
 import { serverApi } from "../../../lib/config";
 import { verifiedMemberData } from "../../apiServices/verify";
+import { height } from "@mui/system";
 
 // REDUX SLICE
 const actionDispatch = (dispach: Dispatch) => ({
@@ -274,7 +275,7 @@ export function VisitOtherPage(props: any) {
             </Stack>
 
             <Stack className={"my_page_right"}>
-              <Box className={"order_info_box"}>
+              <Box className={"order_info_box"} sx={{height: "360px"}}>
                 <Box
                   display={"flex"}
                   flexDirection={"column"}

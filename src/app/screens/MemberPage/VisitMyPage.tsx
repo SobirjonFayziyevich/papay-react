@@ -243,7 +243,7 @@ export function VisitMyPage(props: any) {
               </Box>
             </Stack>
 
-            <Stack className={"my_page_right"}>
+            <Stack className={"my_page_right"} style={{height: "450px"}}>
               <Box className={"order_info_box"}>
                 <a onClick={() => setValue("6")} className={"settings_btn"}>
                   <SettingsIcon />

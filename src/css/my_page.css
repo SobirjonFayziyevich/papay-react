@@ -135,7 +135,7 @@
   margin-left: 57px;
   position: relative;
   width: 372.58px;
-  height: 450px;
+  height: 397px;
   border-radius: 16px;
   display: flex;
   background: #FFF;
@@ -144,12 +144,12 @@
   0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset,
   0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;
 }
-
 .my_page_right .order_info_box {
-  height: 100%;
+  /* height: 300px; */
   justify-content: space-between;
   position: relative;
   flex-direction: column;
+  margin-bottom: 40px;
   align-items: center;
   display: flex;
 }
