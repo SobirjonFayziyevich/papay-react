@@ -1,15 +1,45 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Avatar, Box, Stack } from "@mui/material";
 import { Send } from "@mui/icons-material";
-
 import "../../../css/community.css";
-
-// const [massagesList, setMassagesList] = useState({});
+import { SocketContext } from "../../context/socket";
 
 export function CommunityChats() {
+  /** INITIALIZATIONS **/
+   const [massagesList, setMassagesList] = useState([]);
+   const socket = useContext(SocketContext);
+   const [onlineUsers, setOnlineUsers] = useState<number>(0);
+
+
+  useEffect(() => {
+    socket.connect(); // buyrda socket bn connect qilib olamiz
+    console.log("********** PRINTED");  
+    
+    socket?.on("connect", function () {});
+    console.log("CLIENT>>> connected");
+
+    socket?.on("newMsg", (new_message: any) => { // new msg qabul qilsin.
+      console.log("CLIENT: new message");
+      alert(new_message);
+    });
+
+    socket?.on("greetMsg", (new_message: any) => {
+      console.log("CLIENT>>> greet message");
+    });
+
+    socket?.on('infoMsg', (msg: any) => { // sms nomi kiritib oldim.
+      console.log("CLIENT: info messag");
+      setOnlineUsers(msg.total);   // kirib kelgan xabarni olamiz u msg ichidagi totalda buladi
+    });  
+
+    return () => {
+      socket.disconnect(); // harbir pagega utganimda page yopilishi kerak.
+    };  
+  }, [socket]); //va connnect bulgan socket bu yerga keladi.
+
   return (
     <Stack className="chat_frame">
-      <Box className="chat_top">Jonli Muloqot</Box>
+      <Box className="chat_top">Jonli Muloqot {onlineUsers} </Box>
       <Box className="chat_content">
         <Stack className="chat_main">
           <Box
