@@ -17,9 +17,9 @@ import { Restaurant } from "../../../types/user";
 import RestaurantApiService from "../../apiServices/restaurantApiServices";
 
 /** REDUX SLICE */ 
-const actionDispatch = (dispach: Dispatch) => ({ // buning mantiqi HomepageSlicedan setTopRestaurantni chaqirib olish edi.
-  setTopRestaurants: (data: Restaurant[]) => dispach(setTopRestaurants(data)),
-  setBestRestaurants: (data: Restaurant[]) => dispach(setBestRestaurants(data)),
+const actionDispatch = (dispatch: Dispatch) => ({ // buning mantiqi HomepageSlicedan setTopRestaurantni chaqirib olish edi.
+  setTopRestaurants: (data: Restaurant[]) => dispatch(setTopRestaurants(data)),
+  setBestRestaurants: (data: Restaurant[]) => dispatch(setBestRestaurants(data)),
 });
 
 export function Homepage() {
@@ -44,14 +44,16 @@ export function Homepage() {
         .getTopRestaurants()
         .then((data) => {  //useEffectni ichidagi jarayonlar syncrins usulida bulishi keraak.
          setTopRestaurants(data);
-
-     }).catch(err => console.log(err)); 
+        })
+     .catch(err => console.log(err)); 
 
      restaurantService   // BestRestaurantning datalarini STORE qildik, 
         .getRestaurants({ page: 1, limit: 4, order: 'mb_point'})
         .then((data) => {
+          console.log("best", data);
         setBestRestaurants(data);
-     }).catch(err => console.log(err));
+     })
+     .catch(err => console.log(err));
 
     }, []);
     

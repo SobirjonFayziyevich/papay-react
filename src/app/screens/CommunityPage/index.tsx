@@ -23,9 +23,9 @@ import { retrieveTargetBoArticles } from "./selector";
 
 
 /** REDUX SLICE */ 
-const actionDispatch = (dispach: Dispatch) => ({ // buning mantiqi HomepageSlicedan setTopRestaurantni chaqirib olish edi.
+const actionDispatch = (dispatch: Dispatch) => ({ // buning mantiqi HomepageSlicedan setTopRestaurantni chaqirib olish edi.
   setTargetBoArticles: (data: BoArticle[]) =>
-   dispach(setTargetBoArticles(data)) // bu setTargetRestaurant slice.tsdan kelayotgan restaurantdir.
+   dispatch(setTargetBoArticles(data)) // bu setTargetRestaurant slice.tsdan kelayotgan restaurantdir.
   });
 
    /** REDUX SELECTOR */

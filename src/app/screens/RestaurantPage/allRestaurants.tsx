@@ -37,9 +37,9 @@ const order_list = Array.from(Array(8).keys());    // 8ta restaurantni kelishi
 // console.log(order_list);
 
 /** REDUX SLICE */ 
-const actionDispatch = (dispach: Dispatch) => ({ // buning mantiqi HomepageSlicedan setTopRestaurantni chaqirib olish edi.
+const actionDispatch = (dispatch: Dispatch) => ({ // buning mantiqi HomepageSlicedan setTopRestaurantni chaqirib olish edi.
     setTargetRestaurants: (data: Restaurant[]) =>
-     dispach(setTargetRestaurants(data)), // bu setTargetRestaurant slice.tsdan kelayotgan restaurantdir.
+     dispatch(setTargetRestaurants(data)), // bu setTargetRestaurant slice.tsdan kelayotgan restaurantdir.
     });
   /** REDUX SELECTOR */
 const targetRestaurantsRetriever = createSelector(

@@ -59,12 +59,12 @@ import { verifiedMemberData } from "../../apiServices/verify";
 import { height } from "@mui/system";
 
 // REDUX SLICE
-const actionDispatch = (dispach: Dispatch) => ({
-  setChosenMember: (data: Member) => dispach(setChosenMember(data)),
+const actionDispatch = (dispatch: Dispatch) => ({
+  setChosenMember: (data: Member) => dispatch(setChosenMember(data)),
   setChosenMemberBoArticles: (data: BoArticle[]) =>
-    dispach(setChosenMemberBoArticles(data)),
+    dispatch(setChosenMemberBoArticles(data)),
   setChosenSingleBoArticle: (data: BoArticle) =>
-    dispach(setChosenSingleBoArticle(data)),
+    dispatch(setChosenSingleBoArticle(data)),
 });
 
 // REDUX SELECTOR

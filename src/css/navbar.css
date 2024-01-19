@@ -111,9 +111,9 @@
 
 .basket_frame {
     position: relative;
-    padding: 10px 4px 0 4px;
+    padding: 0px 4px 0 4px;
     width: 450px;
-    height: auto;
+    height: 310px;
   
     display: flex;
     flex-direction: column;

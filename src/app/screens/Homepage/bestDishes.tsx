@@ -14,8 +14,8 @@ import { serverApi } from "../../../lib/config";
 import { useHistory } from "react-router-dom";
 
 /** REDUX SLICE */ 
-const actionDispatch = (dispach: Dispatch) => ({ // buning mantiqi HomepageSlicedan setTopRestaurantni chaqirib olish edi.
-   setTrendProducts: (data: Product[]) => dispach(setTrendProducts(data)),    
+const actionDispatch = (dispatch: Dispatch) => ({ // buning mantiqi HomepageSlicedan setTopRestaurantni chaqirib olish edi.
+   setTrendProducts: (data: Product[]) => dispatch(setTrendProducts(data)),    
   });
 
   /** REDUX SELECTOR */

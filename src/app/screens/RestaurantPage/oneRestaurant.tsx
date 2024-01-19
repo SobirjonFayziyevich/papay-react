@@ -40,15 +40,15 @@ import { verifiedMemberData } from "../../apiServices/verify";
 
 
 /** REDUX SLICE */ 
-const actionDispatch = (dispach: Dispatch) => ({ // buning mantiqi HomepageSlicedan setTopRestaurantni chaqirib olish edi.
+const actionDispatch = (dispatch: Dispatch) => ({ // buning mantiqi HomepageSlicedan setTopRestaurantni chaqirib olish edi.
     setRandomRestaurants: (data: Restaurant[]) =>
-     dispach(setRandomRestaurants(data)), // bu setTargetRestaurant slice.tsdan kelayotgan restaurantdir.
+     dispatch(setRandomRestaurants(data)), // bu setTargetRestaurant slice.tsdan kelayotgan restaurantdir.
      
      setChosenRestaurant: (data: Restaurant[]) =>
-     dispach(setChosenRestaurant(data)), // bu setTargetRestaurant slice.tsdan kelayotgan restaurantdir.
+     dispatch(setChosenRestaurant(data)), // bu setTargetRestaurant slice.tsdan kelayotgan restaurantdir.
     
      setTargetProducts: (data: Product[]) =>
-     dispach(setTargetProducts(data)), 
+     dispatch(setTargetProducts(data)), 
     });
 
      /** REDUX SELECTOR */
