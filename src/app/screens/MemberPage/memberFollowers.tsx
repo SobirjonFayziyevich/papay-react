@@ -97,7 +97,7 @@ export function MemberFollowers(props: any) {
               <Stack flexDirection="row">
                 <Avatar 
                 alt={""} 
-                style={{cursor: 'poointer'}}
+                style={{cursor: 'pointer'}}
                 src={image_url} sx={{ width: 89, height: 89 }} 
                 onClick={() => visitMemberHandler(follower?.subscriber_id)} />
                 <div

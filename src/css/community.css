@@ -35,10 +35,10 @@
   .community_page .article_main {
     width: 100%;
     height: 100%;
-  
     display: flex;
     flex-direction: column;
   }
+  
   
   .community_page .article_bott {
     width: 100%;
