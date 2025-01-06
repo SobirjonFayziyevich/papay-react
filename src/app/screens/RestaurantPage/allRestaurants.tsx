@@ -149,6 +149,7 @@ export function AllRestaurants() {
               </form>
             </Box>
           </Box>
+
           <Stack className={"all_res_box"}>
             <CssVarsProvider>
               {targetRestaurants.map((ele: Restaurant) => {
@@ -293,6 +294,7 @@ export function AllRestaurants() {
             />
             <img className={"line_img_two"} src={"/icons/turtburchak.png"} />
           </Stack>
+          
         </Stack>
       </Container>
     </div>

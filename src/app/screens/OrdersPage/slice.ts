@@ -23,8 +23,11 @@ const ordersPageSlice = createSlice({
   },
 });
 
-export const { setFinishedOrders, setPausedOrders, setProcessOrders } =
-  ordersPageSlice.actions;
+export const { 
+  setFinishedOrders, 
+  setPausedOrders, 
+  setProcessOrders 
+} = ordersPageSlice.actions;
 
 const OrdersPageReducer = ordersPageSlice.reducer;
 export default OrdersPageReducer;

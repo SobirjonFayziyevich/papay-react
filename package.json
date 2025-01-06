@@ -22,6 +22,7 @@
     "@types/react-dom": "^18.0.6",
     "@types/redux-logger": "^3.0.12",
     "@types/styled-components": "^5.1.26",
+    "ajv": "^8.17.1",
     "assert": "^2.1.0",
     "axios": "^1.6.2",
     "moment": "^2.29.4",

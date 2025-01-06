@@ -82,6 +82,7 @@ export function BestRestaurants() {
           transform: "rotate(0deg)",
         }}
       />
+      
       <Container sx={{ paddingTop: "153px" }}>
         <Stack flexDirection={"column"} alignItems={"center"}>
           <Box className="category_title">Zo'r Restaurantlar</Box>

@@ -32,7 +32,7 @@ async getTopRestaurants(): Promise<Restaurant[]>  {
      console.log(`ERROR ::: getTopRestaurants ${err.message}`);
      throw err;
     }
-  }
+  } 
 
 
 async getRestaurants(data: SearchObj): Promise<Restaurant[]> { //SearchObj interface hosil qildim
